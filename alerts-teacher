@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+body{background:#eef4f8;padding:8px 6px 20px}
+.wrap{max-width:800px;margin:0 auto}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+.chip.blue{border-color:#b9d2e8;color:#194178}
+.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
+.sub{font-size:14px;color:#51637a;margin:-6px 0 14px;line-height:1.45}
+details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
+details.step[open]{border:1.5px solid #F5B82E}
+summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:#F5B82E;color:#1F3864;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
+.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
+.body b{color:#12305e}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:2px 8px;font-weight:700;color:#12305e;font-size:14px;margin:2px 0}
+.pic{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 10px}
+.codes{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.code{background:#fff;border:1.5px solid #d3dfe9;border-radius:10px;padding:8px 12px;font-size:13.5px;color:#2c4157;min-width:120px}
+.code b{display:block;font-size:16px;color:#12305e;letter-spacing:1px}
+.code.p{border-color:#8fd3a6}.code.a{border-color:#f0a3a3}
+.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
+.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+.gk .ic{flex:0 0 22px;font-size:15px}
+.strip{margin-top:28px}
+.slides{display:flex;gap:14px;flex-wrap:wrap}
+a.slide{width:236px;height:132px;border-radius:9px;background:#E4EEF8;border:1px solid #cddcec;box-shadow:0 2px 6px rgba(15,40,80,.15);padding:14px;position:relative;overflow:hidden;text-decoration:none;display:block}
+a.slide:hover{box-shadow:0 3px 10px rgba(15,40,80,.3)}
+.slide .bar{height:7px;width:64px;background:#F5B82E;border-radius:3px;margin-bottom:10px}
+.slide .t{color:#1F3864;font-weight:800;font-size:13.5px;letter-spacing:.4px;line-height:1.35}
+.slide .pill{position:absolute;left:14px;bottom:12px;background:#2A2F55;color:#fff;font-size:9px;font-weight:700;letter-spacing:1.2px;padding:4px 10px;border-radius:999px}
+.slide .c1{position:absolute;right:-24px;top:-24px;width:74px;height:74px;border-radius:50%;background:#1F3864}
+.slide .c2{position:absolute;right:8px;top:44px;width:26px;height:26px;border-radius:50%;background:#2A2F55}
+.slide .c3{position:absolute;right:30px;top:76px;width:12px;height:12px;border-radius:50%;background:#F5B82E}
+.ai{display:inline-flex;flex:0 0 34px;width:34px;height:34px;border-radius:9px;align-items:center;justify-content:center;margin-right:12px;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
+.ai svg{width:21px;height:21px}
+.ai.card svg{width:27px;height:27px}
+summary h3 .ai{margin-right:12px}
+.who{margin-top:10px;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:9px;padding:9px 12px;font-size:13.5px;color:#44586f;line-height:1.5}
+.who b{color:#12305e}
+.hdr{background:#fff;border:1px solid #d3dfe9;border-radius:12px;overflow:hidden;margin:4px 0 16px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+.hdr .bar{background:#0c4a8a;color:#fff;font-weight:700;font-size:13px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.hdr .bar .srch{margin-left:auto;background:#fff;color:#8a99ab;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:400;width:150px}
+.hdr .main{display:flex;gap:14px;padding:12px 14px 12px;align-items:flex-start}
+.hdr .av{flex:0 0 58px;height:58px;border:1px solid #c9d6e4;background:#eef4f8;color:#1f3864;font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.hdr .nm{font-size:16px;font-weight:700;color:#1b2a3a;margin:2px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hdr .nm .ti{display:inline-flex;gap:7px;align-items:center;margin-left:4px}
+.hdr .nm .ti svg{width:15px;height:15px}
+.hdr .flds{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:#2c4157}
+.hdr .flds span b{font-size:10.5px;letter-spacing:.3px;color:#5d7089;margin-right:3px}
+.hdr .icons{display:flex;gap:8px;margin:10px 0 0;align-items:center}
+.hdr .icons .ai{width:28px;height:28px;margin:0;border-radius:7px}
+.hdr .icons .ai svg{width:18px;height:18px}
+.hdr .icons .ai.card svg{width:23px;height:23px}
+.hdr .lbl{font-size:11.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 9px;margin-left:4px;white-space:nowrap}
+.hdr .flds i{color:#6b7c92;font-style:italic}
+.hdr.t .bar{background:#1565c0}
+.hdr.t .ttl{font-size:20px;font-weight:700;color:#2c3e50;display:flex;align-items:center;gap:10px;margin:0 0 8px}
+.hdr.t .ttl .icons{margin:0 0 0 6px}
+.hdr.t .sel{margin-left:auto;font-size:11px;font-weight:400;color:#2c4157;border:1px solid #1565c0;border-radius:4px;padding:3px 8px;background:#fff}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;border-radius:999px;padding:3px 9px;margin:0 0 6px}
+.tag.t{background:#E4EEF8;color:#194178;border:1px solid #b9d2e8}
+.tag.a{background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8}
+.sub .ai{width:24px;height:24px;flex-basis:24px;margin:0 2px;border-radius:6px}
+.sub .ai svg{width:14px;height:14px}
+.sub .ai.card svg{width:19px;height:19px}
+
+.chip{border-color:#b9d2e8;color:#194178}
+.num{background:#52B3EA;color:#fff}
+details.step[open]{border-color:#52B3EA}
+.pic{color:#194178;background:#E4EEF8;border-color:#b9d2e8}
+.hdr .lbl{color:#194178;background:#E4EEF8;border-color:#b9d2e8}
+
+</style></head><body><div class="wrap">
+<div class="chips"><span class="chip">TEACHERS &middot; TAs</span><span class="chip">NEXT TO THE PAGE TITLE</span><span class="chip">TAP AN ICON FOR DETAILS</span></div>
+<div class="label">THE ICONS &nbsp;&mdash;&nbsp; TAP ONE TO SEE WHAT IT MEANS</div>
+<div class="sub">The little icons by a student's name are <b>alerts</b> &mdash; each one is a heads-up about that student. In PowerSchool, tap the icon and a pop-up tells you more. Summit uses seven: <span class="ai "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span><span class="ai "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#1E63D6"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">ESC</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#6A3BA8"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="9" fill="#FFFFFF">AS</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M9 6.5 V4.4 A2.2 2.2 0 0 1 11.2 2.2 H13.8 A2.2 2.2 0 0 1 16 4.4 V6.5" fill="none" stroke="#D9640C" stroke-width="2.2" stroke-linecap="round"/><rect x="0.5" y="6.5" width="24" height="16.5" rx="2.4" fill="#D9640C"/><text x="12.5" y="17.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="8.4" fill="#FFFFFF">WBL</text></svg></span> (plus PowerSchool's own <span class="ai "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span>).</div>
+<details class="step" open><summary><h3><span class="ai "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span>School vs. Home: Name &amp; Pronouns</h3><span class="chev">&#9662;</span></summary><div class="body">On <b>every</b> student. Tap it before anything goes <b>home</b> &mdash; a progress report, a report card, a conference, a phone call. The pop-up has two rows: the name and pronouns the student uses <b>at school</b>, and the name and pronouns to use <b>with family</b>. <b>&ldquo;Same as at school&rdquo;</b> means there is no difference.<br>For everyday class use you do not need the alert at all &mdash; the header already shows <b>GOES BY</b> and <b>PRONOUNS</b>.<div class="who"><b>Who keeps it up to date:</b> the social workers. Looks wrong? Tell the student's <b>SW</b> (named in the header). Subs do not see this icon &mdash; they only get the header.</div></div></details>
+<details class="step"><summary><h3><span class="ai "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span>IEP Accommodations &amp; Modifications</h3><span class="chev">&#9662;</span></summary><div class="body">Shows once the student's IEP has been entered. Tap it for the <b>testing accommodations</b> &mdash; one per row with the detail that matters (double time, breaks, tests read, calculator&hellip;) &mdash; and the <b>program modifications &amp; accommodations</b>, plus the date of the IEP they come from.<div class="who"><b>Good to know:</b> this is the same information as the yearly accommodations sheet &mdash; now it is on the student, in PowerSchool, for every class. Subs see it too.</div></div></details>
+<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span>C&amp;C &mdash; Close &amp; Continuous supervision</h3><span class="chev">&#9662;</span></summary><div class="body">A staff member stays with this student <b>at all times</b>. The student also carries the <b>red card</b>. If you have this student and nobody is with them, say something right away. Tap the icon for the note and dates.</div></details>
+<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#1E63D6"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">ESC</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span>ESC &mdash; Escort</h3><span class="chev">&#9662;</span></summary><div class="body">Staff <b>walk the student</b> between places in the building &mdash; the student does not travel alone. The student carries the <b>blue card</b>. Tap the icon for the note and dates.</div></details>
+<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#6A3BA8"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="9" fill="#FFFFFF">AS</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span>AS &mdash; Administrative Support</h3><span class="chev">&#9662;</span></summary><div class="body">A <b>longer-term coverage</b> arranged by administration (no card for this one). Tap the icon to read what it means for this student; check with the student's social worker if you are not sure what it means for your class.</div></details>
+<details class="step"><summary><h3><span class="ai "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span>Absences + Cuts (unexcused)</h3><span class="chev">&#9662;</span></summary><div class="body">Appears once a student has <b>5 or more</b> unexcused absences and cuts (codes <b>A, CC, CG</b>) in <b>one class</b> this year. Tap it to see which class, the teacher and the count. Summit's rule is per class: at <b>5, 10 and 15</b> the TA emails the student's team (homeroom teacher, guidance counselor, social worker); <b>15 = no credit</b> for that course.<div class="who"><b>Comes from:</b> attendance, automatically &mdash; nothing to enter. It only goes away if the attendance is corrected (an excused day is EA, which does not count).</div></div></details>
+<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M9 6.5 V4.4 A2.2 2.2 0 0 1 11.2 2.2 H13.8 A2.2 2.2 0 0 1 16 4.4 V6.5" fill="none" stroke="#D9640C" stroke-width="2.2" stroke-linecap="round"/><rect x="0.5" y="6.5" width="24" height="16.5" rx="2.4" fill="#D9640C"/><text x="12.5" y="17.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="8.4" fill="#FFFFFF">WBL</text></svg></span>WBL &mdash; Work Schedule</h3><span class="chev">&#9662;</span></summary><div class="body">This student has <b>work-based learning</b> on their schedule &mdash; a job site or Animal Care during one of the WB blocks. Tap the icon to see <b>where</b> they go, <b>which day and periods</b>, and the staff member who runs it &mdash; for example <i>Walgreens &mdash; Tue, periods 2-4 | Shaina Rochester</i>. During that block the student is <b>at work, not in your room</b> &mdash; that is why they are missing from a class that meets at the same time.<div class="who"><b>Comes from:</b> the schedule, automatically &mdash; nothing to enter, and it goes away when the work block is dropped. A student who should be at work but is sitting in your class? Check with <b>Shaina Rochester</b> (WBL staff).</div></div></details>
+<details class="step"><summary><h3><span class="ai "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span>Counselors (the three people)</h3><span class="chev">&#9662;</span></summary><div class="body">Not an alert &mdash; it is PowerSchool's own icon, next to the page title on every student. Tap it for the student's <b>counselor</b>.</div></details>
+<div class="label">HOW TO SEE THEM &nbsp;&mdash;&nbsp; TAP A STEP</div>
+<details class="step"><summary><span class="num">1</span><h3>Start Page &rarr; Student Information</h3><span class="chev">&#9662;</span></summary><div class="body">On the PowerTeacher <b>Start Page</b>, click the little <b>ID-card</b> icon on the class's row &mdash; the <b>Student Information</b> column. Your class list opens on the left.<br><span class="pic">&#128247; picture 1 below</span></div></details>
+<details class="step"><summary><span class="num">2</span><h3>Click the student's name</h3><span class="chev">&#9662;</span></summary><div class="body">The student's page opens (<b>Quick Lookup</b>, <b>Schedule</b>&hellip; the <b>Select Screens</b> box at the top right switches between them). The <b>alert icons</b> sit right next to the page title; the <b>header</b> &mdash; the band of facts about the student &mdash; is just underneath.<br><span class="pic">&#128247; picture 2 below</span></div></details>
+<details class="step"><summary><span class="num">3</span><h3>Tap an icon to read it</h3><span class="chev">&#9662;</span></summary><div class="body">Click any icon and a <b>pop-up</b> opens with the details. Close it with the <b>X</b>. Icons that are not there simply do not apply to that student.<br><span class="pic">&#128247; pictures 3 and 4 below</span></div></details>
+<details class="step"><summary><span class="num">4</span><h3>Taking attendance? The icons are there too</h3><span class="chev">&#9662;</span></summary><div class="body">On the <b>Single Day</b> attendance page there is an <b>Alerts</b> column next to each name &mdash; same icons, same pop-ups, no need to leave the page. (The seating chart does not show them.)<br><span class="pic">&#128247; picture 5 below</span></div></details>
+<div class="label">THE STUDENT HEADER &nbsp;&mdash;&nbsp; WHAT EACH LABEL MEANS</div>
+<div class="sub">The <b>header</b> is the band of facts about the student at the top of every student page. Here is what each label means.</div>
+<div class="hdr shot t"><div class="bar">PowerSchool SIS<span class="srch">PowerTeacher</span></div><div class="main"><div class="av">SZ</div><div style="flex:1"><div class="ttl">Schedule<span class="icons"><span class="ai "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span><span class="ai "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span><span class="ai "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span><span class="lbl">&larr; the alert icons</span></span><span class="sel">Select Screens &#9662;</span></div><div class="flds"><span><b>NAME:</b>ZZTest, Student</span><span><b>GOES BY:</b>Student</span><span><b>GOES BY (LAST):</b>ZZTest</span><span><b>PRONOUNS:</b>They, them</span><span><b>DOB:</b>07/31/2011</span><span><b>AGE:</b>15 years 2 months</span><span><b>HR:</b><i>homeroom teacher</i></span><span><b>COUNSELOR:</b><i>counselor</i></span><span><b>SW:</b><i>social worker</i></span><span><b>SPEECH:</b><i>speech therapist</i></span><span><b>PSYCHIATRIST:</b><i>psychiatrist</i></span><span><b>PLACEMENT:</b>Resident</span><span><b>COTTAGE:</b>Everest</span><span><b>DISTRICT:</b>NYC</span></div><div style="margin-top:8px"><span class="lbl">&uarr; the header</span></div></div></div></div><details class="step"><summary><span class="num">1</span><h3>NAME &middot; GOES BY &middot; GOES BY (LAST) &middot; PRONOUNS</h3><span class="chev">&#9662;</span></summary><div class="body"><b>NAME</b> is the student's name in PowerSchool (Last, First). <b>GOES BY</b> is the first name the student uses at school &mdash; <b>use this one</b>; <b>GOES BY (LAST)</b> is the last name they use. <b>PRONOUNS</b> are the student's pronouns at school. (What to use with the <b>family</b> is in the pink alert.) A blank field is simply not shown, so some students have fewer labels.</div></details>
+<details class="step"><summary><span class="num">2</span><h3>DOB &middot; AGE</h3><span class="chev">&#9662;</span></summary><div class="body"><b>DOB</b> is the date of birth; <b>AGE</b> is worked out from it (years and months).</div></details>
+<details class="step"><summary><span class="num">3</span><h3>HR &middot; COUNSELOR &middot; SW &middot; SPEECH &middot; PSYCHIATRIST</h3><span class="chev">&#9662;</span></summary><div class="body">The people on the student's team: <b>HR</b> = homeroom teacher, <b>COUNSELOR</b> = guidance counselor, <b>SW</b> = social worker, <b>SPEECH</b> = speech therapist, <b>PSYCHIATRIST</b>. These are who you loop in when something comes up with the student.</div></details>
+<details class="step"><summary><span class="num">4</span><h3>PLACEMENT &middot; COTTAGE &middot; DISTRICT</h3><span class="chev">&#9662;</span></summary><div class="body"><b>PLACEMENT</b> = Day or Resident. <b>COTTAGE</b> = the cottage a residential student lives in (blank for day students). <b>DISTRICT</b> = the student's home school district &mdash; the one that placed them at Summit.</div></details>
+<div class="callout"><div class="clabel">GOOD TO KNOW</div>
+<div class="gk"><span class="ic">&#128065;&#65039;</span><span><b>Same icons on both sides.</b> Teachers see them in PowerTeacher, the admin side sees them on the student pages &mdash; one source, no separate lists.</span></div>
+<div class="gk"><span class="ic">&#129309;</span><span><b>Subs</b> see the header (GOES BY, PRONOUNS) and the IEP and coverage icons, but not the pink Name &amp; Pronouns alert.</span></div>
+<div class="gk"><span class="ic">&#128203;</span><span>Today's <b>C&amp;C / Escort / Admin Support</b> lists are also in the <b>Daily Notes</b> &mdash; the icon is the per-student version.</span></div>
+<div class="gk"><span class="ic">&#9993;&#65039;</span><span>Something in an alert or the header wrong or missing? <b>Email Nicole</b> &mdash; or the student's <b>SW</b> for names and pronouns.</span></div>
+</div>
+</div>
+<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
+<style id="rsp">
+body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
+body.cards>.wrap{display:none}
+body:not(.cards) .deck{display:none}
+.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
+.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
+.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
+.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
+.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
+.deck .cb b{color:#12305e}
+.deck .cb .shot,.deck .cb .browser,.deck .cb .hdr{display:none}
+.deck .cb .path{font-size:12.5px;padding:1px 6px}
+.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
+.deck .cb .codes{gap:6px;margin:6px 0 2px}
+.deck .cb .code{min-width:0;padding:5px 8px;font-size:12px}
+.deck .cb .code b{font-size:13px}
+.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
+.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
+.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
+.deck .cb p{margin:4px 0 0}
+.deck .cb .who{font-size:12px;margin-top:6px;padding:6px 8px}
+.deck .cb a.lk{display:block;background:#E4EEF8;border:1px solid #cddcec;border-radius:9px;padding:9px 11px;margin:5px 0;color:#1F3864;font-weight:800;text-decoration:none;font-size:13px}
+.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
+.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
+.deck .nav button[disabled]{opacity:.28}
+.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
+.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
+.deck .dots i.on{background:#1F3864}
+</style>
+<script>
+(function(){
+var BASE=974,BP=700,idx=0,deck=null,cards=[];
+function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function kindOf(lab){
+ if(/ICON/i.test(lab))return{kind:'ICON',head:'THE ICONS',noun:'icons'};
+ if(/LABEL|HEADER/i.test(lab))return{kind:'LABEL',head:'THE HEADER',noun:'header labels'};
+ if(/QUESTION/i.test(lab))return{kind:'QUESTION',head:'COMMON QUESTIONS',noun:'quick answers'};
+ if(/WAYS|OPTION|HELP/i.test(lab))return{kind:'OPTION',head:'WAYS TO GET HELP',noun:'ways to get help'};
+ return{kind:'STEP',head:'HOW TO DO IT',noun:'short steps'};
+}
+function collect(){
+ cards=[];var groups=[],cur=null;
+ q('.wrap .label, details.step').forEach(function(el){
+  if(el.classList.contains('label')){var k=kindOf(el.textContent.replace(/\s+/g,' ').trim());cur={kind:k.kind,head:k.head,noun:k.noun,steps:[]};groups.push(cur);}
+  else{if(!cur){cur={kind:'STEP',head:'HOW TO DO IT',noun:'short steps',steps:[]};groups.push(cur);}cur.steps.push(el);}
+ });
+ groups=groups.filter(function(g){return g.steps.length;});
+ var kinds=[],tot={},run={};
+ groups.forEach(function(g){if(!tot[g.kind]){tot[g.kind]=0;run[g.kind]=0;kinds.push(g);}tot[g.kind]+=g.steps.length;});
+ var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
+ var pics=q('.pic').length>0;
+ var title=kinds.map(function(g){return tot[g.kind]+' '+g.noun;}).join(' &middot; ');
+ var head=kinds.length===1?kinds[0].head:'ON THIS PAGE';
+ cards.push({k:head,num:'&#9654;',title:title,body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'});
+ groups.forEach(function(g){g.steps.forEach(function(d){var h=d.querySelector('summary h3'),b=d.querySelector('.body');run[g.kind]++;cards.push({k:g.kind+' '+run[g.kind]+' OF '+tot[g.kind],num:String(run[g.kind]),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});});
+ var co=document.querySelector('.callout');
+ if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
+ var st=document.querySelector('.strip');
+ if(st){var ls=q('a.slide',st).map(function(a){var t=a.querySelector('.t');return '<a class="lk" href="'+a.getAttribute('href')+'" target="_blank" rel="noopener">'+(t?t.innerHTML:a.textContent)+' &rarr;</a>';}).join('');if(ls){cards.push({k:'FROM THE TRAINING',num:'&#9654;',title:'Open the training slides',body:ls});}}
+}
+function render(){
+ var c=cards[idx];
+ deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
+ deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
+ deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
+}
+function apply(){
+ var w=window.innerWidth;
+ if(w<BP){
+  if(!deck){
+   var n=document.querySelector('.num');
+   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
+   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
+   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
+   render();
+  }
+  document.body.classList.add('cards');document.body.style.zoom='';
+ }else{
+  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
+ }
+}
+apply();window.addEventListener('resize',apply);
+})();
+</script>
+</body></html>
