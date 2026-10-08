@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+body{background:#eef4f8;padding:8px 6px 20px}
+.wrap{max-width:800px;margin:0 auto}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:#fff;border:1.5px solid #b9d2e8;color:#194178;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
+details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
+details.step[open]{border:1.5px solid #52B3EA}
+summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:#52B3EA;color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
+.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
+.shot{margin-top:14px;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:10px;padding:13px}
+.browser{background:#fff;border:1px solid #d3dfe9;border-radius:8px;overflow:hidden}
+.bbar{background:#e9eff5;height:24px;display:flex;align-items:center;padding:0 10px;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:#c4d2df}
+.rowhead{display:flex;padding:9px 14px 4px;color:#8296ab;font-size:10.5px;letter-spacing:1px;font-weight:700}
+.classrow{display:flex;align-items:center;padding:8px 14px;border-top:1px solid #eef3f7;font-size:13.5px;color:#2c4157}
+.spacer{flex:1}
+.code{min-width:46px;text-align:center;border-radius:6px;padding:3px 8px;font-weight:800;font-size:12.5px;border:1px solid #d3dfe9;background:#fff;color:#8296ab}
+.code.ua{background:#fde8e8;border-color:#f3b4b4;color:#b3261e}
+.code.l{background:#FDF6E4;border-color:#f1d28a;color:#8a6413}
+.code.ea{background:#eef1f5;border-color:#d3dfe9;color:#8296ab}
+.ring{position:relative}
+.ring:after{content:'';position:absolute;inset:-6px;border:2.5px dashed #E8A33D;border-radius:9px}
+.caption{margin-top:9px;font-size:12.5px;color:#8a6413;font-weight:700}
+.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
+.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+.gk .ic{flex:0 0 22px;font-size:15px}
+.strip{margin-top:28px}
+.slides{display:flex;gap:14px;flex-wrap:wrap}
+a.slide{width:236px;height:132px;border-radius:9px;background:#E4EEF8;border:1px solid #cddcec;box-shadow:0 2px 6px rgba(15,40,80,.15);padding:14px;position:relative;overflow:hidden;text-decoration:none;display:block}
+a.slide:hover{box-shadow:0 3px 10px rgba(15,40,80,.3)}
+.slide .bar{height:7px;width:64px;background:#F5B82E;border-radius:3px;margin-bottom:10px}
+.slide .t{color:#1F3864;font-weight:800;font-size:13.5px;letter-spacing:.4px;line-height:1.35}
+.slide .pill{position:absolute;left:14px;bottom:12px;background:#2A2F55;color:#fff;font-size:9px;font-weight:700;letter-spacing:1.2px;padding:4px 10px;border-radius:999px}
+.slide .c1{position:absolute;right:-24px;top:-24px;width:74px;height:74px;border-radius:50%;background:#1F3864}
+.slide .c2{position:absolute;right:8px;top:44px;width:26px;height:26px;border-radius:50%;background:#2A2F55}
+.slide .c3{position:absolute;right:30px;top:76px;width:12px;height:12px;border-radius:50%;background:#F5B82E}
+</style></head><body><div class="wrap">
+<div class="chips"><span class="chip">QUICK ANSWERS</span><span class="chip">ATTENDANCE FIRST</span><span class="chip">STILL STUCK? EMAIL NICOLE</span></div>
+<div class="label">COMMON QUESTIONS &nbsp;&mdash;&nbsp; TAP ONE</div>
+<details class="step" open><summary><span class="num">1</span><h3>Can't sign in?</h3><span class="chev">&#9662;</span></summary><div class="body">Use the Teacher Portal Sign-In button on the Teacher Portal page of this site &mdash; never a Googled login page. Password not working? Email Nicole before it locks you out.</div></details>
+<details class="step"><summary><span class="num">2</span><h3>The chair icon is grayed out</h3><span class="chev">&#9662;</span></summary><div class="body">Take Attendance grays out on days that class doesn't meet, and the teacher portal only shows today. If a class that meets today still looks gray, email Nicole with the class name.</div></details>
+<details class="step"><summary><span class="num">3</span><h3>Everyone already shows Present &mdash; is that right?</h3><span class="chev">&#9662;</span></summary><div class="body">Yes. Everyone starts Present. Change only the students who aren't there &mdash; A (absent) or L (late) &mdash; then Submit, even if nobody is out. The chair turns green once it's recorded.</div></details>
+<details class="step"><summary><span class="num">4</span><h3>An attendance code won't change</h3><span class="chev">&#9662;</span></summary><div class="body">Codes entered by the office or social workers (like EA &mdash; Excused Absent) are locked for staff. That's by design &mdash; no action needed.</div></details>
+<details class="step"><summary><span class="num">5</span><h3>My roster is wrong</h3><span class="chev">&#9662;</span></summary><div class="body">Missing or extra students? Email Nicole with the class and the student's name so the schedule can be fixed on the admin side.</div></details>
+<details class="step"><summary><span class="num">6</span><h3>I missed a period, or need a past day fixed</h3><span class="chev">&#9662;</span></summary><div class="body">Today's attendance can still be entered or corrected until the day ends &mdash; open the class, fix the codes, Submit. Anything older: email Nicole with the class, the student, the date, and the code it should be.</div></details>
+<details class="step"><summary><span class="num">7</span><h3>Something else?</h3><span class="chev">&#9662;</span></summary><div class="body">Head to <b>Get Help</b> in the menu above for the fastest ways to reach Nicole.</div></details>
+<div class="callout"><div class="clabel">GOOD TO KNOW</div>
+<div class="gk"><span class="ic">&#128274;</span><span><b>EA is entered by social workers</b> and locked for staff &mdash; if it's there, leave it.</span></div>
+<div class="gk"><span class="ic">&#128337;</span><span><b>Teachers can only edit today's attendance</b> &mdash; older dates go through Nicole.</span></div>
+<div class="gk"><span class="ic">&#128248;</span><span><b>When you email,</b> include the class, the student, the date, and a screenshot &mdash; one reply usually fixes it.</span></div>
+<div class="gk"><span class="ic">&#128279;</span><span><b>Sign in only through the Teacher Portal Sign-In button</b> on the Home page.</span></div></div>
+<div class="strip"><div class="label">HANDY REFERENCES</div><div class="slides">
+<a class="slide" href="https://drive.google.com/file/d/1b-vfCdDOs7X1EDeUndojAS3PRvUyMk6Y/view" target="_blank" rel="noopener"><span class="c1"></span><span class="c2"></span><span class="c3"></span><div class="bar"></div><div class="t">ATTENDANCE CODES<br>CHEAT SHEET</div><span class="pill">QUICK REFERENCE</span></a>
+<a class="slide" href="https://drive.google.com/file/d/1gIUeKf2Iz1kaAdPIM40KCmVj9u_T4xMa/view" target="_blank" rel="noopener"><span class="c1"></span><span class="c2"></span><span class="c3"></span><div class="bar"></div><div class="t">TAKING ATTENDANCE<br>AT SUMMIT</div><span class="pill">TAS + SUPPORT STAFF</span></a>
+</div></div>
+</div>
+<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
+<style id="rsp">
+body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
+body.cards>.wrap{display:none}
+body:not(.cards) .deck{display:none}
+.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
+.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
+.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
+.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
+.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0}
+.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
+.deck .cb b{color:#12305e}
+.deck .cb .shot,.deck .cb .browser{display:none}
+.deck .cb .path{font-size:12.5px;padding:1px 6px}
+.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
+.deck .cb .codes{gap:6px;margin:6px 0 2px}
+.deck .cb .code{min-width:0;padding:5px 8px;font-size:12px}
+.deck .cb .code b{font-size:13px}
+.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
+.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
+.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
+.deck .cb p{margin:4px 0 0}
+.deck .cb a.lk{display:block;background:#E4EEF8;border:1px solid #cddcec;border-radius:9px;padding:9px 11px;margin:5px 0;color:#1F3864;font-weight:800;text-decoration:none;font-size:13px}
+.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
+.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
+.deck .nav button[disabled]{opacity:.28}
+.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
+.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
+.deck .dots i.on{background:#1F3864}
+</style>
+<script>
+(function(){
+var BASE=974,BP=700,idx=0,deck=null,cards=[];
+function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function collect(){
+ var steps=q('details.step');cards=[];
+ var lab=((document.querySelector('.label')||{}).textContent||'').replace(/\s+/g,' ').trim();
+ var faq=/QUESTION/i.test(lab),opt=!faq&&/WAYS|OPTION|HELP/i.test(lab);
+ var kind=faq?'QUESTION':(opt?'OPTION':'STEP');
+ var head=faq?'COMMON QUESTIONS':(opt?'WAYS TO GET HELP':'HOW TO DO IT');
+ var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
+ var pics=q('.pic').length>0;
+ cards.push({k:head,num:'&#9654;',title:steps.length+' '+(faq?'quick answers':(opt?'ways to get help':'short steps')),body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'});
+ steps.forEach(function(d,i){var h=d.querySelector('summary h3'),b=d.querySelector('.body');cards.push({k:kind+' '+(i+1)+' OF '+steps.length,num:String(i+1),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});
+ var co=document.querySelector('.callout');
+ if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
+ var st=document.querySelector('.strip');
+ if(st){var ls=q('a.slide',st).map(function(a){var t=a.querySelector('.t');return '<a class="lk" href="'+a.getAttribute('href')+'" target="_blank" rel="noopener">'+(t?t.innerHTML:a.textContent)+' &rarr;</a>';}).join('');if(ls){cards.push({k:'FROM THE TRAINING',num:'&#9654;',title:'Open the training slides',body:ls});}}
+}
+function render(){
+ var c=cards[idx];
+ deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
+ deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
+ deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
+}
+function apply(){
+ var w=window.innerWidth;
+ if(w<BP){
+  if(!deck){
+   var n=document.querySelector('.num');
+   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
+   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
+   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
+   render();
+  }
+  document.body.classList.add('cards');document.body.style.zoom='';
+ }else{
+  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
+ }
+}
+apply();window.addEventListener('resize',apply);
+})();
+</script>
+</body></html>
