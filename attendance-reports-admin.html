@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+body{background:#eef4f8;padding:8px 6px 20px}
+.wrap{max-width:800px;margin:0 auto}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+.chip.blue{border-color:#b9d2e8;color:#194178}
+.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
+.sub{font-size:14px;color:#51637a;margin:-6px 0 14px;line-height:1.45}
+details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
+details.step[open]{border:1.5px solid #F5B82E}
+summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:#F5B82E;color:#1F3864;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
+.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
+.body b{color:#12305e}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:2px 8px;font-weight:700;color:#12305e;font-size:14px;margin:2px 0}
+.pic{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 10px}
+.codes{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.code{background:#fff;border:1.5px solid #d3dfe9;border-radius:10px;padding:8px 12px;font-size:13.5px;color:#2c4157;min-width:120px}
+.code b{display:block;font-size:16px;color:#12305e;letter-spacing:1px}
+.code.p{border-color:#8fd3a6}.code.a{border-color:#f0a3a3}
+.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
+.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+.gk .ic{flex:0 0 22px;font-size:15px}
+.strip{margin-top:28px}
+.slides{display:flex;gap:14px;flex-wrap:wrap}
+a.slide{width:236px;height:132px;border-radius:9px;background:#E4EEF8;border:1px solid #cddcec;box-shadow:0 2px 6px rgba(15,40,80,.15);padding:14px;position:relative;overflow:hidden;text-decoration:none;display:block}
+a.slide:hover{box-shadow:0 3px 10px rgba(15,40,80,.3)}
+.slide .bar{height:7px;width:64px;background:#F5B82E;border-radius:3px;margin-bottom:10px}
+.slide .t{color:#1F3864;font-weight:800;font-size:13.5px;letter-spacing:.4px;line-height:1.35}
+.slide .pill{position:absolute;left:14px;bottom:12px;background:#2A2F55;color:#fff;font-size:9px;font-weight:700;letter-spacing:1.2px;padding:4px 10px;border-radius:999px}
+.slide .c1{position:absolute;right:-24px;top:-24px;width:74px;height:74px;border-radius:50%;background:#1F3864}
+.slide .c2{position:absolute;right:8px;top:44px;width:26px;height:26px;border-radius:50%;background:#2A2F55}
+.slide .c3{position:absolute;right:30px;top:76px;width:12px;height:12px;border-radius:50%;background:#F5B82E}
+.ai{display:inline-flex;flex:0 0 34px;width:34px;height:34px;border-radius:9px;align-items:center;justify-content:center;margin-right:12px;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
+.ai svg{width:21px;height:21px}
+.ai.card svg{width:27px;height:27px}
+summary h3 .ai{margin-right:12px}
+.who{margin-top:10px;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:9px;padding:9px 12px;font-size:13.5px;color:#44586f;line-height:1.5}
+.who b{color:#12305e}
+.hdr{background:#fff;border:1px solid #d3dfe9;border-radius:12px;overflow:hidden;margin:4px 0 16px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+.hdr .bar{background:#0c4a8a;color:#fff;font-weight:700;font-size:13px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.hdr .bar .srch{margin-left:auto;background:#fff;color:#8a99ab;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:400;width:150px}
+.hdr .main{display:flex;gap:14px;padding:12px 14px 12px;align-items:flex-start}
+.hdr .av{flex:0 0 58px;height:58px;border:1px solid #c9d6e4;background:#eef4f8;color:#1f3864;font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.hdr .nm{font-size:16px;font-weight:700;color:#1b2a3a;margin:2px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hdr .nm .ti{display:inline-flex;gap:7px;align-items:center;margin-left:4px}
+.hdr .nm .ti svg{width:15px;height:15px}
+.hdr .flds{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:#2c4157}
+.hdr .flds span b{font-size:10.5px;letter-spacing:.3px;color:#5d7089;margin-right:3px}
+.hdr .icons{display:flex;gap:8px;margin:10px 0 0;align-items:center}
+.hdr .icons .ai{width:28px;height:28px;margin:0;border-radius:7px}
+.hdr .icons .ai svg{width:18px;height:18px}
+.hdr .icons .ai.card svg{width:23px;height:23px}
+.hdr .lbl{font-size:11.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 9px;margin-left:4px;white-space:nowrap}
+.hdr .flds i{color:#6b7c92;font-style:italic}
+.hdr.t .bar{background:#1565c0}
+.hdr.t .ttl{font-size:20px;font-weight:700;color:#2c3e50;display:flex;align-items:center;gap:10px;margin:0 0 8px}
+.hdr.t .ttl .icons{margin:0 0 0 6px}
+.hdr.t .sel{margin-left:auto;font-size:11px;font-weight:400;color:#2c4157;border:1px solid #1565c0;border-radius:4px;padding:3px 8px;background:#fff}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;border-radius:999px;padding:3px 9px;margin:0 0 6px}
+.tag.t{background:#E4EEF8;color:#194178;border:1px solid #b9d2e8}
+.tag.a{background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8}
+.sub .ai{width:24px;height:24px;flex-basis:24px;margin:0 2px;border-radius:6px}
+.sub .ai svg{width:14px;height:14px}
+.sub .ai.card svg{width:19px;height:19px}
+
+
+.fig{margin:12px 0 4px;border:1px solid #d3dfe9;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+.fig img{display:block;width:100%;height:auto}
+.fig.narrow{max-width:430px}
+.figcap{font-size:12.5px;color:#51637a;padding:6px 12px;background:#f7fafc;border-top:1px solid #e3ebf3;line-height:1.4}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 2px;font-size:14px;color:#44586f}
+.key span{display:inline-flex;align-items:center;gap:7px}
+.key i{display:inline-block;width:17px;height:17px;border:1px solid #9aa3b8;border-radius:3px;flex:0 0 17px}
+.keynote{font-size:13.5px;color:#51637a;margin-top:6px}
+
+.ai.gold{background:#FDF6E4;border-color:#f0dca8;color:#8a6413}
+</style></head>
+<body>
+<div class="wrap">
+<div class="chips"><span class="chip">SOCIAL WORKERS &middot; COUNSELORS &middot; COORDINATORS</span><span class="chip">ATTENDANCE MENU</span><span class="chip">LOOK &amp; PRINT ONLY</span></div>
+<div class="label">WHICH ONE DO I NEED? &nbsp;&mdash;&nbsp; TAP ONE</div>
+<div class="sub">Two Summit reports live in the left menu under <span class="path">Attendance</span> &rarr; <span class="path">Summit Attendance Reports</span>. Both are look-and-print only &mdash; nothing on either page changes attendance.</div>
+<details class="step"><summary><h3><span class="ai gold"><svg style="width:21px;height:21px"
+  aria-hidden="true" class="lucide lucide-sheet"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+  <line x1="3" x2="21" y1="9" y2="9" />
+  <line x1="3" x2="21" y1="15" y2="15" />
+  <line x1="9" x2="9" y1="9" y2="21" />
+  <line x1="15" x2="15" y1="9" y2="21" />
+</svg></span>Period Attendance &mdash; every period, every day</h3><span class="chev">&#9662;</span></summary><div class="body">The code for every school day and every period (AM homeroom, 1st&ndash;4th, 6th, 7th), with the <b>cuts counted for you</b> and two charts. Use it to spot a pattern &mdash; before a meeting, a call home or a team check-in.<div class="who"><b>Who uses it:</b> social workers, counselors, coordinators. <b>Teachers</b> have the same screen in PowerTeacher: student page &rarr; <b>Select Screens</b> &rarr; <b>Period Attendance</b>.</div></div></details>
+<details class="step"><summary><h3><span class="ai gold"><svg style="width:21px;height:21px"
+  aria-hidden="true" class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg></span>Daily Attendance Record &mdash; Present / Absent, to send</h3><span class="chev">&#9662;</span></summary><div class="body">One line per school day &mdash; <b>Present</b> or <b>Absent</b> &mdash; with month subtotals, no-school days and totals, ready to <b>print or save as a PDF</b>. Built for <b>district and agency requests</b>: one month, the school year so far, or any dates.<div class="who"><b>Who uses it:</b> Summit's executive assistant, or whoever gets the request.</div></div></details>
+<div class="label">PERIOD ATTENDANCE &nbsp;&mdash;&nbsp; TAP A STEP</div>
+<details class="step"><summary><span class="num">1</span><h3>Attendance &rarr; Summit Attendance Reports &rarr; Period Attendance</h3><span class="chev">&#9662;</span></summary><div class="body">In the left menu, click <span class="path">Attendance</span>. In the third column, <b>Summit Attendance Reports</b>, click <span class="path">Period Attendance</span>.<div class="fig"><img src="menu-summit-attendance-reports.png" alt="PowerSchool Attendance menu with the Summit Attendance Reports column ringed" loading="lazy"><div class="figcap">The <b>Attendance</b> menu &mdash; Summit's reports are the third column.</div></div></div></details>
+<details class="step"><summary><span class="num">2</span><h3>Pick the student</h3><span class="chev">&#9662;</span></summary><div class="body">Type a <b>last name, first name or student number</b> in the box and click the student. Students who have left Summit are in the list too. Wrong one? Click <b>Pick a different student</b>.</div></details>
+<details class="step"><summary><span class="num">3</span><h3>Read the Summary and the two charts</h3><span class="chev">&#9662;</span></summary><div class="body">It opens on the <b>whole term so far</b>. The <b>Summary</b> says it in a few lines: days in school, absences, cuts and when they happen, <b>CC</b> (stayed in the cottage) vs <b>CG</b> (on campus, not in class), AM homeroom cuts and lates. The charts show <b>cuts by week</b> and <b>cuts by period</b>. Change <b>From</b> / <b>To</b> for a stretch &mdash; <b>All dates</b> puts it back. <b>Print</b> prints just the report; <b>Open their Attendance Overview</b> opens PowerSchool's own page.<div class="fig"><img src="pa-admin-summary.png" alt="Period Attendance on the admin side: student picker, dates, Summary and charts for the test student" loading="lazy"><div class="figcap">Sample: the test student, <b>ZZTest, Student</b>. Every student's page looks the same.</div></div></div></details>
+<details class="step"><summary><span class="num">4</span><h3>Read Codes by Day</h3><span class="chev">&#9662;</span></summary><div class="body">One row per school day, grouped by week, and one column per period: <b>AM HR</b>, <b>1st</b>&ndash;<b>4th</b>, <b>6th</b>, <b>7th</b> (no 5th &mdash; that's lunch).<div class="key"><span><i style="background:#f4cccc"></i><b>Cut</b> &mdash; CC, CG</span><span><i style="background:#ea9999"></i><b>Absent</b> &mdash; A, OSS</span><span><i style="background:#c9daf8"></i><b>Excused</b> &mdash; EA, AP, OC, TR, WS, IH</span><span><i style="background:#fff2cc"></i><b>Late</b> &mdash; L</span></div><div class="keynote">A <b>blank</b> box = no code entered, which counts as present. A <b>dash</b> = not in that class yet.</div><div class="fig"><img src="pa-codes-by-day.png" alt="Codes by Day grid with colored codes for the test student" loading="lazy"><div class="figcap">Sample: the test student, <b>ZZTest, Student</b>. Two weeks shown.</div></div></div></details>
+<div class="label">DAILY ATTENDANCE RECORD &nbsp;&mdash;&nbsp; TAP A STEP</div>
+<details class="step"><summary><span class="num">1</span><h3>Attendance &rarr; Summit Attendance Reports &rarr; Daily Attendance Record</h3><span class="chev">&#9662;</span></summary><div class="body">Same menu, one line down: <span class="path">Attendance</span> &rarr; <b>Summit Attendance Reports</b> &rarr; <span class="path">Daily Attendance Record</span>.<div class="fig"><img src="menu-summit-attendance-reports.png" alt="PowerSchool Attendance menu with the Summit Attendance Reports column ringed" loading="lazy"><div class="figcap">The <b>Attendance</b> menu &mdash; Summit's reports are the third column.</div></div></div></details>
+<details class="step"><summary><span class="num">2</span><h3>Pick the student, then the dates</h3><span class="chev">&#9662;</span></summary><div class="body">Type a last name, first name or student number and click the student. Then pick the dates: <b>One month</b> (choose it from the list), <b>This school year so far</b>, or <b>Other dates</b> (from / to). <b>Since they started</b> only shows up for students who started before this school year.<div class="fig"><img src="dra-steps.png" alt="Daily Attendance Record steps 1 to 3 and the Before you send box, for the test student" loading="lazy"><div class="figcap">Sample: the test student, <b>ZZTest, Student</b>. The yellow box only shows up when there are days to check.</div></div></div></details>
+<details class="step"><summary><span class="num">3</span><h3>Check the yellow box before you send</h3><span class="chev">&#9662;</span></summary><div class="body">If a yellow <b>Before you send</b> box shows up, look at those days first &mdash; for example a day counted Present when no attendance was entered, or Present only because of <b>OC</b> or <b>WORK</b>. A day is wrong? Email Nicole to fix it. Present/Absent updates <b>overnight</b>, so print it again tomorrow.</div></details>
+<details class="step"><summary><span class="num">4</span><h3>Print or Save as PDF</h3><span class="chev">&#9662;</span></summary><div class="body">The <b>preview</b> under the steps is exactly what prints: <b>Student Attendance Record</b> with the name, student #, date of birth, district of residence, totals and every school day. Click <b>Print or Save as PDF</b>. In the print window, pick a printer &mdash; or change <b>Destination</b> to <b>Save as PDF</b> to email it.<div class="fig narrow"><img src="dra-record.png" alt="Printed Student Attendance Record for the test student" loading="lazy"><div class="figcap">The top of the printed record (sample: the test student).</div></div></div></details>
+<div class="callout"><div class="clabel">GOOD TO KNOW</div>
+<div class="gk"><span class="ic">&#128274;</span><span><b>Look and print only.</b> Nothing on either page changes attendance.</span></div>
+<div class="gk"><span class="ic">&#9989;</span><span><b>Present</b> = in school for at least one period &mdash; CG and CC count, they're on grounds. Same numbers as the billing packets.</span></div>
+<div class="gk"><span class="ic">&#127769;</span><span><b>The Daily record stops at yesterday</b> &mdash; today isn't final until tomorrow, and Present/Absent updates overnight.</span></div>
+<div class="gk"><span class="ic">&#128193;</span><span><b>PowerSchool attendance starts 9/1/2026.</b> Anything earlier is in the old attendance sheets.</span></div>
+<div class="gk"><span class="ic">&#129514;</span><span><b>ZZTest isn't in these lists on purpose.</b> Looking can't change anything, so any real student is fine.</span></div>
+</div>
+</div>
+<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
+<style id="rsp">
+body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
+body.cards>.wrap{display:none}
+body:not(.cards) .deck{display:none}
+.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
+.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
+.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
+.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
+.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
+.deck .cb b{color:#12305e}
+.deck .cb .shot,.deck .cb .browser,.deck .cb .hdr{display:none}
+.deck .cb .path{font-size:12.5px;padding:1px 6px}
+.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
+.deck .cb .codes{gap:6px;margin:6px 0 2px}
+.deck .cb .code{min-width:0;padding:5px 8px;font-size:12px}
+.deck .cb .code b{font-size:13px}
+.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
+.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
+.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
+.deck .cb p{margin:4px 0 0}
+.deck .cb .who{font-size:12px;margin-top:6px;padding:6px 8px}
+.deck .cb a.lk{display:block;background:#E4EEF8;border:1px solid #cddcec;border-radius:9px;padding:9px 11px;margin:5px 0;color:#1F3864;font-weight:800;text-decoration:none;font-size:13px}
+.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
+.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
+.deck .nav button[disabled]{opacity:.28}
+.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
+.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
+.deck .dots i.on{background:#1F3864}
+</style>
+<script>
+(function(){
+var BASE=974,BP=700,idx=0,deck=null,cards=[];
+function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function kindOf(lab){
+ if(/WHICH ONE/i.test(lab))return{kind:'REPORT',head:'WHICH ONE?',noun:'reports'};
+ if(/^PERIOD ATTENDANCE/i.test(lab))return{kind:'PERIOD ATTENDANCE \u00b7 STEP',head:'PERIOD ATTENDANCE',noun:'Period Attendance steps'};
+ if(/^DAILY ATTENDANCE/i.test(lab))return{kind:'DAILY RECORD \u00b7 STEP',head:'DAILY ATTENDANCE RECORD',noun:'Daily record steps'};
+ if(/ICON/i.test(lab))return{kind:'ICON',head:'THE ICONS',noun:'icons'};
+ if(/LABEL|HEADER/i.test(lab))return{kind:'LABEL',head:'THE HEADER',noun:'header labels'};
+ if(/QUESTION/i.test(lab))return{kind:'QUESTION',head:'COMMON QUESTIONS',noun:'quick answers'};
+ if(/WAYS|OPTION|HELP/i.test(lab))return{kind:'OPTION',head:'WAYS TO GET HELP',noun:'ways to get help'};
+ return{kind:'STEP',head:'HOW TO DO IT',noun:'short steps'};
+}
+function collect(){
+ cards=[];var groups=[],cur=null;
+ q('.wrap .label, details.step').forEach(function(el){
+  if(el.classList.contains('label')){var k=kindOf(el.textContent.replace(/\s+/g,' ').trim());cur={kind:k.kind,head:k.head,noun:k.noun,steps:[]};groups.push(cur);}
+  else{if(!cur){cur={kind:'STEP',head:'HOW TO DO IT',noun:'short steps',steps:[]};groups.push(cur);}cur.steps.push(el);}
+ });
+ groups=groups.filter(function(g){return g.steps.length;});
+ var kinds=[],tot={},run={};
+ groups.forEach(function(g){if(!tot[g.kind]){tot[g.kind]=0;run[g.kind]=0;kinds.push(g);}tot[g.kind]+=g.steps.length;});
+ var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
+ var pics=q('.pic').length>0;
+ var title=kinds.map(function(g){return tot[g.kind]+' '+g.noun;}).join(' &middot; ');
+ var head=kinds.length===1?kinds[0].head:'ON THIS PAGE';
+ cards.push({k:head,num:'&#9654;',title:title,body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'});
+ groups.forEach(function(g){g.steps.forEach(function(d){var h=d.querySelector('summary h3'),b=d.querySelector('.body');run[g.kind]++;cards.push({k:g.kind+' '+run[g.kind]+' OF '+tot[g.kind],num:String(run[g.kind]),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});});
+ var co=document.querySelector('.callout');
+ if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
+ var st=document.querySelector('.strip');
+ if(st){var ls=q('a.slide',st).map(function(a){var t=a.querySelector('.t');return '<a class="lk" href="'+a.getAttribute('href')+'" target="_blank" rel="noopener">'+(t?t.innerHTML:a.textContent)+' &rarr;</a>';}).join('');if(ls){cards.push({k:'FROM THE TRAINING',num:'&#9654;',title:'Open the training slides',body:ls});}}
+}
+function render(){
+ var c=cards[idx];
+ deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
+ deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
+ deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
+}
+function apply(){
+ var w=window.innerWidth;
+ if(w<BP){
+  if(!deck){
+   var n=document.querySelector('.num');
+   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
+   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
+   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
+   render();
+  }
+  document.body.classList.add('cards');document.body.style.zoom='';
+ }else{
+  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
+ }
+}
+apply();window.addEventListener('resize',apply);
+})();
+</script>
+</body></html>
