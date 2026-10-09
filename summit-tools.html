@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+body{background:#eef4f8;padding:8px 6px 20px}
+.wrap{max-width:800px;margin:0 auto}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+.chip.blue{border-color:#b9d2e8;color:#194178}
+.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
+.sub{font-size:14px;color:#51637a;margin:-6px 0 14px;line-height:1.45}
+details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
+details.step[open]{border:1.5px solid #F5B82E}
+summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:#F5B82E;color:#1F3864;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
+.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
+.body b{color:#12305e}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:2px 8px;font-weight:700;color:#12305e;font-size:14px;margin:2px 0}
+.pic{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 10px}
+.codes{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.code{background:#fff;border:1.5px solid #d3dfe9;border-radius:10px;padding:8px 12px;font-size:13.5px;color:#2c4157;min-width:120px}
+.code b{display:block;font-size:16px;color:#12305e;letter-spacing:1px}
+.code.p{border-color:#8fd3a6}.code.a{border-color:#f0a3a3}
+.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
+.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+.gk .ic{flex:0 0 22px;font-size:15px}
+.strip{margin-top:28px}
+.slides{display:flex;gap:14px;flex-wrap:wrap}
+a.slide{width:236px;height:132px;border-radius:9px;background:#E4EEF8;border:1px solid #cddcec;box-shadow:0 2px 6px rgba(15,40,80,.15);padding:14px;position:relative;overflow:hidden;text-decoration:none;display:block}
+a.slide:hover{box-shadow:0 3px 10px rgba(15,40,80,.3)}
+.slide .bar{height:7px;width:64px;background:#F5B82E;border-radius:3px;margin-bottom:10px}
+.slide .t{color:#1F3864;font-weight:800;font-size:13.5px;letter-spacing:.4px;line-height:1.35}
+.slide .pill{position:absolute;left:14px;bottom:12px;background:#2A2F55;color:#fff;font-size:9px;font-weight:700;letter-spacing:1.2px;padding:4px 10px;border-radius:999px}
+.slide .c1{position:absolute;right:-24px;top:-24px;width:74px;height:74px;border-radius:50%;background:#1F3864}
+.slide .c2{position:absolute;right:8px;top:44px;width:26px;height:26px;border-radius:50%;background:#2A2F55}
+.slide .c3{position:absolute;right:30px;top:76px;width:12px;height:12px;border-radius:50%;background:#F5B82E}
+.ai{display:inline-flex;flex:0 0 34px;width:34px;height:34px;border-radius:9px;align-items:center;justify-content:center;margin-right:12px;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
+.ai svg{width:21px;height:21px}
+.ai.card svg{width:27px;height:27px}
+summary h3 .ai{margin-right:12px}
+.who{margin-top:10px;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:9px;padding:9px 12px;font-size:13.5px;color:#44586f;line-height:1.5}
+.who b{color:#12305e}
+.hdr{background:#fff;border:1px solid #d3dfe9;border-radius:12px;overflow:hidden;margin:4px 0 16px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+.hdr .bar{background:#0c4a8a;color:#fff;font-weight:700;font-size:13px;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.hdr .bar .srch{margin-left:auto;background:#fff;color:#8a99ab;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:400;width:150px}
+.hdr .main{display:flex;gap:14px;padding:12px 14px 12px;align-items:flex-start}
+.hdr .av{flex:0 0 58px;height:58px;border:1px solid #c9d6e4;background:#eef4f8;color:#1f3864;font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.hdr .nm{font-size:16px;font-weight:700;color:#1b2a3a;margin:2px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hdr .nm .ti{display:inline-flex;gap:7px;align-items:center;margin-left:4px}
+.hdr .nm .ti svg{width:15px;height:15px}
+.hdr .flds{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:#2c4157}
+.hdr .flds span b{font-size:10.5px;letter-spacing:.3px;color:#5d7089;margin-right:3px}
+.hdr .icons{display:flex;gap:8px;margin:10px 0 0;align-items:center}
+.hdr .icons .ai{width:28px;height:28px;margin:0;border-radius:7px}
+.hdr .icons .ai svg{width:18px;height:18px}
+.hdr .icons .ai.card svg{width:23px;height:23px}
+.hdr .lbl{font-size:11.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 9px;margin-left:4px;white-space:nowrap}
+.hdr .flds i{color:#6b7c92;font-style:italic}
+.hdr.t .bar{background:#1565c0}
+.hdr.t .ttl{font-size:20px;font-weight:700;color:#2c3e50;display:flex;align-items:center;gap:10px;margin:0 0 8px}
+.hdr.t .ttl .icons{margin:0 0 0 6px}
+.hdr.t .sel{margin-left:auto;font-size:11px;font-weight:400;color:#2c4157;border:1px solid #1565c0;border-radius:4px;padding:3px 8px;background:#fff}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;border-radius:999px;padding:3px 9px;margin:0 0 6px}
+.tag.t{background:#E4EEF8;color:#194178;border:1px solid #b9d2e8}
+.tag.a{background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8}
+.sub .ai{width:24px;height:24px;flex-basis:24px;margin:0 2px;border-radius:6px}
+.sub .ai svg{width:14px;height:14px}
+.sub .ai.card svg{width:19px;height:19px}
+
+
+.tag.chk{background:#FFF1F1;color:#A12D2D;border:1px solid #F1BDBD;margin:0 0 8px}
+.ai.gold{background:#FDF6E4;border-color:#f0dca8}
+.ai.gold svg{color:#8a6413}
+.nav{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #d3dfe9;border-radius:8px;padding:2px 10px 2px 5px;font-weight:800;color:#12305e;font-size:14px;vertical-align:middle;margin:0}
+.nav svg{width:18px;height:18px;color:#194178}
+.sub .pic{display:inline-block;margin-top:8px}
+</style></head>
+<body>
+<div class="wrap">
+<div class="chips"><span class="chip">SOCIAL WORKERS &middot; COUNSELORS &middot; COORDINATORS</span><span class="chip">LEFT MENU &middot; FIRST ITEM</span><span class="chip">TAP AN ITEM BELOW</span></div>
+
+<div class="label">WHAT IS SUMMIT TOOLS?</div>
+<div class="sub"><span class="nav"><span class="ai gold" style="margin:0;width:22px;height:22px;flex-basis:22px;border-radius:6px"><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>Summit Tools</span> is the <b>first thing in the left menu</b> of PowerSchool SIS &mdash; the wrench. It is Summit's own shelf: the pages built just for Summit live here, so you don't have to hunt through PowerSchool's menus for them. <b>Hover over it</b> (or click it) and the list slides out to the right &mdash; click the item you need. A few items work on <b>one student</b>, so search the student first, then open the item.<br><span class="pic">&#128247; picture 1 below &mdash; the menu, opened</span></div>
+
+<div class="label">THE MENU &nbsp;&mdash;&nbsp; TAP AN ITEM TO SEE WHAT IT DOES</div>
+<div class="sub">In the same order as the menu.</div>
+<div id="items"></div>
+
+<div class="callout"><div class="clabel">GOOD TO KNOW</div>
+<div class="gk"><span class="ic">&#128065;&#65039;</span><span><b>Admin side only.</b> Summit Tools lives in PowerSchool SIS, not in PowerTeacher &mdash; teachers get the same things as buttons on their Start Page (<b>Print Student Schedules</b>, <b>View Student ICSP</b>, <b>View Student IEP</b>).</span></div>
+<div class="gk"><span class="ic">&#128269;</span><span><b>Pick the student first.</b> If an item opens with no student on it (or asks you to select one), search the student, then open the item again.</span></div>
+<div class="gk"><span class="ic">&#128274;</span><span><b>Missing an item a colleague has?</b> That's permissions, not a glitch &mdash; email Nicole.</span></div>
+<div class="gk"><span class="ic">&#10024;</span><span><b>New Summit pages land here first.</b> When something new is built for Summit, this menu is where it goes &mdash; and this page gets a new line.</span></div>
+</div>
+</div>
+<script>
+var ICONS={wrench:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"/></svg>",bell:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\"/><path d=\"M10.3 21a1.94 1.94 0 0 0 3.4 0\"/></svg>",file:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\"/><path d=\"M14 2v4a2 2 0 0 0 2 2h4\"/><path d=\"M10 9H8\"/><path d=\"M16 13H8\"/><path d=\"M16 17H8\"/></svg>",calendar:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 2v4\"/><path d=\"M16 2v4\"/><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\"/><path d=\"M3 10h18\"/><path d=\"m9 16 2 2 4-4\"/></svg>",printer:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"/><path d=\"M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6\"/><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\" rx=\"1\"/></svg>",clipboard:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\" ry=\"1\"/><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"/><path d=\"M12 11h4\"/><path d=\"M12 16h4\"/><path d=\"M8 11h.01\"/><path d=\"M8 16h.01\"/></svg>",user:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>",chart:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 3v18h18\"/><path d=\"M18 17V9\"/><path d=\"M13 17V5\"/><path d=\"M8 17v-3\"/></svg>",cap:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z\"/><path d=\"M22 10v6\"/><path d=\"M6 12.5V16a6 3 0 0 0 12 0v-3.5\"/></svg>",pencil:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\"/><path d=\"m15 5 4 4\"/></svg>",upload:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"17 8 12 3 7 8\"/><line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\"/></svg>"};
+
+// ============================================================================
+//  EDIT THIS LIST.  One entry per item in the Summit Tools menu, in menu order.
+//    label = exactly what the menu says
+//    icon  = one of: bell, file, calendar, printer, clipboard, user, chart, cap, pencil, upload
+//    does  = what it opens / what it is for (plain words; <b>bold</b> is fine)
+//    who   = who uses it
+//    help  = the Help Center page that walks through it (leave "" if there is none yet)
+//    check = true shows a red CHECK ME tag — delete that part once the line is confirmed
+//  Add a new item = copy one line, paste it where it belongs in the menu order, change the words.
+//  Don't put plain double quotes " inside the text (use &quot; or rewrite the sentence).
+// ============================================================================
+var ITEMS = [
+ {label:"Attendance Alerts",       icon:"bell",      check:true,
+  does:"The running list of students who have crossed an absence line in a class &mdash; <b>first notice</b>, <b>intervention</b>, <b>referral</b>, <b>no credit</b> &mdash; plus who is new on the list this week.",
+  who:"Social workers and counselors, to see who needs follow-up before the next line.",
+  help:""},
+ {label:"ICSP",                    icon:"file",      check:false,
+  does:"Opens the student's <b>ICSP</b> (Individual Crisis Support Plan) &mdash; read it, start a new one or update the current one. Pick the student first.",
+  who:"Social workers.",
+  help:"ICSP &amp; IEP Attachments"},
+ {label:"ICSP Renewal Dashboard",  icon:"calendar",  check:true,
+  does:"Every student's ICSP in one list with its date, so you can see which plans are <b>coming due</b> or <b>overdue</b> for renewal without opening students one by one.",
+  who:"Social workers and whoever tracks ICSP due dates.",
+  help:""},
+ {label:"Print Student Schedules", icon:"printer",   check:false,
+  does:"Pick the students and the term and it prints <b>one clean schedule page per student</b> &mdash; the Mon&ndash;Fri grid with A-week / B-week splits, and the name, student number, homeroom and social worker across the top.",
+  who:"Anyone who hands a student a schedule &mdash; social workers, coordinators, the front office.",
+  help:""},
+ {label:"Report Cards",            icon:"clipboard", check:true,
+  does:"Run and print the <b>Summit report card</b> for a student or a group of students for a term.",
+  who:"Social workers and coordinators at the end of each quarter.",
+  help:""},
+ {label:"Student IEP",             icon:"user",      check:true,
+  does:"Opens the student's <b>current IEP</b> (the file added with Upload IEP) to read on screen. Pick the student first.",
+  who:"Social workers, counselors and coordinators. Teachers have the same thing as <b>View Student IEP</b> on their Start Page.",
+  help:"ICSP &amp; IEP Attachments"},
+ {label:"Supplementary Reports",   icon:"chart",     check:true,
+  does:"The <b>quarterly supplementary reports</b> &mdash; the written progress reports that go home with report cards. Open, fill in or print a student's report.",
+  who:"Teachers write them; social workers and coordinators read and send them.",
+  help:""},
+ {label:"Transcript Grades",       icon:"cap",       check:true,
+  does:"The <b>stored final grades</b> that feed the official transcript, by year and course &mdash; look one up or fix one that is wrong.",
+  who:"Guidance and Nicole.",
+  help:""},
+ {label:"Transcript Editor",       icon:"pencil",    check:true,
+  does:"Build and print the <b>official Summit transcript</b> for a student.",
+  who:"Guidance.",
+  help:""},
+ {label:"Upload IEP",              icon:"upload",    check:true,
+  does:"Attach the student's <b>newest IEP file</b> so it shows under Student IEP (and View Student IEP for teachers). Pick the student first.",
+  who:"Whoever receives the new IEP from the district.",
+  help:"ICSP &amp; IEP Attachments"}
+];
+
+
+(function(){
+ var out='';
+ for(var i=0;i<ITEMS.length;i++){var it=ITEMS[i];
+  out+='<details class="step"><summary><h3><span class="ai gold">'+(ICONS[it.icon]||ICONS.file)+'</span>'+it.label+'</h3><span class="chev">&#9662;</span></summary><div class="body">'
+     +(it.check?'<span class="tag chk">CHECK ME &mdash; NICOLE HAS NOT CONFIRMED THIS LINE YET</span><br>':'')
+     +it.does
+     +'<div class="who"><b>Who uses it:</b> '+it.who
+     +(it.help?'<br><b>Step by step:</b> the <b>'+it.help+'</b> page of this site.':'')
+     +'</div></div></details>';
+ }
+ document.getElementById('items').innerHTML=out;
+})();
+
+</script>
+<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
+<style id="rsp">
+body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
+body.cards>.wrap{display:none}
+body:not(.cards) .deck{display:none}
+.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
+.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
+.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
+.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
+.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
+.deck .cb b{color:#12305e}
+.deck .cb .shot,.deck .cb .browser,.deck .cb .hdr{display:none}
+.deck .cb .path{font-size:12.5px;padding:1px 6px}
+.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
+.deck .cb .codes{gap:6px;margin:6px 0 2px}
+.deck .cb .code{min-width:0;padding:5px 8px;font-size:12px}
+.deck .cb .code b{font-size:13px}
+.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
+.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
+.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
+.deck .cb p{margin:4px 0 0}
+.deck .cb .who{font-size:12px;margin-top:6px;padding:6px 8px}
+.deck .cb a.lk{display:block;background:#E4EEF8;border:1px solid #cddcec;border-radius:9px;padding:9px 11px;margin:5px 0;color:#1F3864;font-weight:800;text-decoration:none;font-size:13px}
+.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
+.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
+.deck .nav button[disabled]{opacity:.28}
+.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
+.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
+.deck .dots i.on{background:#1F3864}
+</style>
+<script>
+(function(){
+var BASE=974,BP=700,idx=0,deck=null,cards=[];
+function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function kindOf(lab){
+ if(/ICON/i.test(lab))return{kind:'ICON',head:'THE ICONS',noun:'icons'};
+ if(/LABEL|HEADER/i.test(lab))return{kind:'LABEL',head:'THE HEADER',noun:'header labels'};
+ if(/QUESTION/i.test(lab))return{kind:'QUESTION',head:'COMMON QUESTIONS',noun:'quick answers'};
+ if(/ITEM|MENU/i.test(lab))return{kind:'ITEM',head:'THE MENU',noun:'menu items'};
+ if(/WAYS|OPTION|HELP/i.test(lab))return{kind:'OPTION',head:'WAYS TO GET HELP',noun:'ways to get help'};
+ return{kind:'STEP',head:'HOW TO DO IT',noun:'short steps'};
+}
+function collect(){
+ cards=[];var groups=[],cur=null;
+ q('.wrap .label, details.step').forEach(function(el){
+  if(el.classList.contains('label')){var k=kindOf(el.textContent.replace(/\s+/g,' ').trim());cur={kind:k.kind,head:k.head,noun:k.noun,steps:[]};groups.push(cur);}
+  else{if(!cur){cur={kind:'STEP',head:'HOW TO DO IT',noun:'short steps',steps:[]};groups.push(cur);}cur.steps.push(el);}
+ });
+ groups=groups.filter(function(g){return g.steps.length;});
+ var kinds=[],tot={},run={};
+ groups.forEach(function(g){if(!tot[g.kind]){tot[g.kind]=0;run[g.kind]=0;kinds.push(g);}tot[g.kind]+=g.steps.length;});
+ var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
+ var pics=q('.pic').length>0;
+ var title=kinds.map(function(g){return tot[g.kind]+' '+g.noun;}).join(' &middot; ');
+ var head=kinds.length===1?kinds[0].head:'ON THIS PAGE';
+ cards.push({k:head,num:'&#9654;',title:title,body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'});
+ groups.forEach(function(g){g.steps.forEach(function(d){var h=d.querySelector('summary h3'),b=d.querySelector('.body');run[g.kind]++;cards.push({k:g.kind+' '+run[g.kind]+' OF '+tot[g.kind],num:String(run[g.kind]),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});});
+ var co=document.querySelector('.callout');
+ if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
+ var st=document.querySelector('.strip');
+ if(st){var ls=q('a.slide',st).map(function(a){var t=a.querySelector('.t');return '<a class="lk" href="'+a.getAttribute('href')+'" target="_blank" rel="noopener">'+(t?t.innerHTML:a.textContent)+' &rarr;</a>';}).join('');if(ls){cards.push({k:'FROM THE TRAINING',num:'&#9654;',title:'Open the training slides',body:ls});}}
+}
+function render(){
+ var c=cards[idx];
+ deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
+ deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
+ deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
+}
+function apply(){
+ var w=window.innerWidth;
+ if(w<BP){
+  if(!deck){
+   var n=document.querySelector('.num');
+   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
+   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
+   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
+   render();
+  }
+  document.body.classList.add('cards');document.body.style.zoom='';
+ }else{
+  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
+ }
+}
+apply();window.addEventListener('resize',apply);
+})();
+</script>
+</body></html>
