@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+body{background:#eef4f8;padding:8px 6px 20px}
+.wrap{max-width:800px;margin:0 auto}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+.chip.blue{border-color:#b9d2e8;color:#194178}
+.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
+.sub{font-size:14px;color:#51637a;margin:-6px 0 14px;line-height:1.45}
+details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
+details.step[open]{border:1.5px solid #F5B82E}
+summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:#F5B82E;color:#1F3864;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
+.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
+.body b{color:#12305e}
+.body ul{margin:4px 0 0 18px}
+.body li{margin:3px 0}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:2px 8px;font-weight:700;color:#12305e;font-size:14px;margin:2px 0}
+.pic{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 10px}
+.no{display:inline-block;background:#fdecec;border:1px solid #f0a3a3;border-radius:6px;padding:2px 8px;font-weight:700;color:#b3261e;font-size:14px;margin:2px 0}
+.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
+.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+.gk .ic{flex:0 0 22px;font-size:15px}
+.who{margin-top:10px;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:9px;padding:9px 12px;font-size:13.5px;color:#44586f;line-height:1.5}
+.who b{color:#12305e}
+.trio{display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 6px}
+.trio .t{flex:1 1 220px;background:#fff;border:1.5px solid #d3dfe9;border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+.trio .t .k{font-size:11.5px;font-weight:800;letter-spacing:2px;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 9px;display:inline-block;margin-bottom:8px}
+.trio .t h4{font-size:16px;font-weight:800;color:#12305e;margin-bottom:6px}
+.trio .t ul{margin:0 0 0 16px;font-size:14px;color:#51637a;line-height:1.45}
+.trio .t li{margin:2px 0}
+.trio .t b{color:#12305e}
+.when{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 2px}
+.when span{background:#fff;border:1.5px solid #d3dfe9;border-radius:10px;padding:8px 12px;font-size:13.5px;color:#2c4157}
+.when span b{display:block;font-size:12px;letter-spacing:1.5px;color:#8a6413}
+</style></head>
+<body>
+<div class="wrap">
+<div class="chips"><span class="chip">SOCIAL WORKERS</span><span class="chip">ONE ICSP PER STUDENT</span><span class="chip">UPDATE EVERY 6 MONTHS</span></div>
+
+<div class="label">THE BIG PICTURE</div>
+<div class="sub">Every student has <b>one</b> ICSP in PowerSchool for their whole time at Summit. You never make a second one &mdash; you update the same one, and PowerSchool keeps the old versions for you.</div>
+<div class="trio">
+<div class="t"><span class="k">THE PLAN</span><h4>A folder with a sticky note</h4><ul><li>The blue card on the <b>Student Support</b> tab.</li><li>The sticky note = <b>Start Date</b> and <b>Expires</b>.</li><li><b>Expires</b> is just the date the next review is due. Nothing happens when it passes.</li></ul></div>
+<div class="t"><span class="k">THE ICSP FORM</span><h4>The paper inside the folder</h4><ul><li>The link on the card: <b>Individual Crisis Support Plan (ICSP)</b>.</li><li>Fill it in once, then <b>update the same form</b> at each review.</li><li>Everyone who opens it sees the newest version.</li></ul></div>
+<div class="t"><span class="k">RESPONSE HISTORY</span><h4>The old versions, kept for you</h4><ul><li>Every time you click <b>Submit</b>, PowerSchool saves that version.</li><li>Admission &rarr; first Tx conference &rarr; every 6 months: all there.</li><li>Open them from the gray bar at the top of the form.</li></ul></div>
+</div>
+<div class="when"><span><b>AT ADMISSION</b>Create the plan + write the ICSP</span><span><b>~30 DAYS LATER</b>First Tx conference &rarr; update it</span><span><b>EVERY 6 MONTHS</b>Review &rarr; update it again</span></div>
+
+<div class="label">CREATE THE ICSP &nbsp;&mdash;&nbsp; AT ADMISSION &nbsp;&middot;&nbsp; TAP A STEP</div>
+<details class="step" open><summary><span class="num">1</span><h3>Open the student's Student Support tab</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>Find the student from the <b>Start Page</b> search bar and open their profile.</li>
+<li>In the left menu click <span class="path">Student Profile</span> &rarr; <span class="path">Forms</span> &rarr; <span class="path">Student Forms</span>.</li>
+<li>Click the <span class="path">Student Support</span> tab.</li>
+<li>Blank page? Reload it &mdash; this tab sometimes needs a second try.</li>
+</ul>
+<span class="pic">&#128247; picture 1 below</span></div></details>
+
+<details class="step"><summary><span class="num">2</span><h3>Click New and fill in the Add a New Plan box</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>Click the green <span class="path">New</span> button.</li>
+<li><b>Type:</b> Individual Crisis Support Plan (ICSP).</li>
+<li><b>Start Date:</b> today.</li>
+<li><b>Expiration Date:</b> the date of the first Tx conference &mdash; about <b>30 days</b> out.</li>
+<li>Click <span class="path">Save changes</span>. A blue plan card appears.</li>
+</ul>
+<span class="pic">&#128247; picture 2 below</span></div></details>
+
+<details class="step"><summary><span class="num">3</span><h3>Open the form, fill it in, click Submit</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>On the right side of the card, click <span class="path">Individual Crisis Support Plan (ICSP)</span>.</li>
+<li>Fill in the ICSP.</li>
+<li>Scroll to the bottom and click the blue <span class="path">Submit</span>.</li>
+<li><span class="no">Save for Later</span> is a draft only you can see. Nobody else sees the ICSP until you Submit.</li>
+</ul>
+<span class="pic">&#128247; picture 3 below</span></div></details>
+
+<details class="step"><summary><span class="num">4</span><h3>Check the card says Active</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>Back on the Student Support tab, the card should show a green <b>Active</b> badge.</li>
+<li>If it says <b>Inactive</b>, click <span class="path">Activate this Plan</span> on the card.</li>
+<li>Done. The student now has their one ICSP.</li>
+</ul>
+<span class="pic">&#128247; picture 4 below</span></div></details>
+
+<div class="label">UPDATE THE ICSP &nbsp;&mdash;&nbsp; AFTER THE FIRST TX CONFERENCE, THEN EVERY 6 MONTHS</div>
+<details class="step"><summary><span class="num">1</span><h3>Open the same ICSP (not New)</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>Student Support tab &rarr; click <span class="path">Individual Crisis Support Plan (ICSP)</span> on the card.</li>
+<li><span class="no">Don't click New</span> &mdash; that would make a second plan.</li>
+</ul>
+<span class="pic">&#128247; picture 1 below</span></div></details>
+
+<details class="step"><summary><span class="num">2</span><h3>Change what changed, then Submit</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>The form opens with everything you wrote last time.</li>
+<li>Change only what's different now.</li>
+<li>Click <span class="path">Submit</span>. The old version is kept automatically &mdash; no copies, no renaming.</li>
+</ul>
+<span class="pic">&#128247; picture 3 below</span></div></details>
+
+<details class="step"><summary><span class="num">3</span><h3>Move the two dates: Edit &rarr; Save changes</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>Back on the card, click the blue <span class="path">Edit</span> button. The <b>Edit Plan</b> box opens.</li>
+<li><b>Start Date:</b> the date of this review (today).</li>
+<li><b>Expiration Date:</b> the <b>next</b> review &mdash; 6 months from today.</li>
+<li>Click <span class="path">Save changes</span>.</li>
+</ul>
+<span class="pic">&#128247; picture 5 below</span></div></details>
+
+<details class="step"><summary><span class="num">4</span><h3>Leave it Active</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>The plan stays <b>Active</b> the whole time the student is at Summit.</li>
+<li><span class="no">Never click Deactivate this Plan</span> &mdash; that is the only thing that turns a plan off. The date never does.</li>
+</ul>
+<span class="pic">&#128247; picture 4 below</span></div></details>
+
+<div class="label">SEE AN OLDER VERSION &nbsp;&mdash;&nbsp; RESPONSE HISTORY</div>
+<details class="step"><summary><span class="num">1</span><h3>Open the ICSP and click the gray bar at the top</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>The bar says <b>&ldquo;There are 2 previous responses to this form.&rdquo;</b> (the number = how many older versions there are).</li>
+<li>Clicking it opens the <b>Form Options</b> box.</li>
+</ul>
+<span class="pic">&#128247; picture 6 below</span></div></details>
+
+<details class="step"><summary><span class="num">2</span><h3>Pick a date under Response History, then Load Response</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>The <b>Response History</b> list shows one line per Submit, newest first: the 6-month update, the Tx-conference update, the admission ICSP.</li>
+<li>Pick the one you want and click <span class="path">Load Response</span> to read it.</li>
+<li>Just look. <span class="no">Don't Submit</span> while an old version is loaded &mdash; click <span class="path">Cancel</span> or reload the page to get back to the current one.</li>
+</ul>
+<span class="pic">&#128247; pictures 7 and 8 below</span></div></details>
+
+<div class="label">WHAT'S DUE &nbsp;&mdash;&nbsp; THE RENEWAL DASHBOARD</div>
+<details class="step"><summary><span class="num">1</span><h3>Open the ICSP Renewal Dashboard and pick your name</h3><span class="chev">&#9662;</span></summary><div class="body">
+<ul>
+<li>Open <span class="path">summitnyack.powerschool.com/admin/summit_icsp_alerts.html</span> (bookmark it) while signed in to the Admin Portal.</li>
+<li>Under <b>Social worker</b>, pick your name.</li>
+<li><b>Overdue</b> = the review date has passed. <b>Due in 14 days</b> = coming up. Update those ICSPs, then move the dates (steps above).</li>
+<li><b>No ICSP on file</b> = a student who still needs their first one.</li>
+</ul>
+<span class="pic">&#128247; picture 9 below</span></div></details>
+
+<div class="callout"><div class="clabel">GOOD TO KNOW</div>
+<div class="gk"><span class="ic">&#128197;</span><span><b>&ldquo;Expires&rdquo; only means &ldquo;review due.&rdquo;</b> When the date passes, the plan does not turn off, does not disappear, and teachers can still see it. The student just shows up on the dashboard.</span></div>
+<div class="gk"><span class="ic">&#9940;</span><span><b>Only Deactivate this Plan turns a plan off.</b> Don't click it. If a plan ever shows Inactive, click <b>Activate this Plan</b>.</span></div>
+<div class="gk"><span class="ic">&#128196;</span><span><b>One ICSP per student, always the same one.</b> No copies, no new plans, no renaming. Submit keeps every version for you.</span></div>
+<div class="gk"><span class="ic">&#128100;</span><span><b>Teachers read the PowerSchool copy.</b> <b>View Student ICSP</b> on their Start Page opens the newest version &mdash; so an update you don't Submit here is an update nobody sees.</span></div>
+<div class="gk"><span class="ic">&#128260;</span><span><b>Student Support tab came up blank?</b> Reload the page. It is a PowerSchool glitch, not you.</span></div>
+<div class="gk"><span class="ic">&#9993;&#65039;</span><span>Something looks wrong on a plan? <b>Reach out</b> &mdash; contact info is at the bottom of this page.</span></div>
+</div>
+</div>
+<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
+<style id="rsp">
+body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
+body.cards>.wrap{display:none}
+body:not(.cards) .deck{display:none}
+.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
+.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
+.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
+.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
+.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
+.deck .cb b{color:#12305e}
+.deck .cb ul{margin:4px 0 0 16px}
+.deck .cb .path{font-size:12.5px;padding:1px 6px}
+.deck .cb .no{font-size:12.5px;padding:1px 6px}
+.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
+.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
+.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
+.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
+.deck .cb p{margin:4px 0 0}
+.deck .cb .who{font-size:12px;margin-top:6px;padding:6px 8px}
+.deck .cb .trio{gap:8px;margin:6px 0 0}
+.deck .cb .trio .t{flex:1 1 100%;padding:9px 11px}
+.deck .cb .trio .t h4{font-size:14px}
+.deck .cb .trio .t ul{font-size:12.5px}
+.deck .cb .when{display:none}
+.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
+.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
+.deck .nav button[disabled]{opacity:.28}
+.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
+.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
+.deck .dots i.on{background:#1F3864}
+</style>
+<script>
+(function(){
+var BASE=974,BP=700,idx=0,deck=null,cards=[];
+function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function kindOf(lab){
+ if(/^CREATE/i.test(lab))return{kind:'CREATE · STEP',head:'CREATE THE ICSP',noun:'create steps'};
+ if(/^UPDATE/i.test(lab))return{kind:'UPDATE · STEP',head:'UPDATE THE ICSP',noun:'update steps'};
+ if(/OLDER VERSION/i.test(lab))return{kind:'HISTORY · STEP',head:'OLDER VERSIONS',noun:'history steps'};
+ if(/DUE/i.test(lab))return{kind:'DASHBOARD · STEP',head:'WHAT’S DUE',noun:'dashboard step'};
+ if(/QUESTION/i.test(lab))return{kind:'QUESTION',head:'COMMON QUESTIONS',noun:'quick answers'};
+ if(/WAYS|OPTION|HELP/i.test(lab))return{kind:'OPTION',head:'WAYS TO GET HELP',noun:'ways to get help'};
+ return{kind:'STEP',head:'HOW TO DO IT',noun:'short steps'};
+}
+function collect(){
+ cards=[];var groups=[],cur=null;
+ q('.wrap .label, details.step').forEach(function(el){
+  if(el.classList.contains('label')){var k=kindOf(el.textContent.replace(/\s+/g,' ').trim());cur={kind:k.kind,head:k.head,noun:k.noun,steps:[]};groups.push(cur);}
+  else{if(!cur){cur={kind:'STEP',head:'HOW TO DO IT',noun:'short steps',steps:[]};groups.push(cur);}cur.steps.push(el);}
+ });
+ groups=groups.filter(function(g){return g.steps.length;});
+ var kinds=[],tot={},run={};
+ groups.forEach(function(g){if(!tot[g.kind]){tot[g.kind]=0;run[g.kind]=0;kinds.push(g);}tot[g.kind]+=g.steps.length;});
+ var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
+ var pics=q('.pic').length>0;
+ var title=kinds.map(function(g){return tot[g.kind]+' '+g.noun;}).join(' &middot; ');
+ var head=kinds.length===1?kinds[0].head:'ON THIS PAGE';
+ var big=document.querySelector('.trio');
+ cards.push({k:head,num:'&#9654;',title:title,body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'+(big?'<div class="trio">'+big.innerHTML+'</div>':'')});
+ groups.forEach(function(g){g.steps.forEach(function(d){var h=d.querySelector('summary h3'),b=d.querySelector('.body');run[g.kind]++;cards.push({k:g.kind+' '+run[g.kind]+' OF '+tot[g.kind],num:String(run[g.kind]),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});});
+ var co=document.querySelector('.callout');
+ if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
+}
+function render(){
+ var c=cards[idx];
+ deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
+ deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
+ deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
+}
+function apply(){
+ var w=window.innerWidth;
+ if(w<BP){
+  if(!deck){
+   var n=document.querySelector('.num');
+   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
+   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
+   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
+   render();
+  }
+  document.body.classList.add('cards');document.body.style.zoom='';
+ }else{
+  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
+ }
+}
+apply();window.addEventListener('resize',apply);
+})();
+</script>
+</body></html>
