@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
-body{background:#eef4f8;padding:8px 6px 20px}
+body{background:transparent;padding:8px 6px 20px}
 .wrap{max-width:800px;margin:0 auto}
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
 .chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
@@ -162,7 +162,7 @@ details[open] .chev{transform:rotate(180deg)}
 </div>
 <script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
 <style id="rsp">
-body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
+body.cards{padding:0!important;height:100vh;overflow:hidden;background:transparent}
 body.cards>.wrap{display:none}
 body:not(.cards) .deck{display:none}
 .deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
