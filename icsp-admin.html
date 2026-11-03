@@ -1,254 +1,197 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create &amp;amp; Update an ICSP</title>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+:root{--acc:#F5B82E;--acct:#12305e;--accsoft:#FDF6E4}
 body{background:transparent;padding:8px 6px 20px}
-.wrap{max-width:800px;margin:0 auto}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
-.chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
-.chip.blue{border-color:#b9d2e8;color:#194178}
-.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
-.sub{font-size:14px;color:#51637a;margin:-6px 0 14px;line-height:1.45}
-details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
-details.step[open]{border:1.5px solid #F5B82E}
-summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
-summary::-webkit-details-marker{display:none}
-.num{flex:0 0 34px;height:34px;border-radius:50%;background:#F5B82E;color:#1F3864;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
-summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
-.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
-details[open] .chev{transform:rotate(180deg)}
-.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
-.body b{color:#12305e}
-.body ul{margin:4px 0 0 18px}
-.body li{margin:3px 0}
-.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:2px 8px;font-weight:700;color:#12305e;font-size:14px;margin:2px 0}
-.pic{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 10px}
-.no{display:inline-block;background:#fdecec;border:1px solid #f0a3a3;border-radius:6px;padding:2px 8px;font-weight:700;color:#b3261e;font-size:14px;margin:2px 0}
-.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
-.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
-.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+body.standalone{background:#e3f5fc;padding:18px 16px 40px}
+.wrap{max-width:974px;margin:0 auto}
+.top{display:none;margin:0 0 16px;padding:0 0 14px;border-bottom:3px solid var(--acc)}
+body.standalone .top{display:block}
+.top .kicker{font-size:12px;font-weight:800;letter-spacing:3px;color:#194178}
+.top h1{font-size:30px;font-weight:800;color:#12305e;line-height:1.15;margin-top:4px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 16px;align-items:center}
+.chip{background:#fff;border:1.5px solid #b9d2e8;color:#194178;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+a.full{margin-left:auto;font-size:12.5px;font-weight:800;letter-spacing:1px;color:#194178;text-decoration:none;border:1.5px solid #b9d2e8;background:#fff;border-radius:999px;padding:6px 13px}
+a.full:hover{background:#eaf4fc}
+body.standalone a.full{display:none}
+.layout{display:grid;grid-template-columns:238px minmax(0,1fr);gap:22px;align-items:start}
+nav.rail{display:flex;flex-direction:column;gap:4px;position:sticky;top:10px}
+.rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:10px;color:#12305e;font-size:14.5px;font-weight:700;line-height:1.25}
+.rail button span.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail button:hover{background:#eaf4fc}
+.rail button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.rail button[aria-current="step"]{background:var(--acc);color:var(--acct)}
+.rail .n{flex:0 0 28px;height:28px;border-radius:50%;background:#eaf4fc;color:#194178;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.rail button[aria-current="step"] .n{background:#fff;color:#194178}
+.rail .sep{height:1px;background:#dce6ef;margin:5px 8px}
+.rail .grp{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#8296ab;padding:8px 11px 2px}
+.rail .done .n{background:#dff1e4;color:#2f7d4a}
+main{min-width:0}
+section.step{display:none;background:#fff;border:1.5px solid #dce6ef;border-radius:14px;padding:22px 24px 18px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+section.step.on{display:block;border-color:var(--acc)}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:3px;color:#194178}
+section h2{font-size:23px;font-weight:800;color:#12305e;line-height:1.2;margin:4px 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.lead{font-size:15px;color:#51637a;line-height:1.5;margin:0 0 16px;max-width:70ch}
+.lead b,.steps b,.gk b,.ans b,.bul b,.box b,.ct b,.who b,.txt b{color:#12305e}
+ol.steps{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0 0 6px}
+ol.steps li{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:start;font-size:15.5px;color:#51637a;line-height:1.5}
+.num{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--acc);color:var(--acct);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+ul.bul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 8px}
+ul.bul li{position:relative;padding-left:20px;font-size:15.5px;color:#51637a;line-height:1.5}
+ul.bul li::before{content:"";position:absolute;left:4px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--acc)}
+ul.bul ul.bul{margin:6px 0 0}
+.txt{font-size:15.5px;color:#51637a;line-height:1.5;margin:0 0 10px}
+.ui{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:1px 8px;font-weight:800;color:#12305e;font-size:14.5px;white-space:nowrap;line-height:1.45}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:1px 8px;font-weight:700;color:#12305e;font-size:14px;line-height:1.45}
+.no{display:inline-block;background:#fdf0f0;border:1px solid #f2c9c9;border-radius:6px;padding:1px 8px;font-weight:800;color:#9b2c2c;font-size:14.5px;line-height:1.45}
+.ai{display:inline-flex;flex:0 0 36px;width:36px;height:36px;border-radius:9px;align-items:center;justify-content:center;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
+.ai svg{width:22px;height:22px}
+.ai.card svg{width:28px;height:28px}
+.ai.gold{color:#8a6413;background:#FDF6E4;border-color:#f0dca8}
+.ai.sm{width:26px;height:26px;flex-basis:26px;border-radius:7px;margin:0 2px}
+.ai.sm svg{width:15px;height:15px}
+.ai.sm.card svg{width:20px;height:20px}
+.fig{margin:16px 0 4px;border:1px solid #d3dfe9;border-radius:10px;overflow:hidden;background:#fff}
+.fig a{display:block}
+.fig img{display:block;max-width:100%;max-height:640px;height:auto;margin:0 auto}
+.fig .ph{display:none;padding:22px 18px;background:#f4f8fb;color:#8296ab;font-size:14px;line-height:1.5;text-align:center}
+.fig .ph .pl{display:block;color:#51637a;font-weight:800;font-size:12.5px;letter-spacing:2px;margin-bottom:4px}
+.fig.missing img{display:none}
+.fig.missing .ph{display:block}
+.fig figcaption{font-size:12.5px;color:#51637a;padding:7px 12px;background:#f7fafc;border-top:1px solid #e3ebf3;line-height:1.4}
+.fig figcaption b:first-child{color:#8a6413;letter-spacing:1px}
+.fig figcaption b{color:#12305e}
+.callout{margin-top:18px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:14px 20px}
+.callout .clabel{font-size:13px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:6px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:4px 0;align-items:flex-start;line-height:1.45}
 .gk .ic{flex:0 0 22px;font-size:15px}
-.who{margin-top:10px;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:9px;padding:9px 12px;font-size:13.5px;color:#44586f;line-height:1.5}
-.who b{color:#12305e}
-.trio{display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 6px}
-.trio .t{flex:1 1 220px;background:#fff;border:1.5px solid #d3dfe9;border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
-.trio .t .k{font-size:11.5px;font-weight:800;letter-spacing:2px;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 9px;display:inline-block;margin-bottom:8px}
-.trio .t h4{font-size:16px;font-weight:800;color:#12305e;margin-bottom:6px}
-.trio .t ul{margin:0 0 0 16px;font-size:14px;color:#51637a;line-height:1.45}
-.trio .t li{margin:2px 0}
-.trio .t b{color:#12305e}
-.when{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 2px}
-.when span{background:#fff;border:1.5px solid #d3dfe9;border-radius:10px;padding:8px 12px;font-size:13.5px;color:#2c4157}
-.when span b{display:block;font-size:12px;letter-spacing:1.5px;color:#8a6413}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:4px 0 14px}
+.boxes.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.box{background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:14px 15px;min-width:0}
+.box .bl{font-size:12px;font-weight:800;letter-spacing:3px;color:#194178;margin-bottom:6px}
+.box p,.box li{font-size:14.5px;color:#51637a;line-height:1.45}
+.box ul{margin:0;padding-left:18px}
+.cases{display:flex;flex-direction:column;gap:10px;margin:4px 0 8px}
+.case{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:13px 15px}
+.case .cw{font-size:12.5px;font-weight:800;letter-spacing:2px;color:#194178;line-height:1.35;padding-top:2px}
+.case .ct{font-size:15px;color:#51637a;line-height:1.5}
+.case.lock{background:#fdf0f0;border-color:#f2c9c9}
+.case.lock .cw{color:#9b2c2c}
+.who{margin-top:10px;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:10px;padding:10px 14px;font-size:14.5px;color:#51637a;line-height:1.5}
+.key{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.key span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid #d3dfe9;background:#fff;color:#12305e}
+.key .cut{background:#ffd9ec;border-color:#f3a7cf}.key .abs{background:#ffd7d7;border-color:#f0a1a1}.key .exc{background:#d9ecff;border-color:#9ec5f0}.key .late{background:#fff3c4;border-color:#ebd27a}
+table.codes{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:14.5px}
+table.codes th{text-align:left;font-size:11.5px;letter-spacing:2.5px;color:#194178;padding:6px 8px;border-bottom:2px solid #dce6ef}
+table.codes td{padding:7px 8px;border-bottom:1px solid #e9eff5;color:#51637a;line-height:1.4;vertical-align:top}
+table.codes td.c{font-weight:800;color:#12305e;white-space:nowrap;width:76px}
+table.codes td i{color:#8296ab}
+table.codes tr.new td.c::after{content:"NEW";font-size:9.5px;font-weight:800;letter-spacing:1px;background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.locked{background:#f4efe6;border:1px solid #e4d7bf;border-radius:12px;padding:12px 14px;margin:6px 0 12px}
+.locked .bl{font-size:12px;font-weight:800;letter-spacing:3px;color:#6b5a2e;margin-bottom:6px}
+.locked p{font-size:14px;color:#5d5233;line-height:1.45}
+.ask{background:#edf7f1;border:1.5px solid #9fd3b4;border-radius:12px;padding:12px 16px;font-size:15px;color:#2f5a3f;line-height:1.5;margin:8px 0 4px}
+.ask b{color:#1f4d31}
+.selmock{display:inline-block;min-width:260px;background:#fff;border:1.5px solid #d3dfe9;border-radius:8px;margin:12px 0 4px;overflow:hidden;font-size:14px}
+.selmock .hd{display:flex;justify-content:space-between;background:#eef3f8;padding:8px 12px;font-weight:800;color:#12305e;border-bottom:1px solid #d3dfe9}
+.selmock .op{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;color:#51637a;border-bottom:1px solid #eef2f6}
+.selmock .op.hit{background:var(--accsoft);color:#12305e;font-weight:800}
+.selmock .op em{font-style:normal;font-size:10.5px;letter-spacing:2px;color:#8a6413;font-weight:800}
+.selmock .op.dim{color:#b5c2cf}
+.faq{display:flex;flex-direction:column;gap:9px}
+details.q{background:#f7fafc;border:1px solid #dce6ef;border-radius:12px;overflow:hidden}
+details.q[open]{border-color:var(--acc);background:#fff}
+details.q summary{display:flex;gap:12px;align-items:center;padding:13px 16px;cursor:pointer;list-style:none;font-size:15.5px;font-weight:800;color:#12305e;line-height:1.35}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary .qn{flex:0 0 30px;height:30px;border-radius:50%;background:#eaf4fc;color:#194178;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+details.q .ans{padding:0 16px 14px 58px;font-size:15px;color:#51637a;line-height:1.5}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #e3ebf3}
+.pager button{border:0;border-radius:999px;padding:10px 18px;font-weight:800;font-size:14px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2;text-align:left}
+.pager button.ghost{background:#fff;color:#194178;border:1.5px solid #b9d2e8}
+.pager button[disabled]{opacity:.3;cursor:default}
+.pager button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+body.narrow .layout{grid-template-columns:1fr;gap:12px}
+body.narrow nav.rail{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding:2px 2px 8px;-webkit-overflow-scrolling:touch}
+body.narrow .rail button{padding:7px 10px 7px 7px;font-size:13px;flex:0 0 auto}
+body.narrow .rail .sep,body.narrow .rail .grp{display:none}
+body.narrow section.step{padding:16px 14px 14px}
+body.narrow .boxes,body.narrow .boxes.two{grid-template-columns:1fr}
+body.narrow .case{grid-template-columns:1fr;gap:4px}
+body.narrow .chips{gap:7px}
+body.narrow .chip{font-size:11.5px;padding:5px 11px}
+body.narrow a.full{margin-left:0}
+body.narrow table.codes td.c{width:auto}
+@media (prefers-reduced-motion:no-preference){section.step.on{animation:fade .2s ease}}
+@keyframes fade{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}
 </style></head>
 <body>
 <div class="wrap">
-<div class="chips"><span class="chip">SOCIAL WORKERS</span><span class="chip">ONE ICSP PER STUDENT</span><span class="chip">UPDATE EVERY 6 MONTHS</span></div>
+<div class="top"><div class="kicker">SUMMIT POWERSCHOOL HELP CENTER &middot; ADMIN PORTAL</div><h1>Create &amp; Update an ICSP</h1></div>
+<div class="chips"><span class="chip">SOCIAL WORKERS</span><span class="chip">ONE ICSP PER STUDENT</span><span class="chip">UPDATE EVERY 6 MONTHS</span><a class="full" id="full" href="#" target="_blank" rel="noopener">OPEN FULL SCREEN &nearr;</a></div>
+<div class="layout">
+<nav class="rail" aria-label="Steps"><button data-s="start" data-num="0"><span class="n">?</span><span class="t">The big picture</span></button><div class="grp">CREATE &middot; AT ADMISSION</div><button data-s="step-1" data-num="1"><span class="n">1</span><span class="t">Student Support tab</span></button><button data-s="step-2" data-num="1"><span class="n">2</span><span class="t">New &rarr; Add a New Plan</span></button><button data-s="step-3" data-num="1"><span class="n">3</span><span class="t">Fill in the form, Submit</span></button><button data-s="step-4" data-num="1"><span class="n">4</span><span class="t">Check it says Active</span></button><div class="grp">UPDATE &middot; TX CONFERENCE, THEN EVERY 6 MONTHS</div><button data-s="step-5" data-num="1"><span class="n">5</span><span class="t">Open the same ICSP</span></button><button data-s="step-6" data-num="1"><span class="n">6</span><span class="t">Change what changed</span></button><button data-s="step-7" data-num="1"><span class="n">7</span><span class="t">Move the two dates</span></button><button data-s="step-8" data-num="1"><span class="n">8</span><span class="t">Leave it Active</span></button><div class="grp">OLDER VERSIONS</div><button data-s="step-9" data-num="1"><span class="n">9</span><span class="t">The gray bar</span></button><button data-s="step-10" data-num="1"><span class="n">10</span><span class="t">Load Response</span></button><div class="grp">WHAT'S DUE</div><button data-s="step-11" data-num="1"><span class="n">11</span><span class="t">Renewal Dashboard</span></button></nav>
+<main>
+<section class="step" id="start"><span class="eyebrow">THE BIG PICTURE</span><h2>One ICSP per student, for their whole time at Summit</h2><p class="lead">Every student has <b>one</b> ICSP in PowerSchool. You never make a second one &mdash; you update the same one, and PowerSchool keeps the old versions for you.</p><div class="boxes"><div class="box"><div class="bl">THE PLAN</div><p><b>A folder with a sticky note.</b></p><ul><li>The blue card on the <b>Student Support</b> tab.</li><li>The sticky note = <b>Start Date</b> and <b>Expires</b>.</li><li><b>Expires</b> is just the date the next review is due. Nothing happens when it passes.</li></ul></div><div class="box"><div class="bl">THE ICSP FORM</div><p><b>The paper inside the folder.</b></p><ul><li>The link on the card: <b>Individual Crisis Support Plan (ICSP)</b>.</li><li>Fill it in once, then <b>update the same form</b> at each review.</li><li>Everyone who opens it sees the newest version.</li></ul></div><div class="box"><div class="bl">RESPONSE HISTORY</div><p><b>The old versions, kept for you.</b></p><ul><li>Every time you click <b>Submit</b>, PowerSchool saves that version.</li><li>Admission &rarr; first Tx conference &rarr; every 6 months: all there.</li><li>Open them from the gray bar at the top of the form.</li></ul></div></div><div class="cases"><div class="case"><div class="cw">AT ADMISSION</div><div class="ct">Create the plan + write the ICSP (steps 1&ndash;4).</div></div><div class="case"><div class="cw">~30 DAYS LATER</div><div class="ct">First Tx conference &rarr; update it (steps 5&ndash;8).</div></div><div class="case"><div class="cw">EVERY 6 MONTHS</div><div class="ct">Review &rarr; update it again (steps 5&ndash;8).</div></div></div><div class="pager"><button class="ghost" disabled>Back</button><button data-go="step-1">Start: create the ICSP &rarr;</button></div></section>
 
-<div class="label">THE BIG PICTURE</div>
-<div class="sub">Every student has <b>one</b> ICSP in PowerSchool for their whole time at Summit. You never make a second one &mdash; you update the same one, and PowerSchool keeps the old versions for you.</div>
-<div class="trio">
-<div class="t"><span class="k">THE PLAN</span><h4>A folder with a sticky note</h4><ul><li>The blue card on the <b>Student Support</b> tab.</li><li>The sticky note = <b>Start Date</b> and <b>Expires</b>.</li><li><b>Expires</b> is just the date the next review is due. Nothing happens when it passes.</li></ul></div>
-<div class="t"><span class="k">THE ICSP FORM</span><h4>The paper inside the folder</h4><ul><li>The link on the card: <b>Individual Crisis Support Plan (ICSP)</b>.</li><li>Fill it in once, then <b>update the same form</b> at each review.</li><li>Everyone who opens it sees the newest version.</li></ul></div>
-<div class="t"><span class="k">RESPONSE HISTORY</span><h4>The old versions, kept for you</h4><ul><li>Every time you click <b>Submit</b>, PowerSchool saves that version.</li><li>Admission &rarr; first Tx conference &rarr; every 6 months: all there.</li><li>Open them from the gray bar at the top of the form.</li></ul></div>
-</div>
-<div class="when"><span><b>AT ADMISSION</b>Create the plan + write the ICSP</span><span><b>~30 DAYS LATER</b>First Tx conference &rarr; update it</span><span><b>EVERY 6 MONTHS</b>Review &rarr; update it again</span></div>
+<section class="step" id="step-1"><span class="eyebrow">CREATE &middot; STEP 1 OF 4</span><h2>Open the student's Student Support tab</h2><ol class="steps"><li><span class="num">1</span><div>Find the student from the <b>Start Page</b> search bar and open their profile.</div></li><li><span class="num">2</span><div>In the left menu click <span class="path">Student Profile</span> &rarr; <span class="path">Forms</span> &rarr; <span class="path">Student Forms</span>.</div></li><li><span class="num">3</span><div>Click the <span class="path">Student Support</span> tab.</div></li><li><span class="num">4</span><div>Blank page? Reload it &mdash; this tab sometimes needs a second try.</div></li></ol><figure class="fig"><a href="icsp-1.png" target="_blank" rel="noopener"><img src="icsp-1.png" alt="the Student Support tab with the plan card"></a><div class="ph"><span class="pl">PICTURE 1</span>Screenshot coming: the Student Support tab with the plan card.</div><figcaption><b>PICTURE 1</b> &mdash; The Student Support tab. The blue card is the plan; the link on the right is the ICSP form.</figcaption></figure><div class="pager"><button class="ghost" data-go="start">Back</button><button data-go="step-2">Next: New &rarr; Add a New Plan &rarr;</button></div></section>
 
-<div class="label">CREATE THE ICSP &nbsp;&mdash;&nbsp; AT ADMISSION &nbsp;&middot;&nbsp; TAP A STEP</div>
-<details class="step" open><summary><span class="num">1</span><h3>Open the student's Student Support tab</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>Find the student from the <b>Start Page</b> search bar and open their profile.</li>
-<li>In the left menu click <span class="path">Student Profile</span> &rarr; <span class="path">Forms</span> &rarr; <span class="path">Student Forms</span>.</li>
-<li>Click the <span class="path">Student Support</span> tab.</li>
-<li>Blank page? Reload it &mdash; this tab sometimes needs a second try.</li>
-</ul>
-<span class="pic">&#128247; picture 1 below</span></div></details>
+<section class="step" id="step-2"><span class="eyebrow">CREATE &middot; STEP 2 OF 4</span><h2>Click New and fill in the Add a New Plan box</h2><ol class="steps"><li><span class="num">1</span><div>Click the green <span class="path">New</span> button.</div></li><li><span class="num">2</span><div><b>Type:</b> Individual Crisis Support Plan (ICSP).</div></li><li><span class="num">3</span><div><b>Start Date:</b> today.</div></li><li><span class="num">4</span><div><b>Expiration Date:</b> the date of the first Tx conference &mdash; about <b>30 days</b> out.</div></li><li><span class="num">5</span><div>Click <span class="path">Save changes</span>. A blue plan card appears.</div></li></ol><figure class="fig"><a href="icsp-2.png" target="_blank" rel="noopener"><img src="icsp-2.png" alt="the Add a New Plan box"></a><div class="ph"><span class="pl">PICTURE 2</span>Screenshot coming: the Add a New Plan box.</div><figcaption><b>PICTURE 2</b> &mdash; Add a New Plan: Type, Start Date (today), Expiration Date (first Tx conference), then Save changes.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-1">Back</button><button data-go="step-3">Next: Fill in the form, Submit &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">2</span><h3>Click New and fill in the Add a New Plan box</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>Click the green <span class="path">New</span> button.</li>
-<li><b>Type:</b> Individual Crisis Support Plan (ICSP).</li>
-<li><b>Start Date:</b> today.</li>
-<li><b>Expiration Date:</b> the date of the first Tx conference &mdash; about <b>30 days</b> out.</li>
-<li>Click <span class="path">Save changes</span>. A blue plan card appears.</li>
-</ul>
-<span class="pic">&#128247; picture 2 below</span></div></details>
+<section class="step" id="step-3"><span class="eyebrow">CREATE &middot; STEP 3 OF 4</span><h2>Open the form, fill it in, click Submit</h2><ol class="steps"><li><span class="num">1</span><div>On the right side of the card, click <span class="path">Individual Crisis Support Plan (ICSP)</span>.</div></li><li><span class="num">2</span><div>Fill in the ICSP.</div></li><li><span class="num">3</span><div>Scroll to the bottom and click the blue <span class="path">Submit</span>.</div></li><li><span class="num">4</span><div><span class="no">Save for Later</span> is a draft only you can see. Nobody else sees the ICSP until you Submit.</div></li></ol><figure class="fig"><a href="icsp-3.png" target="_blank" rel="noopener"><img src="icsp-3.png" alt="the bottom of the ICSP form with Submit"></a><div class="ph"><span class="pl">PICTURE 3</span>Screenshot coming: the bottom of the ICSP form with Submit.</div><figcaption><b>PICTURE 3</b> &mdash; Bottom of the form: Submit. Save for Later is only a draft.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-2">Back</button><button data-go="step-4">Next: Check it says Active &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">3</span><h3>Open the form, fill it in, click Submit</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>On the right side of the card, click <span class="path">Individual Crisis Support Plan (ICSP)</span>.</li>
-<li>Fill in the ICSP.</li>
-<li>Scroll to the bottom and click the blue <span class="path">Submit</span>.</li>
-<li><span class="no">Save for Later</span> is a draft only you can see. Nobody else sees the ICSP until you Submit.</li>
-</ul>
-<span class="pic">&#128247; picture 3 below</span></div></details>
+<section class="step" id="step-4"><span class="eyebrow">CREATE &middot; STEP 4 OF 4</span><h2>Check the card says Active</h2><ol class="steps"><li><span class="num">1</span><div>Back on the Student Support tab, the card should show a green <b>Active</b> badge.</div></li><li><span class="num">2</span><div>If it says <b>Inactive</b>, click <span class="path">Activate this Plan</span> on the card.</div></li><li><span class="num">3</span><div>Done. The student now has their one ICSP.</div></li></ol><figure class="fig"><a href="icsp-4.png" target="_blank" rel="noopener"><img src="icsp-4.png" alt="the plan card with Edit and the Active badge"></a><div class="ph"><span class="pl">PICTURE 4</span>Screenshot coming: the plan card with Edit and the Active badge.</div><figcaption><b>PICTURE 4</b> &mdash; The plan card: Edit changes the dates. Deactivate this Plan is the one thing never to click.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-3">Back</button><button data-go="step-5">Next: update the ICSP &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">4</span><h3>Check the card says Active</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>Back on the Student Support tab, the card should show a green <b>Active</b> badge.</li>
-<li>If it says <b>Inactive</b>, click <span class="path">Activate this Plan</span> on the card.</li>
-<li>Done. The student now has their one ICSP.</li>
-</ul>
-<span class="pic">&#128247; picture 4 below</span></div></details>
+<section class="step" id="step-5"><span class="eyebrow">UPDATE &middot; STEP 1 OF 4</span><h2>Open the same ICSP (not New)</h2><ol class="steps"><li><span class="num">1</span><div>Student Support tab &rarr; click <span class="path">Individual Crisis Support Plan (ICSP)</span> on the card.</div></li><li><span class="num">2</span><div><span class="no">Don't click New</span> &mdash; that would make a second plan.</div></li></ol><figure class="fig"><a href="icsp-1.png" target="_blank" rel="noopener"><img src="icsp-1.png" alt="the Student Support tab with the plan card"></a><div class="ph"><span class="pl">PICTURE 1</span>Screenshot coming: the Student Support tab with the plan card.</div><figcaption><b>PICTURE 1</b> &mdash; The Student Support tab. The blue card is the plan; the link on the right is the ICSP form.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-4">Back</button><button data-go="step-6">Next: Change what changed &rarr;</button></div></section>
 
-<div class="label">UPDATE THE ICSP &nbsp;&mdash;&nbsp; AFTER THE FIRST TX CONFERENCE, THEN EVERY 6 MONTHS</div>
-<details class="step"><summary><span class="num">1</span><h3>Open the same ICSP (not New)</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>Student Support tab &rarr; click <span class="path">Individual Crisis Support Plan (ICSP)</span> on the card.</li>
-<li><span class="no">Don't click New</span> &mdash; that would make a second plan.</li>
-</ul>
-<span class="pic">&#128247; picture 1 below</span></div></details>
+<section class="step" id="step-6"><span class="eyebrow">UPDATE &middot; STEP 2 OF 4</span><h2>Change what changed, then Submit</h2><ol class="steps"><li><span class="num">1</span><div>The form opens with everything you wrote last time.</div></li><li><span class="num">2</span><div>Change only what's different now.</div></li><li><span class="num">3</span><div>Click <span class="path">Submit</span>. The old version is kept automatically &mdash; no copies, no renaming.</div></li></ol><figure class="fig"><a href="icsp-3.png" target="_blank" rel="noopener"><img src="icsp-3.png" alt="the bottom of the ICSP form with Submit"></a><div class="ph"><span class="pl">PICTURE 3</span>Screenshot coming: the bottom of the ICSP form with Submit.</div><figcaption><b>PICTURE 3</b> &mdash; Bottom of the form: Submit. Save for Later is only a draft.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-5">Back</button><button data-go="step-7">Next: Move the two dates &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">2</span><h3>Change what changed, then Submit</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>The form opens with everything you wrote last time.</li>
-<li>Change only what's different now.</li>
-<li>Click <span class="path">Submit</span>. The old version is kept automatically &mdash; no copies, no renaming.</li>
-</ul>
-<span class="pic">&#128247; picture 3 below</span></div></details>
+<section class="step" id="step-7"><span class="eyebrow">UPDATE &middot; STEP 3 OF 4</span><h2>Move the two dates: Edit &rarr; Save changes</h2><ol class="steps"><li><span class="num">1</span><div>Back on the card, click the blue <span class="path">Edit</span> button. The <b>Edit Plan</b> box opens.</div></li><li><span class="num">2</span><div><b>Start Date:</b> the date of this review (today).</div></li><li><span class="num">3</span><div><b>Expiration Date:</b> the <b>next</b> review &mdash; 6 months from today.</div></li><li><span class="num">4</span><div>Click <span class="path">Save changes</span>.</div></li></ol><figure class="fig"><a href="icsp-5.png" target="_blank" rel="noopener"><img src="icsp-5.png" alt="the Edit Plan box"></a><div class="ph"><span class="pl">PICTURE 5</span>Screenshot coming: the Edit Plan box.</div><figcaption><b>PICTURE 5</b> &mdash; Edit Plan: Start Date = this review, Expiration Date = the next review, Save changes.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-6">Back</button><button data-go="step-8">Next: Leave it Active &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">3</span><h3>Move the two dates: Edit &rarr; Save changes</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>Back on the card, click the blue <span class="path">Edit</span> button. The <b>Edit Plan</b> box opens.</li>
-<li><b>Start Date:</b> the date of this review (today).</li>
-<li><b>Expiration Date:</b> the <b>next</b> review &mdash; 6 months from today.</li>
-<li>Click <span class="path">Save changes</span>.</li>
-</ul>
-<span class="pic">&#128247; picture 5 below</span></div></details>
+<section class="step" id="step-8"><span class="eyebrow">UPDATE &middot; STEP 4 OF 4</span><h2>Leave it Active</h2><ol class="steps"><li><span class="num">1</span><div>The plan stays <b>Active</b> the whole time the student is at Summit.</div></li><li><span class="num">2</span><div><span class="no">Never click Deactivate this Plan</span> &mdash; that is the only thing that turns a plan off. The date never does.</div></li></ol><figure class="fig"><a href="icsp-4.png" target="_blank" rel="noopener"><img src="icsp-4.png" alt="the plan card with Edit and the Active badge"></a><div class="ph"><span class="pl">PICTURE 4</span>Screenshot coming: the plan card with Edit and the Active badge.</div><figcaption><b>PICTURE 4</b> &mdash; The plan card: Edit changes the dates. Deactivate this Plan is the one thing never to click.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-7">Back</button><button data-go="step-9">Next: older versions &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">4</span><h3>Leave it Active</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>The plan stays <b>Active</b> the whole time the student is at Summit.</li>
-<li><span class="no">Never click Deactivate this Plan</span> &mdash; that is the only thing that turns a plan off. The date never does.</li>
-</ul>
-<span class="pic">&#128247; picture 4 below</span></div></details>
+<section class="step" id="step-9"><span class="eyebrow">RESPONSE HISTORY &middot; STEP 1 OF 2</span><h2>Open the ICSP and click the gray bar at the top</h2><ol class="steps"><li><span class="num">1</span><div>The bar says <b>&ldquo;There are 2 previous responses to this form.&rdquo;</b> (the number = how many older versions there are).</div></li><li><span class="num">2</span><div>Clicking it opens the <b>Form Options</b> box.</div></li></ol><figure class="fig"><a href="icsp-6.png" target="_blank" rel="noopener"><img src="icsp-6.png" alt="the gray bar at the top of the ICSP form"></a><div class="ph"><span class="pl">PICTURE 6</span>Screenshot coming: the gray bar at the top of the ICSP form.</div><figcaption><b>PICTURE 6</b> &mdash; The gray bar at the top of the ICSP opens Form Options.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-8">Back</button><button data-go="step-10">Next: Load Response &rarr;</button></div></section>
 
-<div class="label">SEE AN OLDER VERSION &nbsp;&mdash;&nbsp; RESPONSE HISTORY</div>
-<details class="step"><summary><span class="num">1</span><h3>Open the ICSP and click the gray bar at the top</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>The bar says <b>&ldquo;There are 2 previous responses to this form.&rdquo;</b> (the number = how many older versions there are).</li>
-<li>Clicking it opens the <b>Form Options</b> box.</li>
-</ul>
-<span class="pic">&#128247; picture 6 below</span></div></details>
+<section class="step" id="step-10"><span class="eyebrow">RESPONSE HISTORY &middot; STEP 2 OF 2</span><h2>Pick a date under Response History, then Load Response</h2><ol class="steps"><li><span class="num">1</span><div>The <b>Response History</b> list shows one line per Submit, newest first: the 6-month update, the Tx-conference update, the admission ICSP.</div></li><li><span class="num">2</span><div>Pick the one you want and click <span class="path">Load Response</span> to read it.</div></li><li><span class="num">3</span><div>Just look. <span class="no">Don't Submit</span> while an old version is loaded &mdash; click <span class="path">Cancel</span> or reload the page to get back to the current one.</div></li></ol><figure class="fig"><a href="icsp-7.png" target="_blank" rel="noopener"><img src="icsp-7.png" alt="the Form Options box with Response History"></a><div class="ph"><span class="pl">PICTURE 7</span>Screenshot coming: the Form Options box with Response History.</div><figcaption><b>PICTURE 7</b> &mdash; Form Options: pick a date, then Load Response (look only).</figcaption></figure><figure class="fig"><a href="icsp-8.png" target="_blank" rel="noopener"><img src="icsp-8.png" alt="an older version loaded"></a><div class="ph"><span class="pl">PICTURE 8</span>Screenshot coming: an older version loaded.</div><figcaption><b>PICTURE 8</b> &mdash; An older version loaded &mdash; read it, then Cancel or reload to get back to the current one.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-9">Back</button><button data-go="step-11">Next: what's due &rarr;</button></div></section>
 
-<details class="step"><summary><span class="num">2</span><h3>Pick a date under Response History, then Load Response</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>The <b>Response History</b> list shows one line per Submit, newest first: the 6-month update, the Tx-conference update, the admission ICSP.</li>
-<li>Pick the one you want and click <span class="path">Load Response</span> to read it.</li>
-<li>Just look. <span class="no">Don't Submit</span> while an old version is loaded &mdash; click <span class="path">Cancel</span> or reload the page to get back to the current one.</li>
-</ul>
-<span class="pic">&#128247; pictures 7 and 8 below</span></div></details>
-
-<div class="label">WHAT'S DUE &nbsp;&mdash;&nbsp; THE RENEWAL DASHBOARD</div>
-<details class="step"><summary><span class="num">1</span><h3>Open the ICSP Renewal Dashboard and pick your name</h3><span class="chev">&#9662;</span></summary><div class="body">
-<ul>
-<li>Open <span class="path">summitnyack.powerschool.com/admin/summit_icsp_alerts.html</span> (bookmark it) while signed in to the Admin Portal.</li>
-<li>Under <b>Social worker</b>, pick your name.</li>
-<li><b>Overdue</b> = the review date has passed. <b>Due in 14 days</b> = coming up. Update those ICSPs, then move the dates (steps above).</li>
-<li><b>No ICSP on file</b> = a student who still needs their first one.</li>
-</ul>
-<span class="pic">&#128247; picture 9 below</span></div></details>
-
-<div class="callout"><div class="clabel">GOOD TO KNOW</div>
-<div class="gk"><span class="ic">&#128197;</span><span><b>&ldquo;Expires&rdquo; only means &ldquo;review due.&rdquo;</b> When the date passes, the plan does not turn off, does not disappear, and teachers can still see it. The student just shows up on the dashboard.</span></div>
-<div class="gk"><span class="ic">&#9940;</span><span><b>Only Deactivate this Plan turns a plan off.</b> Don't click it. If a plan ever shows Inactive, click <b>Activate this Plan</b>.</span></div>
-<div class="gk"><span class="ic">&#128196;</span><span><b>One ICSP per student, always the same one.</b> No copies, no new plans, no renaming. Submit keeps every version for you.</span></div>
-<div class="gk"><span class="ic">&#128100;</span><span><b>Teachers read the PowerSchool copy.</b> <b>View Student ICSP</b> on their Start Page opens the newest version &mdash; so an update you don't Submit here is an update nobody sees.</span></div>
-<div class="gk"><span class="ic">&#128260;</span><span><b>Student Support tab came up blank?</b> Reload the page. It is a PowerSchool glitch, not you.</span></div>
-<div class="gk"><span class="ic">&#9993;&#65039;</span><span>Something looks wrong on a plan? <b>Reach out</b> &mdash; contact info is at the bottom of this page.</span></div>
+<section class="step" id="step-11"><span class="eyebrow">WHAT'S DUE &middot; THE RENEWAL DASHBOARD</span><h2>Open the ICSP Renewal Dashboard and pick your name</h2><ol class="steps"><li><span class="num">1</span><div>Open <span class="path">summitnyack.powerschool.com/admin/summit_icsp_alerts.html</span> (bookmark it) while signed in to the Admin Portal &mdash; it is also under <b>Summit Tools</b> in the left menu.</div></li><li><span class="num">2</span><div>Under <b>Social worker</b>, pick your name.</div></li><li><span class="num">3</span><div><b>Overdue</b> = the review date has passed. <b>Due in 14 days</b> = coming up. Update those ICSPs, then move the dates (steps 5&ndash;8).</div></li><li><span class="num">4</span><div><b>No ICSP on file</b> = a student who still needs their first one.</div></li></ol><figure class="fig"><a href="icsp-9.png" target="_blank" rel="noopener"><img src="icsp-9.png" alt="the ICSP Renewal Dashboard"></a><div class="ph"><span class="pl">PICTURE 9</span>Screenshot coming: the ICSP Renewal Dashboard.</div><figcaption><b>PICTURE 9</b> &mdash; The ICSP Renewal Dashboard: pick your name under Social worker; Overdue, Due in 14 days, No ICSP on file.</figcaption></figure><div class="callout"><div class="clabel">GOOD TO KNOW</div><div class="gk"><span class="ic">&#128197;</span><span>&ldquo;Expires&rdquo; only means &ldquo;review due.&rdquo; When the date passes, the plan does not turn off, does not disappear, and teachers can still see it. The student just shows up on the dashboard.</span></div><div class="gk"><span class="ic">&#9940;</span><span>Only <b>Deactivate this Plan</b> turns a plan off. Don't click it. If a plan ever shows Inactive, click <b>Activate this Plan</b>.</span></div><div class="gk"><span class="ic">&#128196;</span><span>One ICSP per student, always the same one. No copies, no new plans, no renaming. Submit keeps every version for you.</span></div><div class="gk"><span class="ic">&#128100;</span><span>Teachers read the PowerSchool copy. <b>View Student ICSP</b> on their Start Page opens the newest version &mdash; so an update you don't Submit here is an update nobody sees.</span></div><div class="gk"><span class="ic">&#128260;</span><span>Student Support tab came up blank? Reload the page. It is a PowerSchool glitch, not you.</span></div><div class="gk"><span class="ic">&#9993;&#65039;</span><span>Something looks wrong on a plan? Reach out &mdash; contact info is at the bottom of this page.</span></div></div><div class="pager"><button class="ghost" data-go="step-10">Back</button><button data-go="start">Start over</button></div></section>
+</main>
 </div>
 </div>
-<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
-<style id="rsp">
-body.cards{padding:0!important;height:100vh;overflow:hidden;background:transparent}
-body.cards>.wrap{display:none}
-body:not(.cards) .deck{display:none}
-.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
-.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
-.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
-.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
-.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
-.deck .cb b{color:#12305e}
-.deck .cb ul{margin:4px 0 0 16px}
-.deck .cb .path{font-size:12.5px;padding:1px 6px}
-.deck .cb .no{font-size:12.5px;padding:1px 6px}
-.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
-.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
-.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
-.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
-.deck .cb p{margin:4px 0 0}
-.deck .cb .who{font-size:12px;margin-top:6px;padding:6px 8px}
-.deck .cb .trio{gap:8px;margin:6px 0 0}
-.deck .cb .trio .t{flex:1 1 100%;padding:9px 11px}
-.deck .cb .trio .t h4{font-size:14px}
-.deck .cb .trio .t ul{font-size:12.5px}
-.deck .cb .when{display:none}
-.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
-.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
-.deck .nav button[disabled]{opacity:.28}
-.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
-.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
-.deck .dots i.on{background:#1F3864}
-</style>
 <script>
 (function(){
-var BASE=974,BP=700,idx=0,deck=null,cards=[];
-function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
-function kindOf(lab){
- if(/^CREATE/i.test(lab))return{kind:'CREATE · STEP',head:'CREATE THE ICSP',noun:'create steps'};
- if(/^UPDATE/i.test(lab))return{kind:'UPDATE · STEP',head:'UPDATE THE ICSP',noun:'update steps'};
- if(/OLDER VERSION/i.test(lab))return{kind:'HISTORY · STEP',head:'OLDER VERSIONS',noun:'history steps'};
- if(/DUE/i.test(lab))return{kind:'DASHBOARD · STEP',head:'WHAT’S DUE',noun:'dashboard step'};
- if(/QUESTION/i.test(lab))return{kind:'QUESTION',head:'COMMON QUESTIONS',noun:'quick answers'};
- if(/WAYS|OPTION|HELP/i.test(lab))return{kind:'OPTION',head:'WAYS TO GET HELP',noun:'ways to get help'};
- return{kind:'STEP',head:'HOW TO DO IT',noun:'short steps'};
-}
-function collect(){
- cards=[];var groups=[],cur=null;
- q('.wrap .label, details.step').forEach(function(el){
-  if(el.classList.contains('label')){var k=kindOf(el.textContent.replace(/\s+/g,' ').trim());cur={kind:k.kind,head:k.head,noun:k.noun,steps:[]};groups.push(cur);}
-  else{if(!cur){cur={kind:'STEP',head:'HOW TO DO IT',noun:'short steps',steps:[]};groups.push(cur);}cur.steps.push(el);}
- });
- groups=groups.filter(function(g){return g.steps.length;});
- var kinds=[],tot={},run={};
- groups.forEach(function(g){if(!tot[g.kind]){tot[g.kind]=0;run[g.kind]=0;kinds.push(g);}tot[g.kind]+=g.steps.length;});
- var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
- var pics=q('.pic').length>0;
- var title=kinds.map(function(g){return tot[g.kind]+' '+g.noun;}).join(' &middot; ');
- var head=kinds.length===1?kinds[0].head:'ON THIS PAGE';
- var big=document.querySelector('.trio');
- cards.push({k:head,num:'&#9654;',title:title,body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'+(big?'<div class="trio">'+big.innerHTML+'</div>':'')});
- groups.forEach(function(g){g.steps.forEach(function(d){var h=d.querySelector('summary h3'),b=d.querySelector('.body');run[g.kind]++;cards.push({k:g.kind+' '+run[g.kind]+' OF '+tot[g.kind],num:String(run[g.kind]),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});});
- var co=document.querySelector('.callout');
- if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
-}
-function render(){
- var c=cards[idx];
- deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
- deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
- deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
-}
-function apply(){
- var w=window.innerWidth;
- if(w<BP){
-  if(!deck){
-   var n=document.querySelector('.num');
-   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
-   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
-   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
-   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
-   render();
+  var ids=Array.prototype.map.call(document.querySelectorAll("section.step"),function(s){return s.id;});
+  var btns=Array.prototype.slice.call(document.querySelectorAll(".rail button"));
+  function show(id,push){
+    if(ids.indexOf(id)<0) id=ids[0];
+    Array.prototype.forEach.call(document.querySelectorAll("section.step"),function(s){s.classList.toggle("on",s.id===id);});
+    var seen=true;
+    btns.forEach(function(b){
+      if(b.dataset.s===id){b.setAttribute("aria-current","step");seen=false;} else {b.removeAttribute("aria-current");}
+      b.classList.toggle("done",seen && b.dataset.num==="1");
+    });
+    if(push){ try{ if(location.hash!=="#"+id) history.replaceState(null,"","#"+id); }catch(e){} window.scrollTo(0,0); }
+    var cur=document.querySelector('.rail button[aria-current="step"]');
+    if(cur&&cur.scrollIntoView&&document.body.classList.contains("narrow")){try{cur.scrollIntoView({inline:"center",block:"nearest"});}catch(e){}}
   }
-  document.body.classList.add('cards');document.body.style.zoom='';
- }else{
-  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
- }
-}
-apply();window.addEventListener('resize',apply);
+  btns.forEach(function(b){ b.addEventListener("click",function(){show(b.dataset.s,true);}); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(b){ b.addEventListener("click",function(){show(b.dataset.go,true);}); });
+  window.addEventListener("hashchange",function(){ show(location.hash.replace("#",""),false); });
+  show((location.hash||"#"+ids[0]).replace("#",""),false);
+  Array.prototype.forEach.call(document.querySelectorAll(".fig img"),function(img){
+    img.addEventListener("error",function(){img.closest(".fig").classList.add("missing");});
+    if(img.complete && img.naturalWidth===0) img.closest(".fig").classList.add("missing");
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("details.q"),function(d){d.addEventListener("toggle",function(){if(d.open)Array.prototype.forEach.call(document.querySelectorAll("details.q"),function(o){if(o!==d)o.open=false;});});});
+  var inFrame=false; try{inFrame=window.self!==window.top;}catch(e){inFrame=true;}
+  if(inFrame){ document.getElementById("full").href=location.href.split("#")[0]; }
+  else { document.body.classList.add("standalone"); document.getElementById("full").style.display="none"; }
+  var BASE=974,BP=700;
+  function apply(){var w=window.innerWidth;if(w<BP){document.body.classList.add("narrow");document.body.style.zoom="";}else{document.body.classList.remove("narrow");document.body.style.zoom=String(w/BASE);}}
+  apply();window.addEventListener("resize",apply);
 })();
 </script>
 </body></html>

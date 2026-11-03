@@ -1,202 +1,197 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Alerts &amp;amp; Header</title>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
-body{background:#eef4f8;padding:8px 6px 20px}
-.wrap{max-width:800px;margin:0 auto}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
-.chip{background:#fff;border:1.5px solid #e2c98a;color:#7a5a12;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
-.chip.blue{border-color:#b9d2e8;color:#194178}
-.label{font-size:14px;font-weight:800;letter-spacing:3px;color:#194178;margin:24px 0 12px}
-.sub{font-size:14px;color:#51637a;margin:-6px 0 14px;line-height:1.45}
-details.step{background:#fff;border:1px solid #dce6ef;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,42,84,.06);overflow:hidden}
-details.step[open]{border:1.5px solid #F5B82E}
-summary{display:flex;gap:15px;align-items:center;padding:16px 20px;cursor:pointer;list-style:none}
-summary::-webkit-details-marker{display:none}
-.num{flex:0 0 34px;height:34px;border-radius:50%;background:#F5B82E;color:#1F3864;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
-summary h3{font-size:17px;font-weight:800;color:#12305e;flex:1;line-height:1.3}
-.chev{color:#9fb4c9;font-size:19px;transition:transform .2s}
-details[open] .chev{transform:rotate(180deg)}
-.body{padding:0 20px 18px 69px;font-size:15px;color:#51637a;line-height:1.5}
-.body b{color:#12305e}
-.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:2px 8px;font-weight:700;color:#12305e;font-size:14px;margin:2px 0}
-.pic{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 10px}
-.codes{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
-.code{background:#fff;border:1.5px solid #d3dfe9;border-radius:10px;padding:8px 12px;font-size:13.5px;color:#2c4157;min-width:120px}
-.code b{display:block;font-size:16px;color:#12305e;letter-spacing:1px}
-.code.p{border-color:#8fd3a6}.code.a{border-color:#f0a3a3}
-.callout{margin-top:26px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:16px 22px}
-.callout .clabel{font-size:14px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:8px}
-.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:5px 0;align-items:flex-start;line-height:1.45}
+:root{--acc:#52B3EA;--acct:#fff;--accsoft:#eaf4fc}
+body{background:transparent;padding:8px 6px 20px}
+body.standalone{background:#e3f5fc;padding:18px 16px 40px}
+.wrap{max-width:974px;margin:0 auto}
+.top{display:none;margin:0 0 16px;padding:0 0 14px;border-bottom:3px solid var(--acc)}
+body.standalone .top{display:block}
+.top .kicker{font-size:12px;font-weight:800;letter-spacing:3px;color:#194178}
+.top h1{font-size:30px;font-weight:800;color:#12305e;line-height:1.15;margin-top:4px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 16px;align-items:center}
+.chip{background:#fff;border:1.5px solid #b9d2e8;color:#194178;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+a.full{margin-left:auto;font-size:12.5px;font-weight:800;letter-spacing:1px;color:#194178;text-decoration:none;border:1.5px solid #b9d2e8;background:#fff;border-radius:999px;padding:6px 13px}
+a.full:hover{background:#eaf4fc}
+body.standalone a.full{display:none}
+.layout{display:grid;grid-template-columns:238px minmax(0,1fr);gap:22px;align-items:start}
+nav.rail{display:flex;flex-direction:column;gap:4px;position:sticky;top:10px}
+.rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:10px;color:#12305e;font-size:14.5px;font-weight:700;line-height:1.25}
+.rail button span.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail button:hover{background:#eaf4fc}
+.rail button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.rail button[aria-current="step"]{background:var(--acc);color:var(--acct)}
+.rail .n{flex:0 0 28px;height:28px;border-radius:50%;background:#eaf4fc;color:#194178;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.rail button[aria-current="step"] .n{background:#fff;color:#194178}
+.rail .sep{height:1px;background:#dce6ef;margin:5px 8px}
+.rail .grp{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#8296ab;padding:8px 11px 2px}
+.rail .done .n{background:#dff1e4;color:#2f7d4a}
+main{min-width:0}
+section.step{display:none;background:#fff;border:1.5px solid #dce6ef;border-radius:14px;padding:22px 24px 18px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+section.step.on{display:block;border-color:var(--acc)}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:3px;color:#194178}
+section h2{font-size:23px;font-weight:800;color:#12305e;line-height:1.2;margin:4px 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.lead{font-size:15px;color:#51637a;line-height:1.5;margin:0 0 16px;max-width:70ch}
+.lead b,.steps b,.gk b,.ans b,.bul b,.box b,.ct b,.who b,.txt b{color:#12305e}
+ol.steps{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0 0 6px}
+ol.steps li{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:start;font-size:15.5px;color:#51637a;line-height:1.5}
+.num{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--acc);color:var(--acct);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+ul.bul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 8px}
+ul.bul li{position:relative;padding-left:20px;font-size:15.5px;color:#51637a;line-height:1.5}
+ul.bul li::before{content:"";position:absolute;left:4px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--acc)}
+ul.bul ul.bul{margin:6px 0 0}
+.txt{font-size:15.5px;color:#51637a;line-height:1.5;margin:0 0 10px}
+.ui{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:1px 8px;font-weight:800;color:#12305e;font-size:14.5px;white-space:nowrap;line-height:1.45}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:1px 8px;font-weight:700;color:#12305e;font-size:14px;line-height:1.45}
+.no{display:inline-block;background:#fdf0f0;border:1px solid #f2c9c9;border-radius:6px;padding:1px 8px;font-weight:800;color:#9b2c2c;font-size:14.5px;line-height:1.45}
+.ai{display:inline-flex;flex:0 0 36px;width:36px;height:36px;border-radius:9px;align-items:center;justify-content:center;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
+.ai svg{width:22px;height:22px}
+.ai.card svg{width:28px;height:28px}
+.ai.gold{color:#8a6413;background:#FDF6E4;border-color:#f0dca8}
+.ai.sm{width:26px;height:26px;flex-basis:26px;border-radius:7px;margin:0 2px}
+.ai.sm svg{width:15px;height:15px}
+.ai.sm.card svg{width:20px;height:20px}
+.fig{margin:16px 0 4px;border:1px solid #d3dfe9;border-radius:10px;overflow:hidden;background:#fff}
+.fig a{display:block}
+.fig img{display:block;max-width:100%;max-height:640px;height:auto;margin:0 auto}
+.fig .ph{display:none;padding:22px 18px;background:#f4f8fb;color:#8296ab;font-size:14px;line-height:1.5;text-align:center}
+.fig .ph .pl{display:block;color:#51637a;font-weight:800;font-size:12.5px;letter-spacing:2px;margin-bottom:4px}
+.fig.missing img{display:none}
+.fig.missing .ph{display:block}
+.fig figcaption{font-size:12.5px;color:#51637a;padding:7px 12px;background:#f7fafc;border-top:1px solid #e3ebf3;line-height:1.4}
+.fig figcaption b:first-child{color:#8a6413;letter-spacing:1px}
+.fig figcaption b{color:#12305e}
+.callout{margin-top:18px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:14px 20px}
+.callout .clabel{font-size:13px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:6px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:4px 0;align-items:flex-start;line-height:1.45}
 .gk .ic{flex:0 0 22px;font-size:15px}
-.strip{margin-top:28px}
-.slides{display:flex;gap:14px;flex-wrap:wrap}
-a.slide{width:236px;height:132px;border-radius:9px;background:#E4EEF8;border:1px solid #cddcec;box-shadow:0 2px 6px rgba(15,40,80,.15);padding:14px;position:relative;overflow:hidden;text-decoration:none;display:block}
-a.slide:hover{box-shadow:0 3px 10px rgba(15,40,80,.3)}
-.slide .bar{height:7px;width:64px;background:#F5B82E;border-radius:3px;margin-bottom:10px}
-.slide .t{color:#1F3864;font-weight:800;font-size:13.5px;letter-spacing:.4px;line-height:1.35}
-.slide .pill{position:absolute;left:14px;bottom:12px;background:#2A2F55;color:#fff;font-size:9px;font-weight:700;letter-spacing:1.2px;padding:4px 10px;border-radius:999px}
-.slide .c1{position:absolute;right:-24px;top:-24px;width:74px;height:74px;border-radius:50%;background:#1F3864}
-.slide .c2{position:absolute;right:8px;top:44px;width:26px;height:26px;border-radius:50%;background:#2A2F55}
-.slide .c3{position:absolute;right:30px;top:76px;width:12px;height:12px;border-radius:50%;background:#F5B82E}
-.ai{display:inline-flex;flex:0 0 34px;width:34px;height:34px;border-radius:9px;align-items:center;justify-content:center;margin-right:12px;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
-.ai svg{width:21px;height:21px}
-.ai.card svg{width:27px;height:27px}
-summary h3 .ai{margin-right:12px}
-.who{margin-top:10px;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:9px;padding:9px 12px;font-size:13.5px;color:#44586f;line-height:1.5}
-.who b{color:#12305e}
-.hdr{background:#fff;border:1px solid #d3dfe9;border-radius:12px;overflow:hidden;margin:4px 0 16px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
-.hdr .bar{background:#0c4a8a;color:#fff;font-weight:700;font-size:13px;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.hdr .bar .srch{margin-left:auto;background:#fff;color:#8a99ab;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:400;width:150px}
-.hdr .main{display:flex;gap:14px;padding:12px 14px 12px;align-items:flex-start}
-.hdr .av{flex:0 0 58px;height:58px;border:1px solid #c9d6e4;background:#eef4f8;color:#1f3864;font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;border-radius:4px}
-.hdr .nm{font-size:16px;font-weight:700;color:#1b2a3a;margin:2px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.hdr .nm .ti{display:inline-flex;gap:7px;align-items:center;margin-left:4px}
-.hdr .nm .ti svg{width:15px;height:15px}
-.hdr .flds{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:#2c4157}
-.hdr .flds span b{font-size:10.5px;letter-spacing:.3px;color:#5d7089;margin-right:3px}
-.hdr .icons{display:flex;gap:8px;margin:10px 0 0;align-items:center}
-.hdr .icons .ai{width:28px;height:28px;margin:0;border-radius:7px}
-.hdr .icons .ai svg{width:18px;height:18px}
-.hdr .icons .ai.card svg{width:23px;height:23px}
-.hdr .lbl{font-size:11.5px;font-weight:700;color:#8a6413;background:#FDF6E4;border:1px solid #f0dca8;border-radius:999px;padding:3px 9px;margin-left:4px;white-space:nowrap}
-.hdr .flds i{color:#6b7c92;font-style:italic}
-.hdr.t .bar{background:#1565c0}
-.hdr.t .ttl{font-size:20px;font-weight:700;color:#2c3e50;display:flex;align-items:center;gap:10px;margin:0 0 8px}
-.hdr.t .ttl .icons{margin:0 0 0 6px}
-.hdr.t .sel{margin-left:auto;font-size:11px;font-weight:400;color:#2c4157;border:1px solid #1565c0;border-radius:4px;padding:3px 8px;background:#fff}
-.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;border-radius:999px;padding:3px 9px;margin:0 0 6px}
-.tag.t{background:#E4EEF8;color:#194178;border:1px solid #b9d2e8}
-.tag.a{background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8}
-.sub .ai{width:24px;height:24px;flex-basis:24px;margin:0 2px;border-radius:6px}
-.sub .ai svg{width:14px;height:14px}
-.sub .ai.card svg{width:19px;height:19px}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:4px 0 14px}
+.boxes.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.box{background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:14px 15px;min-width:0}
+.box .bl{font-size:12px;font-weight:800;letter-spacing:3px;color:#194178;margin-bottom:6px}
+.box p,.box li{font-size:14.5px;color:#51637a;line-height:1.45}
+.box ul{margin:0;padding-left:18px}
+.cases{display:flex;flex-direction:column;gap:10px;margin:4px 0 8px}
+.case{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:13px 15px}
+.case .cw{font-size:12.5px;font-weight:800;letter-spacing:2px;color:#194178;line-height:1.35;padding-top:2px}
+.case .ct{font-size:15px;color:#51637a;line-height:1.5}
+.case.lock{background:#fdf0f0;border-color:#f2c9c9}
+.case.lock .cw{color:#9b2c2c}
+.who{margin-top:10px;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:10px;padding:10px 14px;font-size:14.5px;color:#51637a;line-height:1.5}
+.key{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.key span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid #d3dfe9;background:#fff;color:#12305e}
+.key .cut{background:#ffd9ec;border-color:#f3a7cf}.key .abs{background:#ffd7d7;border-color:#f0a1a1}.key .exc{background:#d9ecff;border-color:#9ec5f0}.key .late{background:#fff3c4;border-color:#ebd27a}
+table.codes{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:14.5px}
+table.codes th{text-align:left;font-size:11.5px;letter-spacing:2.5px;color:#194178;padding:6px 8px;border-bottom:2px solid #dce6ef}
+table.codes td{padding:7px 8px;border-bottom:1px solid #e9eff5;color:#51637a;line-height:1.4;vertical-align:top}
+table.codes td.c{font-weight:800;color:#12305e;white-space:nowrap;width:76px}
+table.codes td i{color:#8296ab}
+table.codes tr.new td.c::after{content:"NEW";font-size:9.5px;font-weight:800;letter-spacing:1px;background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.locked{background:#f4efe6;border:1px solid #e4d7bf;border-radius:12px;padding:12px 14px;margin:6px 0 12px}
+.locked .bl{font-size:12px;font-weight:800;letter-spacing:3px;color:#6b5a2e;margin-bottom:6px}
+.locked p{font-size:14px;color:#5d5233;line-height:1.45}
+.ask{background:#edf7f1;border:1.5px solid #9fd3b4;border-radius:12px;padding:12px 16px;font-size:15px;color:#2f5a3f;line-height:1.5;margin:8px 0 4px}
+.ask b{color:#1f4d31}
+.selmock{display:inline-block;min-width:260px;background:#fff;border:1.5px solid #d3dfe9;border-radius:8px;margin:12px 0 4px;overflow:hidden;font-size:14px}
+.selmock .hd{display:flex;justify-content:space-between;background:#eef3f8;padding:8px 12px;font-weight:800;color:#12305e;border-bottom:1px solid #d3dfe9}
+.selmock .op{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;color:#51637a;border-bottom:1px solid #eef2f6}
+.selmock .op.hit{background:var(--accsoft);color:#12305e;font-weight:800}
+.selmock .op em{font-style:normal;font-size:10.5px;letter-spacing:2px;color:#8a6413;font-weight:800}
+.selmock .op.dim{color:#b5c2cf}
+.faq{display:flex;flex-direction:column;gap:9px}
+details.q{background:#f7fafc;border:1px solid #dce6ef;border-radius:12px;overflow:hidden}
+details.q[open]{border-color:var(--acc);background:#fff}
+details.q summary{display:flex;gap:12px;align-items:center;padding:13px 16px;cursor:pointer;list-style:none;font-size:15.5px;font-weight:800;color:#12305e;line-height:1.35}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary .qn{flex:0 0 30px;height:30px;border-radius:50%;background:#eaf4fc;color:#194178;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+details.q .ans{padding:0 16px 14px 58px;font-size:15px;color:#51637a;line-height:1.5}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #e3ebf3}
+.pager button{border:0;border-radius:999px;padding:10px 18px;font-weight:800;font-size:14px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2;text-align:left}
+.pager button.ghost{background:#fff;color:#194178;border:1.5px solid #b9d2e8}
+.pager button[disabled]{opacity:.3;cursor:default}
+.pager button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+body.narrow .layout{grid-template-columns:1fr;gap:12px}
+body.narrow nav.rail{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding:2px 2px 8px;-webkit-overflow-scrolling:touch}
+body.narrow .rail button{padding:7px 10px 7px 7px;font-size:13px;flex:0 0 auto}
+body.narrow .rail .sep,body.narrow .rail .grp{display:none}
+body.narrow section.step{padding:16px 14px 14px}
+body.narrow .boxes,body.narrow .boxes.two{grid-template-columns:1fr}
+body.narrow .case{grid-template-columns:1fr;gap:4px}
+body.narrow .chips{gap:7px}
+body.narrow .chip{font-size:11.5px;padding:5px 11px}
+body.narrow a.full{margin-left:0}
+body.narrow table.codes td.c{width:auto}
+@media (prefers-reduced-motion:no-preference){section.step.on{animation:fade .2s ease}}
+@keyframes fade{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}
+</style></head>
+<body>
+<div class="wrap">
+<div class="top"><div class="kicker">SUMMIT POWERSCHOOL HELP CENTER &middot; TEACHER PORTAL</div><h1>Student Alerts &amp; Header</h1></div>
+<div class="chips"><span class="chip">TEACHERS &middot; TAs</span><span class="chip">NEXT TO THE PAGE TITLE</span><span class="chip">TAP AN ICON FOR DETAILS</span><a class="full" id="full" href="#" target="_blank" rel="noopener">OPEN FULL SCREEN &nearr;</a></div>
+<div class="layout">
+<nav class="rail" aria-label="Steps"><button data-s="start" data-num="0"><span class="n">?</span><span class="t">Start here</span></button><div class="grp">THE ICONS</div><button data-s="step-1" data-num="1"><span class="n">1</span><span class="t">Name &amp; Pronouns</span></button><button data-s="step-2" data-num="1"><span class="n">2</span><span class="t">IEP</span></button><button data-s="step-3" data-num="1"><span class="n">3</span><span class="t">C&amp;C &middot; ESC &middot; AS</span></button><button data-s="step-4" data-num="1"><span class="n">4</span><span class="t">Absences + Cuts</span></button><button data-s="step-5" data-num="1"><span class="n">5</span><span class="t">WBL</span></button><button data-s="step-6" data-num="1"><span class="n">6</span><span class="t">Counselors</span></button><div class="grp">HOW TO SEE THEM</div><button data-s="step-7" data-num="1"><span class="n">7</span><span class="t">Start Page &rarr; Student Information</span></button><button data-s="step-8" data-num="1"><span class="n">8</span><span class="t">Click the student</span></button><button data-s="step-9" data-num="1"><span class="n">9</span><span class="t">Tap an icon</span></button><button data-s="step-10" data-num="1"><span class="n">10</span><span class="t">While taking attendance</span></button><div class="grp">THE HEADER</div><button data-s="header" data-num="0"><span class="n">&#8801;</span><span class="t">What each label means</span></button></nav>
+<main>
+<section class="step" id="start"><span class="eyebrow">START HERE</span><h2>The little icons by a student's name are alerts</h2><p class="lead">Each one is a <b>heads-up</b> about that student. In PowerSchool, tap the icon and a pop-up tells you more. No icon = it doesn't apply to that student.</p><p class="txt">These are the ones Summit uses: <span style="display:inline-flex;gap:4px;vertical-align:middle;flex-wrap:wrap"><span class="ai sm "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span> <span class="ai sm "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span> <span class="ai sm card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span> <span class="ai sm card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#1E63D6"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">ESC</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span> <span class="ai sm card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#6A3BA8"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="9" fill="#FFFFFF">AS</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span> <span class="ai sm "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span> <span class="ai sm card"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M9 6.5 V4.4 A2.2 2.2 0 0 1 11.2 2.2 H13.8 A2.2 2.2 0 0 1 16 4.4 V6.5" fill="none" stroke="#D9640C" stroke-width="2.2" stroke-linecap="round"/><rect x="0.5" y="6.5" width="24" height="16.5" rx="2.4" fill="#D9640C"/><text x="12.5" y="17.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="8.4" fill="#FFFFFF">WBL</text></svg></span></span> (plus PowerSchool's own <span class="ai sm "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span>).</p><figure class="fig"><a href="alerts-teacher-icons.png" target="_blank" rel="noopener"><img src="alerts-teacher-icons.png" alt="the alert icons next to the Schedule title in the teacher portal"></a><div class="ph"><span class="pl">PICTURE A</span>Screenshot coming: the alert icons next to the Schedule title in the teacher portal.</div><figcaption><b>PICTURE A</b> &mdash; What it looks like in the teacher portal: ZZTest's Schedule page &mdash; the alert icons sit next to the page title, the header underneath.</figcaption></figure><div class="callout"><div class="clabel">GOOD TO KNOW</div><div class="gk"><span class="ic">&#128065;&#65039;</span><span><b>Same icons on both sides.</b> Teachers see them in PowerTeacher, the admin side sees them on the student pages &mdash; one source, no separate lists.</span></div><div class="gk"><span class="ic">&#129309;</span><span><b>Subs</b> see the header (GOES BY, PRONOUNS) and the IEP and coverage icons, but not the pink Name &amp; Pronouns alert.</span></div></div><div class="pager"><button class="ghost" disabled>Back</button><button data-go="step-1">Start: the icons &rarr;</button></div></section>
 
-.chip{border-color:#b9d2e8;color:#194178}
-.num{background:#52B3EA;color:#fff}
-details.step[open]{border-color:#52B3EA}
-.pic{color:#194178;background:#E4EEF8;border-color:#b9d2e8}
-.hdr .lbl{color:#194178;background:#E4EEF8;border-color:#b9d2e8}
+<section class="step" id="step-1"><span class="eyebrow">THE ICONS &middot; 1 OF 6</span><h2><span class="ai "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span><span>School vs. Home: Name &amp; Pronouns</span></h2><ul class="bul"><li><b>Means:</b> the name and pronouns the student uses <b>at school</b> vs. the ones to use <b>with family</b>. On every student.</li><li><b>Tap it before</b> anything goes home &mdash; supplementary report, report card, conference, phone call. &ldquo;Same as at school&rdquo; = no difference.</li><li><b>In class:</b> no need to open it &mdash; the header already shows <b>GOES BY</b> and <b>PRONOUNS</b>.</li><li><b>Kept up to date by:</b> the social workers. Looks wrong? Tell the student's <b>SW</b> (named in the header). Subs don't see this icon.</li></ul><figure class="fig"><a href="alerts-teacher-3-pronouns.png" target="_blank" rel="noopener"><img src="alerts-teacher-3-pronouns.png" alt="the School vs. Home pop-up"></a><div class="ph"><span class="pl">PICTURE 3</span>Screenshot coming: the School vs. Home pop-up.</div><figcaption><b>PICTURE 3</b> &mdash; The School vs. Home pop-up: the name and pronouns to use at school, and the ones to use with family.</figcaption></figure><div class="pager"><button class="ghost" data-go="start">Back</button><button data-go="step-2">Next: IEP &rarr;</button></div></section>
 
-.sub ul,.body ul{margin:6px 0 0 20px;padding:0}.body p{margin:0 0 6px}.body p+ul{margin-top:2px}.body ul+p{margin-top:8px}.body li ul{margin:6px 0 2px 18px}.sub li{margin:0 0 6px}.body li{margin:0 0 8px;padding-left:3px}.body li::marker,.sub li::marker{color:#52B3EA}.body ul+.pic{margin-top:10px}.shotimg{margin:4px 0 18px;background:#fff;border:1px solid #d3dfe9;border-radius:12px;padding:10px 10px 8px;box-shadow:0 1px 2px rgba(16,42,84,.06)}.shotimg img{display:block;width:100%;max-width:942px;height:auto;margin:0 auto;border-radius:6px}.shotimg .cap{font-size:12.5px;color:#6b7c92;margin-top:7px;text-align:center;line-height:1.4}.deck .cb ul{margin:4px 0 0 16px}.deck .cb li{margin:0 0 5px}.deck .shotimg{display:none}</style></head><body><div class="wrap">
-<div class="chips"><span class="chip">TEACHERS &middot; TAs</span><span class="chip">NEXT TO THE PAGE TITLE</span><span class="chip">TAP AN ICON FOR DETAILS</span></div>
-<div class="label">THE ICONS &nbsp;&mdash;&nbsp; TAP ONE TO SEE WHAT IT MEANS</div>
-<div class="sub"><ul><li>The little icons by a student&rsquo;s name are <b>alerts</b> &mdash; each one is a heads-up about that student.</li><li>In PowerSchool, tap the icon and a pop-up tells you more.</li><li>These are the ones Summit uses: <span class="ai "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span><span class="ai "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#1E63D6"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">ESC</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#6A3BA8"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="9" fill="#FFFFFF">AS</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M9 6.5 V4.4 A2.2 2.2 0 0 1 11.2 2.2 H13.8 A2.2 2.2 0 0 1 16 4.4 V6.5" fill="none" stroke="#D9640C" stroke-width="2.2" stroke-linecap="round"/><rect x="0.5" y="6.5" width="24" height="16.5" rx="2.4" fill="#D9640C"/><text x="12.5" y="17.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="8.4" fill="#FFFFFF">WBL</text></svg></span> (plus PowerSchool&rsquo;s own <span class="ai "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span>).</li></ul></div><div class="shotimg"><img src="https://nkuhlmeier-cloud.github.io/PowerSchool-Google-Site/alerts-teacher-icons.png" alt="What it looks like in the teacher portal: ZZTest&amp;rsquo;s Schedule page &amp;mdash; the alert icons sit next to the page title, the header underneath."><div class="cap">What it looks like in the teacher portal: ZZTest&rsquo;s Schedule page &mdash; the alert icons sit next to the page title, the header underneath.</div></div>
-<details class="step" open><summary><h3><span class="ai "><svg viewBox="0 0 576 512" fill="#FF20C4" aria-hidden="true"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg></span>School vs. Home: Name &amp; Pronouns</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Means:</b> the name and pronouns the student uses <b>at school</b> vs. the ones to use <b>with family</b>. On every student.</li><li><b>Tap it before</b> anything goes home &mdash; supplementary report, report card, conference, phone call. &ldquo;Same as at school&rdquo; = no difference.</li><li><b>In class:</b> no need to open it &mdash; the header already shows <b>GOES BY</b> and <b>PRONOUNS</b>.</li><li><b>Kept up to date by:</b> the social workers. Looks wrong? Tell the student&rsquo;s <b>SW</b> (named in the header). Subs don&rsquo;t see this icon.</li></ul></div></details>
-<details class="step"><summary><h3><span class="ai "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span>IEP Accommodations &amp; Modifications</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Means:</b> the student&rsquo;s IEP is in PowerSchool.</li><li><b>Tap it for:</b> the <b>testing accommodations</b> (double time, breaks, tests read, calculator&hellip;) and the <b>program modifications &amp; accommodations</b>, with the date of the IEP they come from.</li><li><b>Same as:</b> the yearly accommodations sheet &mdash; now on the student, for every class. Subs see it too.</li></ul></div></details>
-<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span>C&amp;C &mdash; Close &amp; Continuous supervision</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Means:</b> the student has been placed on C&amp;C &mdash; a staff member stays with them <b>at all times</b>.</li><li><b>Tap it for:</b> the note and dates.</li></ul></div></details>
-<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#1E63D6"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">ESC</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span>ESC &mdash; Escort</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Means:</b> the student is on escort status &mdash; staff <b>walk the student</b> between places; they do not travel alone.</li><li><b>Tap it for:</b> the details, e.g. &ldquo;residential escort only&rdquo;.</li></ul></div></details>
-<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#6A3BA8"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="9" fill="#FFFFFF">AS</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span>AS &mdash; Administrative Support</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Means:</b> a <b>longer-term coverage</b> arranged by administration.</li><li><b>Tap it for:</b> what it means for this student. Not sure what it means for your class? Ask the student&rsquo;s social worker.</li></ul></div></details>
-<details class="step"><summary><h3><span class="ai "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span>	Absences + Cuts (yellow person icon with a slash)</h3><span class="chev">&#9662;</span></summary><div class="body"><p>This icon appears next to a student&rsquo;s name once they have <b>5 or more</b> unexcused absences or cuts in <b>any one class</b> this year. Click it to see a breakdown by class:</p><ul><li><b>Per / Course / Teacher:</b> which class. HR1&ndash;HR4 is homeroom. WB1&ndash;WB4 is the work-based learning slot that runs during periods 1&ndash;4.</li><li><b>Unexcused column (A, CC, CG):</b> absences and cuts only. Excused absences don&rsquo;t count here.</li><li><b>All absences column (incl. excused):</b> every absence in that class, excused or not (A, CC, CG, EA, OSS, BD, ISR).</li><li><b>No-credit status column (30 absences):</b> a student who reaches 30 total absences in a class for the term gets no credit for that course, whether the absences are excused or not.<ul><li><b>Warning (orange)</b> = 25&ndash;29 absences. Let the student&rsquo;s team know now (homeroom teacher, guidance counselor, social worker), while there&rsquo;s still time to step in.</li><li><b>NO CREDIT (red)</b> = 30 or more.</li></ul></li></ul><p>Leaving class with permission (WS, IH, TR) doesn&rsquo;t count as an absence, and neither do AP, WORK, FT, TEST or L.</p></div></details>
-<details class="step"><summary><h3><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M9 6.5 V4.4 A2.2 2.2 0 0 1 11.2 2.2 H13.8 A2.2 2.2 0 0 1 16 4.4 V6.5" fill="none" stroke="#D9640C" stroke-width="2.2" stroke-linecap="round"/><rect x="0.5" y="6.5" width="24" height="16.5" rx="2.4" fill="#D9640C"/><text x="12.5" y="17.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="8.4" fill="#FFFFFF">WBL</text></svg></span>WBL &mdash; Work Schedule</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Means:</b> the student has <b>work-based learning</b> &mdash; a job site or Animal Care &mdash; during a WB block. In that block they are <b>at work, not in your class</b>.</li><li><b>Tap it for:</b> where they go, which day and periods, and the staff member &mdash; e.g. Walgreens &mdash; Tue, periods 2-4 | Shaina Rochester.</li><li><b>Attendance:</b> enter <b>WORK</b>. A student who should be at work but is sitting in your class may get Present &mdash; <b>Shaina Rochester</b> (WBL staff) enters their points.</li></ul></div></details>
-<details class="step"><summary><h3><span class="ai "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span>Counselors (the three people)</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>Not an alert</b> &mdash; PowerSchool&rsquo;s own icon, next to the page title on every student.</li><li><b>Tap it for:</b> the student&rsquo;s counselor.</li></ul></div></details>
-<div class="label">HOW TO SEE THEM &nbsp;&mdash;&nbsp; TAP A STEP</div>
-<details class="step"><summary><span class="num">1</span><h3>Start Page &rarr; Student Information</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li>On the PowerTeacher <b>Start Page</b>, click the <b>ID-card</b> icon in the <b>Student Information</b> column for your class.</li><li>Your class list opens on the left.</li></ul><span class="pic">&#128247; picture 1 below</span></div></details>
-<details class="step"><summary><span class="num">2</span><h3>Click the student's name</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li>The student&rsquo;s page opens (<b>Quick Lookup</b>, <b>Schedule</b>&hellip; switch with the <b>Select Screens</b> box, top right).</li><li>The <b>alert icons</b> sit right next to the page title. The <b>header</b> &mdash; the band of facts about the student &mdash; is just underneath.</li></ul><span class="pic">&#128247; picture 2 below</span></div></details>
-<details class="step"><summary><span class="num">3</span><h3>Tap an icon to read it</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li>A <b>pop-up</b> opens with the details. Close it with the <b>X</b>.</li><li>No icon = it does not apply to that student.</li></ul><span class="pic">&#128247; pictures 3 and 4 below</span></div></details>
-<details class="step"><summary><span class="num">4</span><h3>Taking attendance? The icons are there too</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li>The <b>Single Day</b> attendance page has an <b>Alerts</b> column next to each name &mdash; same icons, same pop-ups, no need to leave the page.</li><li>The seating chart does not show them.</li></ul><span class="pic">&#128247; picture 5 below</span></div></details>
-<div class="label">THE STUDENT HEADER &nbsp;&mdash;&nbsp; WHAT EACH LABEL MEANS</div>
-<div class="sub">The <b>header</b> is the band of facts about the student at the top of every student page. Here is what each label means.</div>
-<div class="shotimg"><img src="https://nkuhlmeier-cloud.github.io/PowerSchool-Google-Site/alerts-teacher-header.png" alt="The header &amp;mdash; the band of facts under the page title (ZZTest, the test student)."><div class="cap">The header &mdash; the band of facts under the page title (ZZTest, the test student).</div></div>
-<details class="step"><summary><span class="num">1</span><h3>NAME &middot; GOES BY &middot; GOES BY (LAST) &middot; PRONOUNS</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>NAME</b> &mdash; the student&rsquo;s name in PowerSchool (Last, First).</li><li><b>GOES BY</b> &mdash; the first name the student uses at school. <b>Use this one.</b></li><li><b>GOES BY (LAST)</b> &mdash; the last name they use.</li><li><b>PRONOUNS</b> &mdash; the student&rsquo;s pronouns at school. (With family: see the pink alert.)</li><li>Blank fields are hidden, so some students show fewer labels.</li></ul></div></details>
-<details class="step"><summary><span class="num">2</span><h3>DOB &middot; AGE</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>DOB</b> &mdash; date of birth.</li><li><b>AGE</b> &mdash; years and months, worked out from the DOB.</li></ul></div></details>
-<details class="step"><summary><span class="num">3</span><h3>HR &middot; COUNSELOR &middot; SW &middot; SPEECH &middot; OT &middot; PSYCHIATRIST</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>HR</b> &mdash; homeroom teacher.</li><li><b>COUNSELOR</b> &mdash; guidance counselor.</li><li><b>SW</b> &mdash; social worker.</li><li><b>SPEECH</b> &mdash; speech therapist.</li><li><b>OT</b> &mdash; occupational therapist.</li><li><b>PSYCHIATRIST</b> &mdash; psychiatrist.</li><li>These are the people to loop in when something comes up with the student. Blank ones are hidden.</li></ul></div></details>
-<details class="step"><summary><span class="num">4</span><h3>PLACEMENT &middot; COTTAGE &middot; DISTRICT</h3><span class="chev">&#9662;</span></summary><div class="body"><ul><li><b>PLACEMENT</b> &mdash; Day or Resident.</li><li><b>COTTAGE</b> &mdash; the cottage a residential student lives in (blank for day students).</li><li><b>DISTRICT</b> &mdash; the student&rsquo;s home school district, the one that placed them at Summit.</li></ul></div></details>
-<div class="callout"><div class="clabel">GOOD TO KNOW</div>
-<div class="gk"><span class="ic">&#128065;&#65039;</span><span><b>Same icons on both sides.</b> Teachers see them in PowerTeacher, the admin side sees them on the student pages &mdash; one source, no separate lists.</span></div>
-<div class="gk"><span class="ic">&#129309;</span><span><b>Subs</b> see the header (GOES BY, PRONOUNS) and the IEP and coverage icons, but not the pink Name &amp; Pronouns alert.</span></div>
-<div class="gk"><span class="ic">&#128203;</span><span>Today's <b>C&amp;C / Escort / Admin Support</b> lists are also in the <b>Daily Notes</b> &mdash; the icon is the per-student version.</span></div>
-<div class="gk"><span class="ic">&#9993;&#65039;</span><span>Something in an alert or the header wrong or missing? <b>Reach out</b> &mdash; or the student's <b>SW</b> for names and pronouns.</span></div>
+<section class="step" id="step-2"><span class="eyebrow">THE ICONS &middot; 2 OF 6</span><h2><span class="ai "><svg viewBox="0 0 512 512" fill="#57C7CF" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm161.5-86.1c-12.2-5.2-26.3 .4-31.5 12.6s.4 26.3 12.6 31.5l11.9 5.1c17.3 7.4 35.2 12.9 53.6 16.3l0 50.1c0 4.3-.7 8.6-2.1 12.6l-28.7 86.1c-4.2 12.6 2.6 26.2 15.2 30.4s26.2-2.6 30.4-15.2l24.4-73.2c1.3-3.8 4.8-6.4 8.8-6.4s7.6 2.6 8.8 6.4l24.4 73.2c4.2 12.6 17.8 19.4 30.4 15.2s19.4-17.8 15.2-30.4l-28.7-86.1c-1.4-4.1-2.1-8.3-2.1-12.6l0-50.1c18.4-3.5 36.3-8.9 53.6-16.3l11.9-5.1c12.2-5.2 17.8-19.3 12.6-31.5s-19.3-17.8-31.5-12.6L338.7 175c-26.1 11.2-54.2 17-82.7 17s-56.5-5.8-82.7-17l-11.9-5.1zM256 160a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg></span><span>IEP Accommodations &amp; Modifications</span></h2><ul class="bul"><li><b>Means:</b> the student's IEP is in PowerSchool.</li><li><b>Tap it for:</b> the <b>testing accommodations</b> (double time, breaks, tests read, calculator&hellip;) and the <b>program modifications &amp; accommodations</b>, with the date of the IEP they come from.</li><li><b>Same as:</b> the yearly accommodations sheet &mdash; now on the student, for every class. Subs see it too.</li></ul><figure class="fig"><a href="alerts-teacher-4-iep.png" target="_blank" rel="noopener"><img src="alerts-teacher-4-iep.png" alt="the IEP pop-up"></a><div class="ph"><span class="pl">PICTURE 4</span>Screenshot coming: the IEP pop-up.</div><figcaption><b>PICTURE 4</b> &mdash; The IEP pop-up: testing accommodations one per row, program modifications, and the date of the IEP.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-1">Back</button><button data-go="step-3">Next: C&amp;C &middot; ESC &middot; AS &rarr;</button></div></section>
+
+<section class="step" id="step-3"><span class="eyebrow">THE ICONS &middot; 3 OF 6</span><h2><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#D62828"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">C&amp;C</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#1E63D6"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="7.6" fill="#FFFFFF">ESC</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><rect x="0.5" y="3.4" width="24" height="18.2" rx="1.8" fill="#FFFFFF" stroke="#9AA5AD" stroke-width="0.9"/><rect x="1.8" y="4.7" width="21.4" height="15.6" rx="0.9" fill="#6A3BA8"/><text x="12.5" y="15.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="9" fill="#FFFFFF">AS</text><path d="M1.8 6.2 L8.5 4.7 L5.2 4.7 Z" fill="#FFFFFF" opacity=".16"/></svg></span><span>The coverage cards: C&amp;C, Escort, Administrative Support</span></h2><p class="lead">Three coverages set up by administration or the clinical team. Tap the icon for the note and the dates.</p><div class="cases"><div class="case"><div class="cw">C&amp;C<br>CLOSE &amp;<br>CONTINUOUS</div><div class="ct">The student has been placed on C&amp;C &mdash; a staff member stays with them <b>at all times</b>. See this student with nobody? Say something right away.</div></div><div class="case"><div class="cw">ESC<br>ESCORT</div><div class="ct">The student is on escort status &mdash; staff <b>walk the student</b> between places; they do not travel alone. The note says more, e.g. &ldquo;residential escort only&rdquo;.</div></div><div class="case"><div class="cw">AS<br>ADMINISTRATIVE<br>SUPPORT</div><div class="ct">A <b>longer-term coverage</b> arranged by administration. Not sure what it means for your class? Ask the student's social worker.</div></div></div><div class="callout"><div class="clabel">GOOD TO KNOW</div><div class="gk"><span class="ic">&#128203;</span><span>Today's C&amp;C / Escort / Admin Support lists are also in the <b>Daily Notes</b> &mdash; the icon is the per-student version.</span></div></div><div class="pager"><button class="ghost" data-go="step-2">Back</button><button data-go="step-4">Next: Absences + Cuts &rarr;</button></div></section>
+
+<section class="step" id="step-4"><span class="eyebrow">THE ICONS &middot; 4 OF 6</span><h2><span class="ai "><svg viewBox="0 0 640 512" fill="#FFCD51" aria-hidden="true"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512L528 512 284.3 320l-59 0C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0 .3 0z"/></svg></span><span>Absences + Cuts (yellow person with a slash)</span></h2><p class="lead">This icon appears once a student has <b>5 or more</b> unexcused absences or cuts in <b>any one class</b> this year. Tap it for a breakdown by class:</p><ul class="bul"><li><b>Per / Course / Teacher:</b> which class. HR1&ndash;HR4 is homeroom. WB1&ndash;WB4 is the work-based learning slot that runs during periods 1&ndash;4.</li><li><b>Unexcused column (A, CC, CG):</b> absences and cuts only. Excused absences don't count here.</li><li><b>All absences column (incl. excused):</b> every absence in that class, excused or not (A, CC, CG, EA, OSS, BD, ISR).</li><li><b>No-credit status column (30 absences):</b> a student who reaches 30 total absences in a class for the term gets no credit for that course, excused or not.<ul class="bul"><li><b>Warning (orange)</b> = 25&ndash;29 absences. Let the student's team know now (homeroom teacher, guidance counselor, social worker), while there's still time to step in.</li><li><b>NO CREDIT (red)</b> = 30 or more.</li></ul></li><li>Leaving class with permission (WS, IH, TR) doesn't count as an absence, and neither do AP, WORK, FT, TEST or L.</li></ul><div class="pager"><button class="ghost" data-go="step-3">Back</button><button data-go="step-5">Next: WBL &rarr;</button></div></section>
+
+<section class="step" id="step-5"><span class="eyebrow">THE ICONS &middot; 5 OF 6</span><h2><span class="ai card"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M9 6.5 V4.4 A2.2 2.2 0 0 1 11.2 2.2 H13.8 A2.2 2.2 0 0 1 16 4.4 V6.5" fill="none" stroke="#D9640C" stroke-width="2.2" stroke-linecap="round"/><rect x="0.5" y="6.5" width="24" height="16.5" rx="2.4" fill="#D9640C"/><text x="12.5" y="17.9" text-anchor="middle" font-family="Arial Narrow,Arial,Helvetica,sans-serif" font-weight="800" font-size="8.4" fill="#FFFFFF">WBL</text></svg></span><span>WBL &mdash; Work Schedule</span></h2><ul class="bul"><li><b>Means:</b> the student has <b>work-based learning</b> &mdash; a job site or Animal Care &mdash; during a WB block. In that block they are <b>at work, not in your class</b>.</li><li><b>Tap it for:</b> where they go, which day and periods, and the staff member &mdash; e.g. Walgreens &mdash; Tue, periods 2-4 | Shaina Rochester.</li><li><b>Attendance:</b> enter <b>WORK</b>. A student who should be at work but is sitting in your class may get Present &mdash; <b>Shaina Rochester</b> (WBL staff) enters their points.</li></ul><div class="pager"><button class="ghost" data-go="step-4">Back</button><button data-go="step-6">Next: Counselors &rarr;</button></div></section>
+
+<section class="step" id="step-6"><span class="eyebrow">THE ICONS &middot; 6 OF 6</span><h2><span class="ai "><svg viewBox="0 0 640 512" fill="#2b6cb0" aria-hidden="true"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></span><span>Counselors (the three people)</span></h2><ul class="bul"><li><b>Not an alert</b> &mdash; PowerSchool's own icon, next to the page title on every student.</li><li><b>Tap it for:</b> the student's counselor.</li></ul><div class="pager"><button class="ghost" data-go="step-5">Back</button><button data-go="step-7">Next: how to see them &rarr;</button></div></section>
+
+<section class="step" id="step-7"><span class="eyebrow">HOW TO SEE THEM &middot; 1 OF 4</span><h2>Start Page &rarr; Student Information</h2><ol class="steps"><li><span class="num">1</span><div>On the PowerTeacher <b>Start Page</b>, click the <b>ID-card</b> icon in the <b>Student Information</b> column for your class.</div></li><li><span class="num">2</span><div>Your class list opens on the left.</div></li></ol><figure class="fig"><a href="alerts-teacher-1-startpage.png" target="_blank" rel="noopener"><img src="alerts-teacher-1-startpage.png" alt="the Start Page with the Student Information column marked"></a><div class="ph"><span class="pl">PICTURE 1</span>Screenshot coming: the Start Page with the Student Information column marked.</div><figcaption><b>PICTURE 1</b> &mdash; PowerTeacher Start Page: the Student Information column (the little ID card) opens your class list.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-6">Back</button><button data-go="step-8">Next: Click the student &rarr;</button></div></section>
+
+<section class="step" id="step-8"><span class="eyebrow">HOW TO SEE THEM &middot; 2 OF 4</span><h2>Click the student's name</h2><ol class="steps"><li><span class="num">1</span><div>The student's page opens (<b>Quick Lookup</b>, <b>Schedule</b>&hellip; switch with the <b>Select Screens</b> box, top right).</div></li><li><span class="num">2</span><div>The <b>alert icons</b> sit right next to the page title. The <b>header</b> &mdash; the band of facts about the student &mdash; is just underneath.</div></li></ol><figure class="fig"><a href="alerts-teacher-2-schedule.png" target="_blank" rel="noopener"><img src="alerts-teacher-2-schedule.png" alt="a student page with the alert icons next to the title"></a><div class="ph"><span class="pl">PICTURE 2</span>Screenshot coming: a student page with the alert icons next to the title.</div><figcaption><b>PICTURE 2</b> &mdash; A student's page: the alert icons sit next to the page title; the header (the band of facts) is right underneath.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-7">Back</button><button data-go="step-9">Next: Tap an icon &rarr;</button></div></section>
+
+<section class="step" id="step-9"><span class="eyebrow">HOW TO SEE THEM &middot; 3 OF 4</span><h2>Tap an icon to read it</h2><ol class="steps"><li><span class="num">1</span><div>A <b>pop-up</b> opens with the details. Close it with the <b>X</b>.</div></li><li><span class="num">2</span><div>No icon = it does not apply to that student. (The pop-ups are in steps 1 and 2.)</div></li></ol><div class="pager"><button class="ghost" data-go="step-8">Back</button><button data-go="step-10">Next: While taking attendance &rarr;</button></div></section>
+
+<section class="step" id="step-10"><span class="eyebrow">HOW TO SEE THEM &middot; 4 OF 4</span><h2>Taking attendance? The icons are there too</h2><ol class="steps"><li><span class="num">1</span><div>The <b>Single Day</b> attendance page has an <b>Alerts</b> column next to each name &mdash; same icons, same pop-ups, no need to leave the page.</div></li><li><span class="num">2</span><div>The seating chart does not show them.</div></li></ol><figure class="fig"><a href="alerts-teacher-5-attendance.png" target="_blank" rel="noopener"><img src="alerts-teacher-5-attendance.png" alt="the Alerts column on the Single Day attendance page"></a><div class="ph"><span class="pl">PICTURE 5</span>Screenshot coming: the Alerts column on the Single Day attendance page.</div><figcaption><b>PICTURE 5</b> &mdash; Single Day attendance (Record Meeting Attendance): the Alerts column shows the same icons next to each name.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-9">Back</button><button data-go="header">Next: the header &rarr;</button></div></section>
+
+<section class="step" id="header"><span class="eyebrow">THE STUDENT HEADER</span><h2>What each label in the header means</h2><p class="lead">The <b>header</b> is the band of facts about the student at the top of every student page. Blank fields are hidden, so some students show fewer labels.</p><figure class="fig"><a href="alerts-teacher-header.png" target="_blank" rel="noopener"><img src="alerts-teacher-header.png" alt="the student header"></a><div class="ph"><span class="pl">PICTURE B</span>Screenshot coming: the student header.</div><figcaption><b>PICTURE B</b> &mdash; The header &mdash; the band of facts under the page title (ZZTest, the test student).</figcaption></figure><div class="cases"><div class="case"><div class="cw">NAME &middot; GOES BY &middot; GOES BY (LAST) &middot; PRONOUNS</div><div class="ct"><b>NAME</b> &mdash; the student's name in PowerSchool (Last, First). <b>GOES BY</b> &mdash; the first name the student uses at school. <b>Use this one.</b> <b>GOES BY (LAST)</b> &mdash; the last name they use. <b>PRONOUNS</b> &mdash; the student's pronouns at school (with family: see the pink alert).</div></div><div class="case"><div class="cw">DOB &middot; AGE</div><div class="ct"><b>DOB</b> &mdash; date of birth. <b>AGE</b> &mdash; years and months, worked out from the DOB.</div></div><div class="case"><div class="cw">HR &middot; COUNSELOR &middot; SW &middot; SPEECH &middot; OT &middot; PSYCHIATRIST</div><div class="ct"><b>HR</b> homeroom teacher &middot; <b>COUNSELOR</b> guidance counselor &middot; <b>SW</b> social worker &middot; <b>SPEECH</b> speech therapist &middot; <b>OT</b> occupational therapist &middot; <b>PSYCHIATRIST</b> psychiatrist. These are the people to loop in when something comes up with the student.</div></div><div class="case"><div class="cw">PLACEMENT &middot; COTTAGE &middot; DISTRICT</div><div class="ct"><b>PLACEMENT</b> &mdash; Day or Resident. <b>COTTAGE</b> &mdash; the cottage a residential student lives in (blank for day students). <b>DISTRICT</b> &mdash; the student's home school district, the one that placed them at Summit.</div></div></div><div class="callout"><div class="clabel">GOOD TO KNOW</div><div class="gk"><span class="ic">&#9993;&#65039;</span><span>Something in an alert or the header wrong or missing? <b>Reach out</b> &mdash; or the student's SW for names and pronouns.</span></div></div><div class="pager"><button class="ghost" data-go="step-10">Back</button><button data-go="start">Start over</button></div></section>
+</main>
 </div>
 </div>
-<script>document.querySelectorAll('details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details').forEach(function(o){if(o!==d)o.open=false})})})</script>
-<style id="rsp">
-body.cards{padding:0!important;height:100vh;overflow:hidden;background:#eef4f8}
-body.cards>.wrap{display:none}
-body:not(.cards) .deck{display:none}
-.deck{height:100vh;display:flex;flex-direction:column;padding:7px 7px 5px}
-.deck .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--acc,#F5B82E);border-radius:14px;box-shadow:0 1px 3px rgba(16,42,84,.10);overflow:hidden}
-.deck .ch{display:flex;align-items:center;gap:9px;padding:8px 11px 3px}
-.deck .cnum{flex:0 0 27px;height:27px;border-radius:50%;background:var(--acc,#F5B82E);color:#1F3864;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-.deck .ck{font-size:10.5px;font-weight:800;letter-spacing:2px;color:#6b7c92}
-.deck h3.ct{font-size:15.5px;font-weight:800;color:#12305e;line-height:1.25;padding:0 11px 5px;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.deck .cb{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 11px 9px;font-size:13.5px;line-height:1.42;color:#51637a}
-.deck .cb b{color:#12305e}
-.deck .cb .shot,.deck .cb .browser,.deck .cb .hdr{display:none}
-.deck .cb .path{font-size:12.5px;padding:1px 6px}
-.deck .cb .pic{display:inline-block;margin-top:5px;font-size:11.5px}
-.deck .cb .codes{gap:6px;margin:6px 0 2px}
-.deck .cb .code{min-width:0;padding:5px 8px;font-size:12px}
-.deck .cb .code b{font-size:13px}
-.deck .cb .gk{display:flex;gap:8px;padding:4px 0;font-size:13px;color:#5d5233;line-height:1.38;align-items:flex-start}
-.deck .cb .gk .ic{flex:0 0 19px;font-size:13px}
-.deck .cb .chip{display:inline-block;font-size:10px;padding:3px 8px;letter-spacing:.6px;margin:0 4px 5px 0}
-.deck .cb p{margin:4px 0 0}
-.deck .cb .who{font-size:12px;margin-top:6px;padding:6px 8px}
-.deck .cb a.lk{display:block;background:#E4EEF8;border:1px solid #cddcec;border-radius:9px;padding:9px 11px;margin:5px 0;color:#1F3864;font-weight:800;text-decoration:none;font-size:13px}
-.deck .nav{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 1px 0}
-.deck .nav button{border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2}
-.deck .nav button[disabled]{opacity:.28}
-.deck .dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:40%}
-.deck .dots i{width:6px;height:6px;border-radius:50%;background:#c3d1e0;display:block}
-.deck .dots i.on{background:#1F3864}
-</style>
 <script>
 (function(){
-var BASE=974,BP=700,idx=0,deck=null,cards=[];
-function q(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
-function kindOf(lab){
- if(/ICON/i.test(lab))return{kind:'ICON',head:'THE ICONS',noun:'icons'};
- if(/LABEL|HEADER/i.test(lab))return{kind:'LABEL',head:'THE HEADER',noun:'header labels'};
- if(/QUESTION/i.test(lab))return{kind:'QUESTION',head:'COMMON QUESTIONS',noun:'quick answers'};
- if(/WAYS|OPTION|HELP/i.test(lab))return{kind:'OPTION',head:'WAYS TO GET HELP',noun:'ways to get help'};
- return{kind:'STEP',head:'HOW TO DO IT',noun:'short steps'};
-}
-function collect(){
- cards=[];var groups=[],cur=null;
- q('.wrap .label, details.step').forEach(function(el){
-  if(el.classList.contains('label')){var k=kindOf(el.textContent.replace(/\s+/g,' ').trim());cur={kind:k.kind,head:k.head,noun:k.noun,steps:[]};groups.push(cur);}
-  else{if(!cur){cur={kind:'STEP',head:'HOW TO DO IT',noun:'short steps',steps:[]};groups.push(cur);}cur.steps.push(el);}
- });
- groups=groups.filter(function(g){return g.steps.length;});
- var kinds=[],tot={},run={};
- groups.forEach(function(g){if(!tot[g.kind]){tot[g.kind]=0;run[g.kind]=0;kinds.push(g);}tot[g.kind]+=g.steps.length;});
- var chips=q('.chips .chip').map(function(c){return '<span class="chip">'+c.innerHTML+'</span>';}).join('');
- var pics=q('.pic').length>0;
- var title=kinds.map(function(g){return tot[g.kind]+' '+g.noun;}).join(' &middot; ');
- var head=kinds.length===1?kinds[0].head:'ON THIS PAGE';
- cards.push({k:head,num:'&#9654;',title:title,body:'<div>'+chips+'</div><p>Tap <b>Next</b> to go one at a time. Swiping works too.'+(pics?' The pictures are right below this box.':'')+'</p>'});
- groups.forEach(function(g){g.steps.forEach(function(d){var h=d.querySelector('summary h3'),b=d.querySelector('.body');run[g.kind]++;cards.push({k:g.kind+' '+run[g.kind]+' OF '+tot[g.kind],num:String(run[g.kind]),title:h?h.innerHTML:'',body:b?b.innerHTML:''});});});
- var co=document.querySelector('.callout');
- if(co){var gks=q('.gk',co);gks.forEach(function(g,i){var ic=g.querySelector('.ic');var tx=g.querySelector('span:not(.ic)');cards.push({k:'GOOD TO KNOW '+(i+1)+' OF '+gks.length,num:ic?ic.innerHTML:'&#10003;',title:'Worth knowing',body:'<div class="gk"><span>'+(tx?tx.innerHTML:g.innerHTML)+'</span></div>'});});}
- var st=document.querySelector('.strip');
- if(st){var ls=q('a.slide',st).map(function(a){var t=a.querySelector('.t');return '<a class="lk" href="'+a.getAttribute('href')+'" target="_blank" rel="noopener">'+(t?t.innerHTML:a.textContent)+' &rarr;</a>';}).join('');if(ls){cards.push({k:'FROM THE TRAINING',num:'&#9654;',title:'Open the training slides',body:ls});}}
-}
-function render(){
- var c=cards[idx];
- deck.innerHTML='<div class="card"><div class="ch"><span class="cnum">'+c.num+'</span><span class="ck">'+c.k+'</span></div><h3 class="ct">'+c.title+'</h3><div class="cb">'+c.body+'</div></div><div class="nav"><button type="button" id="bk"'+(idx===0?' disabled':'')+'>&larr; Back</button><div class="dots">'+cards.map(function(_,i){return '<i'+(i===idx?' class="on"':'')+'></i>';}).join('')+'</div><button type="button" id="nx"'+(idx===cards.length-1?' disabled':'')+'>Next &rarr;</button></div>';
- deck.querySelector('#bk').onclick=function(){if(idx>0){idx--;render();}};
- deck.querySelector('#nx').onclick=function(){if(idx<cards.length-1){idx++;render();}};
-}
-function apply(){
- var w=window.innerWidth;
- if(w<BP){
-  if(!deck){
-   var n=document.querySelector('.num');
-   if(n){try{document.documentElement.style.setProperty('--acc',getComputedStyle(n).backgroundColor);}catch(e){}}
-   collect();deck=document.createElement('div');deck.className='deck';document.body.appendChild(deck);
-   var sx=0;deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
-   deck.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(dx<-50&&idx<cards.length-1){idx++;render();}else if(dx>50&&idx>0){idx--;render();}},{passive:true});
-   render();
+  var ids=Array.prototype.map.call(document.querySelectorAll("section.step"),function(s){return s.id;});
+  var btns=Array.prototype.slice.call(document.querySelectorAll(".rail button"));
+  function show(id,push){
+    if(ids.indexOf(id)<0) id=ids[0];
+    Array.prototype.forEach.call(document.querySelectorAll("section.step"),function(s){s.classList.toggle("on",s.id===id);});
+    var seen=true;
+    btns.forEach(function(b){
+      if(b.dataset.s===id){b.setAttribute("aria-current","step");seen=false;} else {b.removeAttribute("aria-current");}
+      b.classList.toggle("done",seen && b.dataset.num==="1");
+    });
+    if(push){ try{ if(location.hash!=="#"+id) history.replaceState(null,"","#"+id); }catch(e){} window.scrollTo(0,0); }
+    var cur=document.querySelector('.rail button[aria-current="step"]');
+    if(cur&&cur.scrollIntoView&&document.body.classList.contains("narrow")){try{cur.scrollIntoView({inline:"center",block:"nearest"});}catch(e){}}
   }
-  document.body.classList.add('cards');document.body.style.zoom='';
- }else{
-  document.body.classList.remove('cards');document.body.style.zoom=String(w/BASE);
- }
-}
-apply();window.addEventListener('resize',apply);
+  btns.forEach(function(b){ b.addEventListener("click",function(){show(b.dataset.s,true);}); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(b){ b.addEventListener("click",function(){show(b.dataset.go,true);}); });
+  window.addEventListener("hashchange",function(){ show(location.hash.replace("#",""),false); });
+  show((location.hash||"#"+ids[0]).replace("#",""),false);
+  Array.prototype.forEach.call(document.querySelectorAll(".fig img"),function(img){
+    img.addEventListener("error",function(){img.closest(".fig").classList.add("missing");});
+    if(img.complete && img.naturalWidth===0) img.closest(".fig").classList.add("missing");
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("details.q"),function(d){d.addEventListener("toggle",function(){if(d.open)Array.prototype.forEach.call(document.querySelectorAll("details.q"),function(o){if(o!==d)o.open=false;});});});
+  var inFrame=false; try{inFrame=window.self!==window.top;}catch(e){inFrame=true;}
+  if(inFrame){ document.getElementById("full").href=location.href.split("#")[0]; }
+  else { document.body.classList.add("standalone"); document.getElementById("full").style.display="none"; }
+  var BASE=974,BP=700;
+  function apply(){var w=window.innerWidth;if(w<BP){document.body.classList.add("narrow");document.body.style.zoom="";}else{document.body.classList.remove("narrow");document.body.style.zoom=String(w/BASE);}}
+  apply();window.addEventListener("resize",apply);
 })();
 </script>
 </body></html>

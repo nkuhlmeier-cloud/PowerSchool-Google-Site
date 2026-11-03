@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IEP Attachments</title>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Karla',Arial,sans-serif}
+:root{--acc:#F5B82E;--acct:#12305e;--accsoft:#FDF6E4}
+body{background:transparent;padding:8px 6px 20px}
+body.standalone{background:#e3f5fc;padding:18px 16px 40px}
+.wrap{max-width:974px;margin:0 auto}
+.top{display:none;margin:0 0 16px;padding:0 0 14px;border-bottom:3px solid var(--acc)}
+body.standalone .top{display:block}
+.top .kicker{font-size:12px;font-weight:800;letter-spacing:3px;color:#194178}
+.top h1{font-size:30px;font-weight:800;color:#12305e;line-height:1.15;margin-top:4px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 16px;align-items:center}
+.chip{background:#fff;border:1.5px solid #b9d2e8;color:#194178;font-size:13px;font-weight:700;letter-spacing:1px;padding:7px 15px;border-radius:999px}
+a.full{margin-left:auto;font-size:12.5px;font-weight:800;letter-spacing:1px;color:#194178;text-decoration:none;border:1.5px solid #b9d2e8;background:#fff;border-radius:999px;padding:6px 13px}
+a.full:hover{background:#eaf4fc}
+body.standalone a.full{display:none}
+.layout{display:grid;grid-template-columns:238px minmax(0,1fr);gap:22px;align-items:start}
+nav.rail{display:flex;flex-direction:column;gap:4px;position:sticky;top:10px}
+.rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:10px;color:#12305e;font-size:14.5px;font-weight:700;line-height:1.25}
+.rail button span.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail button:hover{background:#eaf4fc}
+.rail button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.rail button[aria-current="step"]{background:var(--acc);color:var(--acct)}
+.rail .n{flex:0 0 28px;height:28px;border-radius:50%;background:#eaf4fc;color:#194178;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.rail button[aria-current="step"] .n{background:#fff;color:#194178}
+.rail .sep{height:1px;background:#dce6ef;margin:5px 8px}
+.rail .grp{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#8296ab;padding:8px 11px 2px}
+.rail .done .n{background:#dff1e4;color:#2f7d4a}
+main{min-width:0}
+section.step{display:none;background:#fff;border:1.5px solid #dce6ef;border-radius:14px;padding:22px 24px 18px;box-shadow:0 1px 2px rgba(16,42,84,.06)}
+section.step.on{display:block;border-color:var(--acc)}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:3px;color:#194178}
+section h2{font-size:23px;font-weight:800;color:#12305e;line-height:1.2;margin:4px 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.lead{font-size:15px;color:#51637a;line-height:1.5;margin:0 0 16px;max-width:70ch}
+.lead b,.steps b,.gk b,.ans b,.bul b,.box b,.ct b,.who b,.txt b{color:#12305e}
+ol.steps{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0 0 6px}
+ol.steps li{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:start;font-size:15.5px;color:#51637a;line-height:1.5}
+.num{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--acc);color:var(--acct);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+ul.bul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 8px}
+ul.bul li{position:relative;padding-left:20px;font-size:15.5px;color:#51637a;line-height:1.5}
+ul.bul li::before{content:"";position:absolute;left:4px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--acc)}
+ul.bul ul.bul{margin:6px 0 0}
+.txt{font-size:15.5px;color:#51637a;line-height:1.5;margin:0 0 10px}
+.ui{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:1px 8px;font-weight:800;color:#12305e;font-size:14.5px;white-space:nowrap;line-height:1.45}
+.path{display:inline-block;background:#f1f6fa;border:1px solid #d3dfe9;border-radius:6px;padding:1px 8px;font-weight:700;color:#12305e;font-size:14px;line-height:1.45}
+.no{display:inline-block;background:#fdf0f0;border:1px solid #f2c9c9;border-radius:6px;padding:1px 8px;font-weight:800;color:#9b2c2c;font-size:14.5px;line-height:1.45}
+.ai{display:inline-flex;flex:0 0 36px;width:36px;height:36px;border-radius:9px;align-items:center;justify-content:center;background:#fff;border:1.5px solid #d3dfe9;vertical-align:middle}
+.ai svg{width:22px;height:22px}
+.ai.card svg{width:28px;height:28px}
+.ai.gold{color:#8a6413;background:#FDF6E4;border-color:#f0dca8}
+.ai.sm{width:26px;height:26px;flex-basis:26px;border-radius:7px;margin:0 2px}
+.ai.sm svg{width:15px;height:15px}
+.ai.sm.card svg{width:20px;height:20px}
+.fig{margin:16px 0 4px;border:1px solid #d3dfe9;border-radius:10px;overflow:hidden;background:#fff}
+.fig a{display:block}
+.fig img{display:block;max-width:100%;max-height:640px;height:auto;margin:0 auto}
+.fig .ph{display:none;padding:22px 18px;background:#f4f8fb;color:#8296ab;font-size:14px;line-height:1.5;text-align:center}
+.fig .ph .pl{display:block;color:#51637a;font-weight:800;font-size:12.5px;letter-spacing:2px;margin-bottom:4px}
+.fig.missing img{display:none}
+.fig.missing .ph{display:block}
+.fig figcaption{font-size:12.5px;color:#51637a;padding:7px 12px;background:#f7fafc;border-top:1px solid #e3ebf3;line-height:1.4}
+.fig figcaption b:first-child{color:#8a6413;letter-spacing:1px}
+.fig figcaption b{color:#12305e}
+.callout{margin-top:18px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:14px 20px}
+.callout .clabel{font-size:13px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:6px}
+.gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:4px 0;align-items:flex-start;line-height:1.45}
+.gk .ic{flex:0 0 22px;font-size:15px}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:4px 0 14px}
+.boxes.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.box{background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:14px 15px;min-width:0}
+.box .bl{font-size:12px;font-weight:800;letter-spacing:3px;color:#194178;margin-bottom:6px}
+.box p,.box li{font-size:14.5px;color:#51637a;line-height:1.45}
+.box ul{margin:0;padding-left:18px}
+.cases{display:flex;flex-direction:column;gap:10px;margin:4px 0 8px}
+.case{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:13px 15px}
+.case .cw{font-size:12.5px;font-weight:800;letter-spacing:2px;color:#194178;line-height:1.35;padding-top:2px}
+.case .ct{font-size:15px;color:#51637a;line-height:1.5}
+.case.lock{background:#fdf0f0;border-color:#f2c9c9}
+.case.lock .cw{color:#9b2c2c}
+.who{margin-top:10px;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:10px;padding:10px 14px;font-size:14.5px;color:#51637a;line-height:1.5}
+.key{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.key span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid #d3dfe9;background:#fff;color:#12305e}
+.key .cut{background:#ffd9ec;border-color:#f3a7cf}.key .abs{background:#ffd7d7;border-color:#f0a1a1}.key .exc{background:#d9ecff;border-color:#9ec5f0}.key .late{background:#fff3c4;border-color:#ebd27a}
+table.codes{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:14.5px}
+table.codes th{text-align:left;font-size:11.5px;letter-spacing:2.5px;color:#194178;padding:6px 8px;border-bottom:2px solid #dce6ef}
+table.codes td{padding:7px 8px;border-bottom:1px solid #e9eff5;color:#51637a;line-height:1.4;vertical-align:top}
+table.codes td.c{font-weight:800;color:#12305e;white-space:nowrap;width:76px}
+table.codes td i{color:#8296ab}
+table.codes tr.new td.c::after{content:"NEW";font-size:9.5px;font-weight:800;letter-spacing:1px;background:#FDF6E4;color:#8a6413;border:1px solid #f0dca8;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.locked{background:#f4efe6;border:1px solid #e4d7bf;border-radius:12px;padding:12px 14px;margin:6px 0 12px}
+.locked .bl{font-size:12px;font-weight:800;letter-spacing:3px;color:#6b5a2e;margin-bottom:6px}
+.locked p{font-size:14px;color:#5d5233;line-height:1.45}
+.ask{background:#edf7f1;border:1.5px solid #9fd3b4;border-radius:12px;padding:12px 16px;font-size:15px;color:#2f5a3f;line-height:1.5;margin:8px 0 4px}
+.ask b{color:#1f4d31}
+.selmock{display:inline-block;min-width:260px;background:#fff;border:1.5px solid #d3dfe9;border-radius:8px;margin:12px 0 4px;overflow:hidden;font-size:14px}
+.selmock .hd{display:flex;justify-content:space-between;background:#eef3f8;padding:8px 12px;font-weight:800;color:#12305e;border-bottom:1px solid #d3dfe9}
+.selmock .op{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;color:#51637a;border-bottom:1px solid #eef2f6}
+.selmock .op.hit{background:var(--accsoft);color:#12305e;font-weight:800}
+.selmock .op em{font-style:normal;font-size:10.5px;letter-spacing:2px;color:#8a6413;font-weight:800}
+.selmock .op.dim{color:#b5c2cf}
+.faq{display:flex;flex-direction:column;gap:9px}
+details.q{background:#f7fafc;border:1px solid #dce6ef;border-radius:12px;overflow:hidden}
+details.q[open]{border-color:var(--acc);background:#fff}
+details.q summary{display:flex;gap:12px;align-items:center;padding:13px 16px;cursor:pointer;list-style:none;font-size:15.5px;font-weight:800;color:#12305e;line-height:1.35}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary .qn{flex:0 0 30px;height:30px;border-radius:50%;background:#eaf4fc;color:#194178;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+details.q .ans{padding:0 16px 14px 58px;font-size:15px;color:#51637a;line-height:1.5}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #e3ebf3}
+.pager button{border:0;border-radius:999px;padding:10px 18px;font-weight:800;font-size:14px;background:#1F3864;color:#fff;cursor:pointer;font-family:inherit;line-height:1.2;text-align:left}
+.pager button.ghost{background:#fff;color:#194178;border:1.5px solid #b9d2e8}
+.pager button[disabled]{opacity:.3;cursor:default}
+.pager button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+body.narrow .layout{grid-template-columns:1fr;gap:12px}
+body.narrow nav.rail{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding:2px 2px 8px;-webkit-overflow-scrolling:touch}
+body.narrow .rail button{padding:7px 10px 7px 7px;font-size:13px;flex:0 0 auto}
+body.narrow .rail .sep,body.narrow .rail .grp{display:none}
+body.narrow section.step{padding:16px 14px 14px}
+body.narrow .boxes,body.narrow .boxes.two{grid-template-columns:1fr}
+body.narrow .case{grid-template-columns:1fr;gap:4px}
+body.narrow .chips{gap:7px}
+body.narrow .chip{font-size:11.5px;padding:5px 11px}
+body.narrow a.full{margin-left:0}
+body.narrow table.codes td.c{width:auto}
+@media (prefers-reduced-motion:no-preference){section.step.on{animation:fade .2s ease}}
+@keyframes fade{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}
+</style></head>
+<body>
+<div class="wrap">
+<div class="top"><div class="kicker">SUMMIT POWERSCHOOL HELP CENTER &middot; ADMIN PORTAL</div><h1>IEP Attachments</h1></div>
+<div class="chips"><span class="chip">SOCIAL WORKERS &middot; COUNSELORS &middot; COORDINATORS</span><span class="chip">STUDENT PROFILE &rarr; ATTACHMENTS</span><span class="chip">LOOK &amp; DOWNLOAD ONLY</span><a class="full" id="full" href="#" target="_blank" rel="noopener">OPEN FULL SCREEN &nearr;</a></div>
+<div class="layout">
+<nav class="rail" aria-label="Steps"><button data-s="start" data-num="0"><span class="n">?</span><span class="t">Before you start</span></button><div class="sep"></div><button data-s="step-1" data-num="1"><span class="n">1</span><span class="t">Open the student</span></button><button data-s="step-2" data-num="1"><span class="n">2</span><span class="t">Student Profile &rarr; Attachments</span></button><button data-s="step-3" data-num="1"><span class="n">3</span><span class="t">View or download</span></button></nav>
+<main>
+<section class="step" id="start"><span class="eyebrow">BEFORE YOU START</span><h2>The student's IEP is a file attached to the student</h2><p class="lead">IEPs are <b>attachments, not forms</b> &mdash; that is why they live under <b>Student Profile &rarr; Attachments</b>, not Student Forms. Two clicks from any student's page.</p><div class="boxes"><div class="box"><div class="bl">WHERE</div><p>Student page &rarr; <span class="path">Student Profile</span> &rarr; <span class="path">Attachments</span> (under the <b>More</b> heading inside that menu).</p></div><div class="box"><div class="bl">THE QUICK READ</div><p>Just need the <b>testing accommodations</b> and <b>program modifications</b>? Tap the teal <b>IEP</b> alert icon under the student's name &mdash; no file to open.</p></div><div class="box"><div class="bl">WHO UPLOADS</div><p><b>Olivia Phelps</b> attaches each new IEP (Summit Tools &rarr; Upload IEP). Teachers read it as <b>View Student IEP</b> on their Start Page.</p></div></div><div class="pager"><button class="ghost" disabled>Back</button><button data-go="step-1">Start: open the student &rarr;</button></div></section>
+
+<section class="step" id="step-1"><span class="eyebrow">STEP 1 OF 3</span><h2>Open the student</h2><ol class="steps"><li><span class="num">1</span><div>Search the last name (top bar or Start Page) and click the name.</div></li><li><span class="num">2</span><div>The student's page opens with the left-hand menu.</div></li></ol><div class="pager"><button class="ghost" data-go="start">Back</button><button data-go="step-2">Next: Student Profile &rarr; Attachments &rarr;</button></div></section>
+
+<section class="step" id="step-2"><span class="eyebrow">STEP 2 OF 3</span><h2>Student Profile &rarr; Attachments</h2><ol class="steps"><li><span class="num">1</span><div>Left-hand menu &rarr; <span class="path">Student Profile</span>.</div></li><li><span class="num">2</span><div>In the menu that opens, under the <b>More</b> heading, click <span class="path">Attachments</span>.</div></li></ol><figure class="fig"><a href="iep-1.png" target="_blank" rel="noopener"><img src="iep-1.png" alt="the Student Profile menu with Attachments marked"></a><div class="ph"><span class="pl">PICTURE 1</span>Screenshot coming: the Student Profile menu with Attachments marked.</div><figcaption><b>PICTURE 1</b> &mdash; Student Profile menu: Attachments (for the IEP). Student Forms, under Forms, is where the ICSP lives.</figcaption></figure><div class="pager"><button class="ghost" data-go="step-1">Back</button><button data-go="step-3">Next: View or download &rarr;</button></div></section>
+
+<section class="step" id="step-3"><span class="eyebrow">STEP 3 OF 3</span><h2>View or download the IEP</h2><ol class="steps"><li><span class="num">1</span><div>The IEP is in the list on the Attachments page.</div></li><li><span class="num">2</span><div>Use the buttons under <b>Actions</b> to <b>view</b> it on screen or <b>download</b> it.</div></li><li><span class="num">3</span><div>Nothing listed? The IEP hasn't been attached yet &mdash; reach out.</div></li></ol><figure class="fig"><a href="iep-4.png" target="_blank" rel="noopener"><img src="iep-4.png" alt="the Attachments page with the IEP listed"></a><div class="ph"><span class="pl">PICTURE 4</span>Screenshot coming: the Attachments page with the IEP listed.</div><figcaption><b>PICTURE 4</b> &mdash; Attachments page: the IEP is listed here &mdash; use the buttons under Actions to view or download it.</figcaption></figure><div class="callout"><div class="clabel">GOOD TO KNOW</div><div class="gk"><span class="ic">&#128206;</span><span><b>IEPs are attachments, not forms</b> &mdash; that is why they live under Student Profile &rarr; Attachments, not Student Forms.</span></div><div class="gk"><span class="ic">&#128196;</span><span>Looking for the <b>ICSP</b>? That is a form: Student Profile &rarr; Student Forms &rarr; Student Support tab &mdash; see the <b>Create &amp; Update an ICSP</b> page of this site.</span></div><div class="gk"><span class="ic">&#128274;</span><span>Missing <b>Attachments</b> on your menu? That is a permissions thing &mdash; <b>reach out</b>.</span></div></div><div class="pager"><button class="ghost" data-go="step-2">Back</button><button data-go="start">Start over</button></div></section>
+</main>
+</div>
+</div>
+<script>
+(function(){
+  var ids=Array.prototype.map.call(document.querySelectorAll("section.step"),function(s){return s.id;});
+  var btns=Array.prototype.slice.call(document.querySelectorAll(".rail button"));
+  function show(id,push){
+    if(ids.indexOf(id)<0) id=ids[0];
+    Array.prototype.forEach.call(document.querySelectorAll("section.step"),function(s){s.classList.toggle("on",s.id===id);});
+    var seen=true;
+    btns.forEach(function(b){
+      if(b.dataset.s===id){b.setAttribute("aria-current","step");seen=false;} else {b.removeAttribute("aria-current");}
+      b.classList.toggle("done",seen && b.dataset.num==="1");
+    });
+    if(push){ try{ if(location.hash!=="#"+id) history.replaceState(null,"","#"+id); }catch(e){} window.scrollTo(0,0); }
+    var cur=document.querySelector('.rail button[aria-current="step"]');
+    if(cur&&cur.scrollIntoView&&document.body.classList.contains("narrow")){try{cur.scrollIntoView({inline:"center",block:"nearest"});}catch(e){}}
+  }
+  btns.forEach(function(b){ b.addEventListener("click",function(){show(b.dataset.s,true);}); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(b){ b.addEventListener("click",function(){show(b.dataset.go,true);}); });
+  window.addEventListener("hashchange",function(){ show(location.hash.replace("#",""),false); });
+  show((location.hash||"#"+ids[0]).replace("#",""),false);
+  Array.prototype.forEach.call(document.querySelectorAll(".fig img"),function(img){
+    img.addEventListener("error",function(){img.closest(".fig").classList.add("missing");});
+    if(img.complete && img.naturalWidth===0) img.closest(".fig").classList.add("missing");
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("details.q"),function(d){d.addEventListener("toggle",function(){if(d.open)Array.prototype.forEach.call(document.querySelectorAll("details.q"),function(o){if(o!==d)o.open=false;});});});
+  var inFrame=false; try{inFrame=window.self!==window.top;}catch(e){inFrame=true;}
+  if(inFrame){ document.getElementById("full").href=location.href.split("#")[0]; }
+  else { document.body.classList.add("standalone"); document.getElementById("full").style.display="none"; }
+  var BASE=974,BP=700;
+  function apply(){var w=window.innerWidth;if(w<BP){document.body.classList.add("narrow");document.body.style.zoom="";}else{document.body.classList.remove("narrow");document.body.style.zoom=String(w/BASE);}}
+  apply();window.addEventListener("resize",apply);
+})();
+</script>
+</body></html>
