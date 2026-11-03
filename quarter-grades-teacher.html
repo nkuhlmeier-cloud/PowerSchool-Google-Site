@@ -319,14 +319,29 @@ body.narrow a.full{margin-left:0}
 </div>
 
 <script>
-/* ===== EDIT THIS EACH QUARTER (one line) ===== */
-var TERM = { term:'Q1', name:'Quarter 1', lastDay:'Fri 11/6', due:'Tue 11/10' };
-/* ============================================= */
+/* ===== SCHOOL YEAR DATES — update once a year from the Summit calendar =====
+   One line per quarter: the term code, its name, the last day of the quarter, the day grades are due,
+   and the due date as a real date (year-month-day) so the page can pick the current quarter by itself. */
+var QUARTERS = [
+  { term:'Q1', name:'Quarter 1', lastDay:'Fri 11/6',  due:'Tue 11/10', dueDate:'2026-11-10' },
+  { term:'Q2', name:'Quarter 2', lastDay:'Fri 1/22',  due:'Tue 1/26',  dueDate:'2027-01-26' },
+  { term:'Q3', name:'Quarter 3', lastDay:'Fri 4/9',   due:'Tue 4/13',  dueDate:'2027-04-13' },
+  { term:'Q4', name:'Quarter 4', lastDay:'Mon 6/14',  due:'Tue 6/22',  dueDate:'2027-06-22' }
+];
+/* ========================================================================== */
 
 (function(){
-  // quarter line + every "Q1" on the page
-  document.getElementById('now-text').innerHTML =
-    '<b>'+TERM.term+'</b> &middot; '+TERM.name+' ends <b>'+TERM.lastDay+'</b> <span class="sep">|</span> grades due <b>'+TERM.due+'</b>';
+  // pick the first quarter whose due date hasn't passed (grace: shows until 3 days after the due date)
+  var today=new Date(); today.setHours(0,0,0,0);
+  var TERM=null;
+  for(var i=0;i<QUARTERS.length;i++){var d=new Date(QUARTERS[i].dueDate+'T00:00:00'); d.setDate(d.getDate()+3); if(today<=d){TERM=QUARTERS[i];break;}}
+  var now=document.getElementById('now-text');
+  if(TERM){
+    now.innerHTML='<b>'+TERM.term+'</b> &middot; '+TERM.name+' ends <b>'+TERM.lastDay+'</b> <span class="sep">|</span> grades due <b>'+TERM.due+'</b>';
+  } else {
+    TERM=QUARTERS[QUARTERS.length-1];
+    now.innerHTML='<b>'+TERM.term+'</b> grades are in. Next year\'s dates will show here once the new calendar is out.';
+  }
   Array.prototype.forEach.call(document.querySelectorAll('.tq'),function(s){s.textContent=TERM.term;});
 
   // wizard
