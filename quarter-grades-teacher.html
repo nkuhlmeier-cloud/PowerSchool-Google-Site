@@ -65,6 +65,17 @@ ol.steps li{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:sta
 .fig figcaption b{color:#8a6413;letter-spacing:1px}
 .fig figcaption b+b,.fig figcaption b:not(:first-child){color:#12305e;letter-spacing:0}
 
+table.codes{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:14.5px}
+table.codes th{text-align:left;font-size:11.5px;letter-spacing:2.5px;color:#194178;padding:6px 8px;border-bottom:2px solid #dce6ef}
+table.codes td{padding:8px;border-bottom:1px solid #e9eff5;color:#51637a;line-height:1.45;vertical-align:top}
+table.codes td b{color:#12305e}
+table.codes td.c{font-weight:800;color:#12305e;white-space:nowrap;width:56px}
+table.codes td.g{white-space:nowrap}
+table.codes ul{margin:6px 0 0;padding-left:18px}
+.pill{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:999px;white-space:nowrap;line-height:1.3}
+.pill.no{background:#f1f6fa;border:1px solid #d3dfe9;color:#51637a}
+.pill.yes{background:#fdf0f0;border:1px solid #f2c9c9;color:#9b2c2c}
+body.narrow table.codes td.g{white-space:normal}
 .callout{margin-top:18px;background:#FDF6E4;border-left:6px solid #E8A33D;border-radius:0 12px 12px 0;padding:14px 20px}
 .callout .clabel{font-size:13px;font-weight:800;letter-spacing:3px;color:#8a6413;margin-bottom:6px}
 .gk{display:flex;gap:11px;font-size:14.5px;color:#5d5233;padding:4px 0;align-items:flex-start;line-height:1.45}
@@ -135,6 +146,7 @@ body.narrow a.full{margin-left:0}
   <div class="sep"></div>
   <button data-s="change"><span class="n">&#9998;</span>Change a grade</button>
   <button data-s="faq"><span class="n">!</span>Common questions</button>
+  <button data-s="codes"><span class="n">i</span>Grade codes</button>
 </nav>
 
 <main>
@@ -230,7 +242,7 @@ body.narrow a.full{margin-left:0}
   <figure class="fig" data-pic="5"><a href="qg-5.png" target="_blank" rel="noopener"><img src="qg-5.png" alt="The Score Inspector with the letter pad"></a><div class="ph"><span class="pl">PICTURE 5</span>Screenshot coming: a <span class="tq">Q1</span> cell selected and the <b>Score Inspector</b> with its letter pad.</div><figcaption><b>PICTURE 5</b> &mdash; The Score Inspector. Letter first, then + or &minus;. <b>INC</b> is on the pad.</figcaption></figure>
   <div class="callout"><div class="clabel">GOOD TO KNOW</div>
     <div class="gk"><span class="ic">&#128683;</span><span><b>Leave Percent alone.</b> The letter is the grade. You don't need to type a percent.</span></div>
-    <div class="gk"><span class="ic">&#10067;</span><span><b>NC, NG, M and P</b> are on the pad too. Only use one if you were told to for that student &mdash; when in doubt, ask.</span></div>
+    <div class="gk"><span class="ic">&#10067;</span><span><b>NC, NG, M and P</b> are on the pad too &mdash; see <b>Grade codes</b> (last item on the left) for what each one means. Only use one if you were told to for that student; when in doubt, ask.</span></div>
     <div class="gk"><span class="ic">&#128202;</span><span><b>Already a grade in the cell?</b> You've been using the PowerSchool gradebook and it calculated one. Leave it, or click a letter to replace it.</span></div>
   </div>
   <div class="pager"><button class="ghost" data-go="step-4">Back</button><button data-go="step-6">Next: add comments &rarr;</button></div>
@@ -307,13 +319,33 @@ body.narrow a.full{margin-left:0}
     <details class="q"><summary><span class="qn">3</span>The term box doesn't say <span class="tq">Q1</span>.</summary><div class="ans">Click it and pick <span class="tq">Q1</span> (step 4). Grades typed into the wrong term don't print on this quarter's report card.</div></details>
     <details class="q"><summary><span class="qn">4</span>I clicked a letter but it didn't stick.</summary><div class="ans">Picking a letter only fills the cell. Click <b>Save</b> at the bottom right (step 7).</div></details>
     <details class="q"><summary><span class="qn">5</span>The <span class="tq">Q1</span> column already has grades in it.</summary><div class="ans">You've been scoring assignments in the PowerSchool gradebook, so it calculated them. They're fine as they are &mdash; or click a cell and pick a letter to replace one.</div></details>
-    <details class="q"><summary><span class="qn">6</span>A student never came / was out all quarter.</summary><div class="ans">Don't guess. <b>Ask</b> which code to use (the pad has NC, NG, M and P) &mdash; for some students the office enters it for you.</div></details>
+    <details class="q"><summary><span class="qn">6</span>A student never came / was out all quarter.</summary><div class="ans">Don't guess. <b>Ask</b> which code to use &mdash; <b>Grade codes</b> (last item on the left) explains NG, NC, M and P. For some students the office enters it for you.</div></details>
     <details class="q"><summary><span class="qn">7</span>Do I really have to do Final Grade Status?</summary><div class="ans">Yes. The green check is the <b>only</b> signal that you're finished with a class. It doesn't lock anything.</div></details>
     <details class="q"><summary><span class="qn">8</span>Can students or families see this?</summary><div class="ans">No. Summit doesn't use the student or parent portal. Grades and comments go on the printed report card.</div></details>
   </div>
-  <div class="pager"><button class="ghost" data-go="change">Back</button><button data-go="start">Start over</button></div>
+  <div class="pager"><button class="ghost" data-go="change">Back</button><button data-go="codes">Grade codes &rarr;</button></div>
 </section>
 
+
+<!-- GRADE CODES -->
+<section class="step" id="codes">
+  <span class="eyebrow">REFERENCE</span>
+  <h2>Grade codes that aren't letter grades</h2>
+  <p class="lead">They're on the letter pad in the Score Inspector, same as A+ to D. Here's what each one means and whether it counts in GPA.</p>
+  <table class="codes"><thead><tr><th>CODE</th><th>MEANS</th><th>WHEN TO USE IT</th><th>GPA</th></tr></thead><tbody>
+  <tr><td class="c">NG</td><td><b>No Grade</b></td><td>The student <b>couldn&rsquo;t earn credit, through no fault of their own</b>. Always add the comment that says why:<ul><li><i>&ldquo;Enrolled too recently to earn credit this quarter.&rdquo;</i></li><li><i>&ldquo;Not enough class time to earn credit this quarter.&rdquo;</i></li></ul></td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
+  <tr><td class="c">INC</td><td><b>Incomplete</b></td><td>Work is still owed. Change it to the real grade once the work is in (<b>Change a grade</b>).</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
+  <tr><td class="c">M</td><td><b>Medical</b></td><td>The student was out for medical reasons and couldn&rsquo;t be graded.</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
+  <tr><td class="c">NC</td><td><b>No Credit</b></td><td>The <b>failing grade</b> &mdash; below 65%, or the student didn&rsquo;t earn credit (for example 30+ absences in a term).</td><td class="g"><span class="pill yes">COUNTS &middot; 0 PTS</span></td></tr>
+  <tr><td class="c">P</td><td><b>Passing</b></td><td>Passed and earned credit, with no letter grade.</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
+  </tbody></table>
+  <figure class="fig"><a href="rc-4.png" target="_blank" rel="noopener"><img src="rc-4.png" alt="Summit's Default grade scale with the non-letter codes boxed"></a><div class="ph"><span class="pl">PICTURE</span>Screenshot coming: Summit's grade scale.</div><figcaption><b>FOR REFERENCE</b> &mdash; Summit&rsquo;s grade scale as the office sees it. You don&rsquo;t need to open this; the <b>Counts in GPA</b> column is what decides whether a code touches GPA.</figcaption></figure>
+  <div class="callout"><div class="clabel">GOOD TO KNOW</div>
+    <div class="gk"><span class="ic">&#9888;&#65039;</span><span><b>Never leave a grade blank.</b> A blank prints as an underscore ( _ ) on the report card and looks like a missing grade.</span></div>
+    <div class="gk"><span class="ic">&#9878;&#65039;</span><span><b>NG vs. NC:</b> NG = not the student&rsquo;s fault (too new, not enough class time). NC = the student didn&rsquo;t earn credit.</span></div>
+  </div>
+  <div class="pager"><button class="ghost" data-go="faq">Back</button><button data-go="start">Start over</button></div>
+</section>
 </main>
 </div>
 </div>
