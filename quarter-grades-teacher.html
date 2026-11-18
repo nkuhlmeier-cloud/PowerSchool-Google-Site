@@ -26,6 +26,12 @@ body.standalone a.full{display:none}
 .now .nl{font-size:12.5px;font-weight:800;letter-spacing:3px;color:#8a6413}
 .now b{color:#3a2d05}
 .now .sep{color:#d9c58a}
+.now #inc-now[hidden]{display:none}
+.now #inc-now{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.now button.incgo{all:unset;cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:1px;color:#8a6413;background:#fff;border:1.5px solid #e6cf8f;border-radius:999px;padding:0 10px;line-height:16px}
+.now button.incgo:hover{background:#fbeecb}
+.now button.incgo:focus-visible{outline:2px solid #52B3EA;outline-offset:2px}
+body.narrow .now #inc-now .sep{display:none}
 
 .layout{display:grid;grid-template-columns:232px minmax(0,1fr);gap:22px;align-items:start}
 nav.rail{display:flex;flex-direction:column;gap:4px;position:sticky;top:10px}
@@ -95,6 +101,10 @@ body.narrow table.codes td.g{white-space:normal}
 .case{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;background:#f4f8fb;border:1px solid #dbe6f0;border-radius:12px;padding:13px 15px}
 .case .cw{font-size:12.5px;font-weight:800;letter-spacing:2px;color:#194178;line-height:1.35;padding-top:2px}
 .case .ct{font-size:15px;color:#51637a;line-height:1.5}
+.case .ct ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.case .ct li{position:relative;padding-left:16px}
+.case .ct li:before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:#52B3EA}
+.case .ct li b{color:#12305e}
 .case.lock{background:#fdf0f0;border-color:#f2c9c9}
 .case.lock .cw{color:#9b2c2c}
 
@@ -133,7 +143,7 @@ body.narrow a.full{margin-left:0}
 
 <div class="chips"><span class="chip">TEACHERS &middot; WBL</span><span class="chip">POWERTEACHER PRO &rarr; A+ GRADING</span><span class="chip">ABOUT 20&ndash;30 MIN</span><a class="full" id="full" href="#" target="_blank" rel="noopener">OPEN FULL SCREEN &nearr;</a></div>
 
-<div class="now"><span class="nl">THIS QUARTER</span><span id="now-text"></span></div>
+<div class="now"><span class="nl">THIS QUARTER</span><span id="now-text"></span><span id="inc-now" hidden><span class="sep">|</span><span><b><span class="iq">Q1</span> INCs</b>: change them by <b><span class="iq-last"></span></b></span><button class="incgo" data-go="change">HOW &rarr;</button></span></div>
 
 <div class="layout">
 <nav class="rail" aria-label="Steps">
@@ -315,7 +325,13 @@ body.narrow a.full{margin-left:0}
   <p class="lead">You can change your own grades right up until the quarter is <b>locked</b>. After that, <b>Jacqueline Kinsley</b> changes it for you.</p>
   <div class="cases">
     <div class="case"><div class="cw">A WRONG<br>GRADE</div><div class="ct">Click the cell, pick the new letter, <b>Save</b>. Works whether or not you already saved &mdash; PowerSchool keeps a record of the change, so you don't need a form.</div></div>
-    <div class="case"><div class="cw">AN INC<br>(INCOMPLETE)</div><div class="ct">If you entered <b>INC</b> and the work is in, change it to the real grade <b>the same way you entered it the first time</b>: click the cell, pick the letter, <b>Save</b>.</div></div>
+    <div class="case"><div class="cw">AN INC<br>(INCOMPLETE)</div><div class="ct"><ul>
+      <li><b>You change it yourself, in PowerSchool.</b> The INC stays an INC until you re-enter the grade. Telling someone isn't enough, and there's no form.</li>
+      <li><b>Check the term box</b> at the top right (step 4). It has to say the quarter the INC is in<span class="iq-on" hidden> &mdash; right now that's <b><span class="iq">Q1</span></b><span class="iq-not" hidden>, not <span class="tq">Q2</span></span></span>.</li>
+      <li>Click the <b>INC</b> cell, pick the letter, <b>Save</b> &mdash; the same way you entered it the first time (steps 5 and 7).</li>
+      <li><b>Work wasn't made up?</b> Change the INC to <b>NC</b>.</li>
+      <li class="iq-on" hidden><b>Deadline: <span class="iq-last"></span></b> for <span class="iq">Q1</span>. After that, <span class="iq">Q1</span> is locked.</li>
+    </ul></div></div>
     <div class="case lock"><div class="cw">QUARTER IS<br>LOCKED</div><div class="ct">The cell won't take a change and you'll see a lock message. Let <b>Jacqueline Kinsley</b> know the student, the class and the right grade, and she'll change it for you.</div></div>
   </div>
   <div class="pager"><button class="ghost" data-go="step-8">Back</button><button data-go="faq">Common questions &rarr;</button></div>
@@ -345,7 +361,7 @@ body.narrow a.full{margin-left:0}
   <p class="lead">These are grades too &mdash; they print on the report card in the same spot as an A or a B. They're on the letter pad in the Score Inspector. Here's when to use each one and whether it counts in GPA.</p>
   <table class="codes"><thead><tr><th>CODE</th><th>MEANS</th><th>WHEN TO USE IT</th><th>GPA</th></tr></thead><tbody>
   <tr><td class="c">NG</td><td><b>No Grade</b></td><td>The student <b>didn&rsquo;t do enough or wasn&rsquo;t there enough to earn credit, but it wasn&rsquo;t their fault</b>. That&rsquo;s the difference from NC. Pick the comment that says which situation it is:<ul><li><b>New to the class:</b> they enrolled too late in the term to earn credit. Add comment <b>705</b> &mdash; <i>&ldquo;Recently entered class; too new to receive credit.&rdquo;</i></li><li><b>Not enough class time, through no fault of their own:</b> they were enrolled but couldn&rsquo;t get enough time in. Example: <b>ESY</b> &mdash; the student is enrolled in the course but doesn&rsquo;t attend the summer session. Add comment <b>704</b> &mdash; <i>&ldquo;Not enough class time to earn credit.&rdquo;</i></li></ul></td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
-  <tr><td class="c">INC</td><td><b>Incomplete</b></td><td>Work is still owed. Change it to the real grade once the work is in (<b>Change a grade</b>).</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
+  <tr><td class="c">INC</td><td><b>Incomplete</b></td><td>Work is still owed. Change it to the real grade yourself once the work is in, or to <b>NC</b> if it isn&rsquo;t made up (<b>Change a grade</b>).</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
   <tr><td class="c">M</td><td><b>Medical</b></td><td>The student was out for medical reasons and couldn&rsquo;t be graded.</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
   <tr><td class="c">NC</td><td><b>No Credit</b></td><td>The <b>failing grade</b> &mdash; below 65%, or the student didn&rsquo;t earn credit (for example 30+ absences in a term).</td><td class="g"><span class="pill yes">COUNTS &middot; 0 PTS</span></td></tr>
   <tr><td class="c">P</td><td><b>Passing</b></td><td>Passed and earned credit, without an A&ndash;D grade.</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
@@ -363,14 +379,19 @@ body.narrow a.full{margin-left:0}
 
 <script>
 /* ===== SCHOOL YEAR DATES — update once a year from the Summit calendar =====
-   One line per quarter: the term code, its name, the last day of the quarter, the day grades are due,
-   and the due date as a real date (year-month-day) so the page can pick the current quarter by itself. */
+   One line per quarter: the term code, its name, the last day of the quarter (as text and as a real
+   year-month-day date), the day grades are due, and the due date as a real date so the page can pick
+   the current quarter by itself. */
 var QUARTERS = [
-  { term:'Q1', name:'Quarter 1', lastDay:'Fri 11/6',  due:'Tue 11/10', dueDate:'2026-11-10' },
-  { term:'Q2', name:'Quarter 2', lastDay:'Fri 1/22',  due:'Tue 1/26',  dueDate:'2027-01-26' },
-  { term:'Q3', name:'Quarter 3', lastDay:'Fri 4/9',   due:'Tue 4/13',  dueDate:'2027-04-13' },
-  { term:'Q4', name:'Quarter 4', lastDay:'Mon 6/14',  due:'Tue 6/22',  dueDate:'2027-06-22' }
+  { term:'Q1', name:'Quarter 1', lastDay:'Fri 11/6',  lastDate:'2026-11-06', due:'Tue 11/10', dueDate:'2026-11-10' },
+  { term:'Q2', name:'Quarter 2', lastDay:'Fri 1/22',  lastDate:'2027-01-22', due:'Tue 1/26',  dueDate:'2027-01-26' },
+  { term:'Q3', name:'Quarter 3', lastDay:'Fri 4/9',   lastDate:'2027-04-09', due:'Tue 4/13',  dueDate:'2027-04-13' },
+  { term:'Q4', name:'Quarter 4', lastDay:'Mon 6/14',  lastDate:'2027-06-14', due:'Tue 6/22',  dueDate:'2027-06-22' }
 ];
+/* ===== INCOMPLETES — how long a finished quarter stays open for changing an INC =====
+   Keep this the SAME number as PowerSchool > Lock Reporting Term Settings > Days After Reporting Term.
+   17 = Q1 (last day 11/6) can be changed through Mon 11/23. The page works out the date for every quarter. */
+var LOCK_DAYS = 17;
 /* ========================================================================== */
 
 (function(){
@@ -386,6 +407,22 @@ var QUARTERS = [
     now.innerHTML='<b>'+TERM.term+'</b> grades are in. Next year\'s dates will show here once the new calendar is out.';
   }
   Array.prototype.forEach.call(document.querySelectorAll('.tq'),function(s){s.textContent=TERM.term;});
+
+  // incompletes: a quarter that has ended stays open for LOCK_DAYS days after its last day
+  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], INCQ=null, incLast=null;
+  for(var j=QUARTERS.length-1;j>=0;j--){
+    var end=new Date(QUARTERS[j].lastDate+'T00:00:00'), last=new Date(end.getTime());
+    last.setDate(last.getDate()+LOCK_DAYS);
+    if(today>end && today<=last){INCQ=QUARTERS[j];incLast=last;break;}
+  }
+  if(INCQ){
+    var lastTxt=DOW[incLast.getDay()]+' '+(incLast.getMonth()+1)+'/'+incLast.getDate();
+    Array.prototype.forEach.call(document.querySelectorAll('.iq'),function(s){s.textContent=INCQ.term;});
+    Array.prototype.forEach.call(document.querySelectorAll('.iq-last'),function(s){s.textContent=lastTxt;});
+    Array.prototype.forEach.call(document.querySelectorAll('.iq-on'),function(s){s.hidden=false;});
+    if(INCQ.term!==TERM.term) Array.prototype.forEach.call(document.querySelectorAll('.iq-not'),function(s){s.hidden=false;});
+    document.getElementById('inc-now').hidden=false;
+  }
 
   // wizard
   var ids=["start","step-1","step-2","step-3","step-4","step-5","step-6","step-7","step-8","change","faq","codes"];
