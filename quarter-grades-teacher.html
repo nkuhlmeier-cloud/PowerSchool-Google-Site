@@ -41,6 +41,7 @@ nav.rail{display:flex;flex-direction:column;gap:4px;position:sticky;top:10px}
 .rail button[aria-current="step"]{background:#52B3EA;color:#fff}
 .rail .n{flex:0 0 28px;height:28px;border-radius:50%;background:#eaf4fc;color:#194178;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
 .rail button[aria-current="step"] .n{background:#fff;color:#194178}
+.rail #rail-inc .n{font-size:9.5px;letter-spacing:.3px}
 .rail .sep{height:1px;background:#dce6ef;margin:5px 8px}
 .rail .done .n{background:#dff1e4;color:#2f7d4a}
 
@@ -116,6 +117,16 @@ details.q summary::-webkit-details-marker{display:none}
 details.q summary .qn{flex:0 0 30px;height:30px;border-radius:50%;background:#eaf4fc;color:#194178;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
 details.q .ans{padding:0 16px 14px 58px;font-size:15px;color:#51637a;line-height:1.5}
 
+/* incompletes: own step; while a finished quarter is still open for INCs the page leads with it */
+.rail button.gold{color:#8a6413;background:#FDF6E4;box-shadow:inset 0 0 0 1.5px #e6cf8f}
+.rail button.gold .n{background:#E8A33D;color:#fff}
+.rail button.gold[aria-current="step"]{background:#E8A33D;color:#fff;box-shadow:none}
+.rail button.gold[aria-current="step"] .n{background:#fff;color:#8a6413}
+.deadline{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#FDF6E4;border:2px solid #E8A33D;border-radius:12px;padding:11px 16px;margin:0 0 16px;font-size:15.5px;color:#5d5233;line-height:1.4}
+.deadline[hidden]{display:none}
+.deadline .dl2{font-size:12.5px;font-weight:800;letter-spacing:2.5px;color:#8a6413}
+.deadline b{color:#3a2d05}
+body.incmode .dropbar{display:none !important}
 /* dropped students: the loud bits */
 .dropbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:#FFF1E7;border:2px solid #F97316;border-radius:12px;padding:10px 16px;margin:-8px 0 18px;font-size:14.5px;color:#7c2d12;line-height:1.4}
 .dropbar .dl{font-size:12.5px;font-weight:800;letter-spacing:2.5px;color:#C2410C;white-space:nowrap}
@@ -170,7 +181,7 @@ body.narrow a.full{margin-left:0}
 
 <div class="chips"><span class="chip">TEACHERS &middot; WBL</span><span class="chip">POWERTEACHER PRO &rarr; A+ GRADING</span><span class="chip">ABOUT 20&ndash;30 MIN</span><a class="full" id="full" href="#" target="_blank" rel="noopener">OPEN FULL SCREEN &nearr;</a></div>
 
-<div class="now"><span class="nl">THIS QUARTER</span><span id="now-text"></span><span id="inc-now" hidden><span class="sep">|</span><span><b><span class="iq">Q1</span> INCs</b>: change them by <b><span class="iq-last"></span></b></span><button class="incgo" data-go="change">HOW &rarr;</button></span></div>
+<div class="now"><span class="nl" id="now-label">THIS QUARTER</span><span id="now-text"></span><span id="inc-now" hidden><span class="sep">|</span><span><b><span class="iq">Q1</span> INCs</b>: change them by <b><span class="iq-last"></span></b></span><button class="incgo" data-go="inc">HOW &rarr;</button></span></div>
 <div class="dropbar" id="dropbar"><span class="dl">&#9888;&#65039; MISSING A STUDENT?</span><span>Students who <b>dropped or switched out of your class</b> still need a <b><span class="tq">Q1</span></b> grade.</span><button data-go="dropped">SHOW ME HOW &rarr;</button></div>
 
 <div class="layout">
@@ -186,7 +197,8 @@ body.narrow a.full{margin-left:0}
   <button data-s="step-7"><span class="n">7</span>Save</button>
   <button data-s="step-8"><span class="n">8</span>Final Grade Status</button>
   <div class="sep"></div>
-  <button data-s="change"><span class="n">&#9998;</span>Change a grade</button>
+  <button data-s="inc" id="rail-inc"><span class="n">INC</span><span id="rail-inc-t">Change an INC</span></button>
+  <button data-s="change"><span class="n">&#9998;</span>Fix a wrong grade</button>
   <button data-s="dropped" class="hot"><span class="n">!</span>Dropped students</button>
   <button data-s="faq"><span class="n">?</span>Common questions</button>
   <button data-s="codes"><span class="n">i</span>Grade codes</button>
@@ -281,7 +293,7 @@ body.narrow a.full{margin-left:0}
   <ol class="steps">
     <li><span class="num">1</span><div>Click the student's cell in the <span class="tq">Q1</span> column. The <b>Score Inspector</b> opens on the right.</div></li>
     <li><span class="num">2</span><div>Click the letter on the pad: <span class="ui">A</span> <span class="ui">B</span> <span class="ui">C</span> <span class="ui">D</span>. For a plus or minus, click the <b>letter first</b>, then <span class="ui">+</span> or <span class="ui">&minus;</span> (B, then +, gives B+).</div></li>
-    <li><span class="num">3</span><div>Work still coming in? Click <span class="ui">INC</span>. You change it to the real grade yourself later &mdash; see <b>Change a grade</b>.</div></li>
+    <li><span class="num">3</span><div>Work still coming in? Click <span class="ui">INC</span>. You change it to the real grade yourself later &mdash; see <b>Change an INC</b>.</div></li>
     <li><span class="num">4</span><div><b>Stay on this student</b> &mdash; add their comments next (step 6), then move to the next student.</div></li>
   </ol>
   <figure class="fig" data-pic="6"><a href="qg-5.png" target="_blank" rel="noopener"><img src="qg-5.png" alt="The Score Inspector with the letter pad"></a><div class="ph"><span class="pl">PICTURE 6</span>Screenshot coming: a <span class="tq">Q1</span> cell selected and the <b>Score Inspector</b> with its letter pad.</div><figcaption><b>PICTURE 6</b> &mdash; The Score Inspector. Letter first, then + or &minus;. <b>INC</b> is on the pad.</figcaption></figure>
@@ -346,26 +358,41 @@ body.narrow a.full{margin-left:0}
   <div class="callout"><div class="clabel">GOOD TO KNOW</div>
     <div class="gk"><span class="ic">&#129300;</span><span><b>Not sure you finished a class?</b> Got pulled away halfway? Open that class on the <b>Traditional</b> page and look at <b>Final Grade Status</b> at the bottom. <b>Green check = done.</b> No check = finish it, Save, and mark it complete.</span></div>
   </div>
-  <div class="pager"><button class="ghost" data-go="step-7">Back</button><button data-go="change">Change a grade &rarr;</button></div>
+  <div class="pager"><button class="ghost" data-go="step-7">Back</button><button data-go="inc">Change an INC &rarr;</button></div>
+</section>
+
+<!-- CHANGE AN INC -->
+<section class="step" id="inc">
+  <span class="eyebrow">INCOMPLETES (INC)</span>
+  <h2>Change an INC to the real grade</h2>
+  <p class="lead"><b>You change it yourself, in PowerSchool.</b> An INC stays an INC until you re-enter the grade. Telling someone isn&rsquo;t enough, and there&rsquo;s no form.</p>
+  <div class="deadline iq-on" hidden><span class="dl2">DEADLINE</span><span><b><span class="iq-last"></span></b> for <b><span class="iq">Q1</span></b> INCs. After that, <span class="iq">Q1</span> is locked and the grade can&rsquo;t be changed.</span></div>
+  <ol class="steps">
+    <li><span class="num">1</span><div>Open <b>PowerTeacher Pro</b> &rarr; <span class="ui">A+ Grading</span> &rarr; <span class="ui">Traditional</span> (steps 1 and 3).</div></li>
+    <li><span class="num">2</span><div>Click the class name in the blue bar and pick the class.</div></li>
+    <li><span class="num">3</span><div><b>Set the term box (top right) to the quarter the INC is in<span class="iq-on" hidden>: <span class="iq">Q1</span></span>.</b><span class="iq-not" hidden> It will say <b><span class="curq">Q2</span></b> when you open it &mdash; click it and pick <b><span class="iq">Q1</span></b>.</span> This is the step people miss.</div></li>
+    <li><span class="num">4</span><div>Click the <b>INC</b> cell and pick the letter on the pad &mdash; the same way you entered it the first time.</div></li>
+    <li><span class="num">5</span><div>Click <span class="ui">Save</span> (bottom right).</div></li>
+  </ol>
+  <figure class="fig"><a href="qg-5.png" target="_blank" rel="noopener"><img src="qg-5.png" alt="A grade cell selected and the Score Inspector letter pad"></a><div class="ph"><span class="pl">PICTURE</span>Screenshot coming.</div><figcaption><b>SAME AS ENTERING IT</b> &mdash; click the cell, pick the letter, then <b>Save</b>.</figcaption></figure>
+  <div class="callout"><div class="clabel">GOOD TO KNOW</div>
+    <div class="gk"><span class="ic">&#10060;</span><span><b>Work wasn&rsquo;t made up?</b> Change the INC to <b>NC</b>. Don&rsquo;t leave it as INC.</span></div>
+    <div class="gk"><span class="ic">&#128269;</span><span><b>Don&rsquo;t see the INC?</b> The term box is on the wrong quarter (step 3 above).</span></div>
+  </div>
+  <div class="pager"><button class="ghost" data-go="step-8">Back</button><button data-go="change">Fix a wrong grade &rarr;</button></div>
 </section>
 
 <!-- CHANGE A GRADE -->
 <section class="step" id="change">
-  <span class="eyebrow">CHANGE A GRADE</span>
-  <h2>Fixing a grade, and what to do with an INC</h2>
+  <span class="eyebrow">FIX A WRONG GRADE</span>
+  <h2>Fixing a grade you already entered</h2>
   <p class="lead"><b>You change your own grades. Nobody else does it for you.</b> You have until the quarter <b>locks</b>. After that, you can't change it.</p>
   <div class="cases">
     <div class="case"><div class="cw">A WRONG<br>GRADE</div><div class="ct">Click the cell, pick the new letter, <b>Save</b>. Works whether or not you already saved &mdash; PowerSchool keeps a record of the change, so you don't need a form.</div></div>
-    <div class="case"><div class="cw">AN INC<br>(INCOMPLETE)</div><div class="ct"><ul>
-      <li><b>You change it yourself, in PowerSchool.</b> The INC stays an INC until you re-enter the grade. Telling someone isn't enough, and there's no form.</li>
-      <li><b>Check the term box</b> at the top right (step 4). It has to say the quarter the INC is in<span class="iq-on" hidden> &mdash; right now that's <b><span class="iq">Q1</span></b><span class="iq-not" hidden>, not <span class="tq">Q2</span></span></span>.</li>
-      <li>Click the <b>INC</b> cell, pick the letter, <b>Save</b> &mdash; the same way you entered it the first time (steps 5 and 7).</li>
-      <li><b>Work wasn't made up?</b> Change the INC to <b>NC</b>.</li>
-      <li class="iq-on" hidden><b>Deadline: <span class="iq-last"></span></b> for <span class="iq">Q1</span>. After that, <span class="iq">Q1</span> is locked.</li>
-    </ul></div></div>
+    <div class="case"><div class="cw">AN INC<br>(INCOMPLETE)</div><div class="ct">That has its own page: <b>Change an INC</b> on the left.</div></div>
     <div class="case lock"><div class="cw">QUARTER IS<br>LOCKED</div><div class="ct">The cell won't take a change and you'll see a lock message. <b>The deadline has passed</b>, so the grade stays the way it is. If that grade is wrong, talk to <b>Jacqueline Kinsley</b>.</div></div>
   </div>
-  <div class="pager"><button class="ghost" data-go="step-8">Back</button><button data-go="dropped">Dropped students &rarr;</button></div>
+  <div class="pager"><button class="ghost" data-go="inc">Back</button><button data-go="dropped">Dropped students &rarr;</button></div>
 </section>
 
 <!-- DROPPED STUDENTS -->
@@ -426,7 +453,7 @@ body.narrow a.full{margin-left:0}
   <p class="lead">These are grades too &mdash; they print on the report card in the same spot as an A or a B. They're on the letter pad in the Score Inspector. Here's when to use each one and whether it counts in GPA.</p>
   <table class="codes"><thead><tr><th>CODE</th><th>MEANS</th><th>WHEN TO USE IT</th><th>GPA</th></tr></thead><tbody>
   <tr><td class="c">NG</td><td><b>No Grade</b></td><td>The student <b>didn&rsquo;t do enough or wasn&rsquo;t there enough to earn credit, but it wasn&rsquo;t their fault</b>. That&rsquo;s the difference from NC. Pick the comment that says which situation it is:<ul><li><b>New to the class:</b> they enrolled too late in the term to earn credit. Add comment <b>705</b> &mdash; <i>&ldquo;Recently entered class; too new to receive credit.&rdquo;</i></li><li><b>Not enough class time, through no fault of their own:</b> they were enrolled but couldn&rsquo;t get enough time in. Example: <b>ESY</b> &mdash; the student is enrolled in the course but doesn&rsquo;t attend the summer session. Add comment <b>704</b> &mdash; <i>&ldquo;Not enough class time to earn credit.&rdquo;</i></li></ul></td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
-  <tr><td class="c">INC</td><td><b>Incomplete</b></td><td>Work is still owed. Change it to the real grade yourself once the work is in, or to <b>NC</b> if it isn&rsquo;t made up (<b>Change a grade</b>).</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
+  <tr><td class="c">INC</td><td><b>Incomplete</b></td><td>Work is still owed. Change it to the real grade yourself once the work is in, or to <b>NC</b> if it isn&rsquo;t made up (<b>Change an INC</b>).</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
   <tr><td class="c">M</td><td><b>Medical</b></td><td>The student was out for medical reasons and couldn&rsquo;t be graded.</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
   <tr><td class="c">NC</td><td><b>No Credit</b></td><td>The <b>failing grade</b> &mdash; below 65%, or the student didn&rsquo;t earn credit (for example 30+ absences in a term).</td><td class="g"><span class="pill yes">COUNTS &middot; 0 PTS</span></td></tr>
   <tr><td class="c">P</td><td><b>Passing</b></td><td>Passed and earned credit, without an A&ndash;D grade.</td><td class="g"><span class="pill no">NOT COUNTED</span></td></tr>
@@ -471,11 +498,6 @@ var LOCK_DAYS = 17;
     TERM=QUARTERS[QUARTERS.length-1];
     now.innerHTML='<b>'+TERM.term+'</b> grades are in. Next year\'s dates will show here once the new calendar is out.';
   }
-  Array.prototype.forEach.call(document.querySelectorAll('.tq'),function(s){s.textContent=TERM.term;});
-  // the quarter PowerSchool has already moved on to while these grades are due (none after the last quarter)
-  var NEXTQ=QUARTERS[QUARTERS.indexOf(TERM)+1];
-  if(NEXTQ){Array.prototype.forEach.call(document.querySelectorAll('.tqn'),function(s){s.textContent=NEXTQ.term;});}
-  else{Array.prototype.forEach.call(document.querySelectorAll('.tqn-on'),function(s){s.style.display='none';});}
 
   // incompletes: a quarter that has ended stays open for LOCK_DAYS days after its last day
   var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], INCQ=null, incLast=null;
@@ -492,12 +514,30 @@ var LOCK_DAYS = 17;
     if(INCQ.term!==TERM.term) Array.prototype.forEach.call(document.querySelectorAll('.iq-not'),function(s){s.hidden=false;});
     document.getElementById('inc-now').hidden=false;
   }
+  // INC MODE: the last quarter's grades are in but its INCs are still open (e.g. Q1 until 11/23).
+  // The page then talks only about that quarter: the next quarter's dates and the dropped-students bar
+  // are hidden, the page opens on "Change an INC", and everything switches back by itself after the deadline.
+  var INCMODE=!!(INCQ && INCQ.term!==TERM.term), SHOWQ=INCMODE?INCQ:TERM, HOME=INCMODE?'inc':'start';
+  Array.prototype.forEach.call(document.querySelectorAll('.curq'),function(s){s.textContent=TERM.term;});
+  if(INCMODE){
+    document.body.classList.add('incmode');
+    document.getElementById('now-label').textContent='RIGHT NOW';
+    now.innerHTML='<b>'+INCQ.term+' incompletes (INC)</b> &middot; change them by <b>'+lastTxt+'</b>';
+    document.getElementById('inc-now').innerHTML='<button class="incgo" data-go="inc">HOW &rarr;</button>';
+    document.getElementById('rail-inc').classList.add('gold');
+    document.getElementById('rail-inc-t').textContent=INCQ.term+' INCs \u00b7 due '+lastTxt;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.tq'),function(s){s.textContent=SHOWQ.term;});
+  // the quarter PowerSchool has already moved on to while these grades are due (none after the last quarter)
+  var NEXTQ=QUARTERS[QUARTERS.indexOf(SHOWQ)+1];
+  if(NEXTQ){Array.prototype.forEach.call(document.querySelectorAll('.tqn'),function(s){s.textContent=NEXTQ.term;});}
+  else{Array.prototype.forEach.call(document.querySelectorAll('.tqn-on'),function(s){s.style.display='none';});}
 
   // wizard
-  var ids=["start","step-1","step-2","step-3","step-4","step-5","step-6","step-7","step-8","change","dropped","faq","codes"];
+  var ids=["start","step-1","step-2","step-3","step-4","step-5","step-6","step-7","step-8","inc","change","dropped","faq","codes"];
   var btns=Array.prototype.slice.call(document.querySelectorAll(".rail button"));
   function show(id,push){
-    if(ids.indexOf(id)<0) id="start";
+    if(ids.indexOf(id)<0) id=HOME;
     Array.prototype.forEach.call(document.querySelectorAll("section.step"),function(s){s.classList.toggle("on",s.id===id);});
     var seen=true;
     btns.forEach(function(b){
@@ -512,7 +552,7 @@ var LOCK_DAYS = 17;
   btns.forEach(function(b){ b.addEventListener("click",function(){show(b.dataset.s,true);}); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(b){ b.addEventListener("click",function(){show(b.dataset.go,true);}); });
   window.addEventListener("hashchange",function(){ show(location.hash.replace("#",""),false); });
-  show((location.hash||"#start").replace("#",""),false);
+  show((location.hash||("#"+HOME)).replace("#",""),false);
 
   // pictures: show a placeholder until the PNG is in the repo
   Array.prototype.forEach.call(document.querySelectorAll(".fig img"),function(img){
